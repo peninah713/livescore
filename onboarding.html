@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Tour - FootballHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .tour-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tour-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        p {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.125rem;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #1e1b4b;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1e1b4b;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: #2d2a5f;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #718096;
+            border: 2px solid transparent;
+        }
+
+        .btn-secondary:hover {
+            color: #1e1b4b;
+        }
+
+        .step-counter {
+            color: #a0aec0;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .tour-modal {
+                padding: 2rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay">
+        <div class="tour-modal">
+            <div class="step-counter" id="stepCounter">Step 1 of 5</div>
+            
+            <div class="tour-icon" id="tourIcon">🏆</div>
+            
+            <h2 id="tourTitle">Welcome to FootballHub!</h2>
+            <p id="tourDescription">Let's take a quick tour to help you get started with your new platform.</p>
+
+            <div class="progress-dots" id="progressDots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="buttons">
+                <button class="btn btn-secondary" onclick="skip()">Skip Tour</button>
+                <button class="btn btn-primary" onclick="next()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const user = JSON.parse(localStorage.getItem('footballhub_user') || '{}');
+        const userType = user.userType || 'player';
+
+        const tours = {
+            player: [
+                {
+                    icon: '🏆',
+                    title: 'Welcome to FootballHub!',
+                    description: "We're excited to have you here. Let's explore what makes FootballHub perfect for players like you."
+                },
+                {
+                    icon: '📹',
+                    title: 'Share Your Highlights',
+                    description: 'Upload match videos, training clips, and showcase your skills to scouts and clubs worldwide.'
+                },
+                {
+                    icon: '🤝',
+                    title: 'Connect with Scouts',
+                    description: 'Get discovered by professional scouts and clubs looking for talent just like you.'
+                },
+                {
+                    icon: '📊',
+                    title: 'Track Your Progress',
+                    description: 'View your stats, performance analytics, and see how you compare with other players.'
+                },
+                {
+                    icon: '🌟',
+                    title: "You're All Set!",
+                    description: "Start building your profile, upload content, and take the next step in your football career!"
+                }
+            ],
+            fan: [
+                {
+                    icon: '❤️',
+                    title: 'Welcome Football Fan!',
+                    description: "You're about to experience football like never before. Let's get started!"
+                },
+                {
+                    icon: '📺',
+                    title: 'Watch Live Matches',
+                    description: 'Stream live matches, highlights, and exclusive behind-the-scenes content from your favorite teams.'
+                },
+                {
+                    icon: '💬',
+                    title: 'Join the Community',
+                    description: 'Chat with fellow fans, comment on posts, and be part of the conversation.'
+                },
+                {
+                    icon: '🎟️',
+                    title: 'Get Event Updates',
+                    description: 'Never miss a match! Get notifications for upcoming games, events, and exclusive fan experiences.'
+                },
+                {
+                    icon: '⚽',
+                    title: 'Let the Games Begin!',
+                    description: "Follow your favorite teams, engage with content, and enjoy the beautiful game!"
+                }
+            ],
+            club: [
+                {
+                    icon: '👥',
+                    title: 'Welcome to Your Club Hub!',
+                    description: 'Manage your team, discover talent, and grow your club with FootballHub.'
+                },
+                {
+                    icon: '🔍',
+                    title: 'Scout New Talent',
+                    description: 'Browse player profiles, watch highlight reels, and find the perfect additions to your squad.'
+                },
+                {
+                    icon: '📱',
+                    title: 'Manage Your Team',
+                    description: 'Post updates, share match results, and keep your fans engaged with regular content.'
+                },
+                {
+                    icon: '🤝',
+                    title: 'Find Sponsors',
+                    description: 'Connect with potential sponsors and partnerships to help your club grow.'
+                },
+                {
+                    icon: '🎯',
+                    title: "Let's Build Something Great!",
+                    description: 'Start managing your club, recruiting talent, and achieving your goals!'
+                }
+            ],
+            sponsor: [
+                {
+                    icon: '⚡',
+                    title: 'Welcome Sponsor Partner!',
+                    description: 'Connect with the perfect partnerships and maximize your brand exposure in football.'
+                },
+                {
+                    icon: '🎯',
+                    title: 'Find the Right Match',
+                    description: 'Browse teams, players, and events that align with your brand values and goals.'
+                },
+                {
+                    icon: '📊',
+                    title: 'Track Your ROI',
+                    description: 'View engagement metrics, reach statistics, and measure the impact of your sponsorships.'
+                },
+                {
+                    icon: '🤝',
+                    title: 'Build Partnerships',
+                    description: 'Connect directly with clubs, players, and event organizers to create meaningful partnerships.'
+                },
+                {
+                    icon: '🚀',
+                    title: 'Ready to Make an Impact!',
+                    description: 'Start exploring opportunities and make your mark in the football community!'
+                }
+            ]
+        };
+
+        const steps = tours[userType] || tours.player;
+
+        function updateTour() {
+            const step = steps[currentStep];
+            document.getElementById('stepCounter').textContent = `Step ${currentStep + 1} of ${steps.length}`;
+            document.getElementById('tourIcon').textContent = step.icon;
+            document.getElementById('tourTitle').textContent = step.title;
+            document.getElementById('tourDescription').textContent = step.description;
+
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentStep);
+            });
+
+            // Update button
+            const nextBtn = document.querySelector('.btn-primary');
+            nextBtn.textContent = currentStep === steps.length - 1 ? "Let's Go!" : 'Next';
+        }
+
+        function next() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateTour();
+            } else {
+                complete();
+            }
+        }
+
+        function skip() {
+            complete();
+        }
+
+        function complete() {
+            localStorage.setItem('footballhub_onboarding_completed', 'true');
+            window.location.href = 'home.html';
+        }
+
+        // Initialize
+        updateTour();
+    </script>
+</body>
+</html>
