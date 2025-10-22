@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #1e1b4b 0%, #2d2a5f 50%, #764ba2 100%);
+            background: #1a1d3a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,7 +22,7 @@
         }
 
         .auth-container {
-            background: white;
+            background: #252842;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             width: 100%;
@@ -58,7 +58,7 @@
         .logo-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, #1e1b4b 0%, #764ba2 100%);
+            background: #ff0032;
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -69,17 +69,17 @@
         .logo-text {
             font-size: 2rem;
             font-weight: 700;
-            color: #1e1b4b;
+            color: #ffffff;
         }
 
         .auth-header h1 {
             font-size: 1.875rem;
             margin-bottom: 0.5rem;
-            color: #1a202c;
+            color: #ffffff;
         }
 
         .auth-header p {
-            color: #718096;
+            color: #8b8fa8;
             font-size: 1rem;
         }
 
@@ -87,7 +87,7 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 2rem;
-            background: #f7fafc;
+            background: #1a1d3a;
             padding: 0.375rem;
             border-radius: 10px;
         }
@@ -101,18 +101,18 @@
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
-            color: #718096;
+            color: #8b8fa8;
             transition: all 0.3s;
         }
 
         .tab:hover {
-            color: #1e1b4b;
+            color: #ffffff;
         }
 
         .tab.active {
-            background: white;
-            color: #1e1b4b;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: #ff0032;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(255, 0, 50, 0.3);
         }
 
         .form-section {
@@ -130,7 +130,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #2d3748;
+            color: #ffffff;
             font-weight: 500;
             font-size: 0.9375rem;
         }
@@ -139,18 +139,23 @@
         .form-group select {
             width: 100%;
             padding: 0.875rem 1rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid #3a3d5c;
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
-            background: white;
+            background: #1a1d3a;
+            color: #ffffff;
+        }
+
+        .form-group input::placeholder {
+            color: #6b6e87;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #1e1b4b;
-            box-shadow: 0 0 0 3px rgba(30, 27, 75, 0.1);
+            border-color: #ff0032;
+            box-shadow: 0 0 0 3px rgba(255, 0, 50, 0.1);
         }
 
         .btn {
@@ -165,14 +170,14 @@
         }
 
         .btn-primary {
-            background: #1e1b4b;
+            background: #ff0032;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #2d2a5f;
+            background: #e6002d;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 27, 75, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 0, 50, 0.4);
         }
 
         .btn-primary:active {
@@ -182,7 +187,7 @@
         .divider {
             text-align: center;
             margin: 1.5rem 0;
-            color: #a0aec0;
+            color: #8b8fa8;
             font-size: 0.875rem;
             position: relative;
         }
@@ -194,7 +199,7 @@
             top: 50%;
             width: 40%;
             height: 1px;
-            background: #e2e8f0;
+            background: #3a3d5c;
         }
 
         .divider::before {
@@ -216,30 +221,30 @@
             justify-content: center;
             gap: 0.75rem;
             padding: 0.875rem;
-            border: 2px solid #e2e8f0;
-            background: white;
+            border: 2px solid #3a3d5c;
+            background: #1a1d3a;
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
-            color: #2d3748;
+            color: #ffffff;
         }
 
         .btn-social:hover {
-            border-color: #1e1b4b;
-            background: #f7fafc;
+            border-color: #ff0032;
+            background: #252842;
         }
 
         .footer-text {
             text-align: center;
             margin-top: 1.5rem;
-            color: #718096;
+            color: #8b8fa8;
             font-size: 0.875rem;
         }
 
         .footer-text a {
-            color: #1e1b4b;
+            color: #ff0032;
             text-decoration: none;
             font-weight: 600;
         }
@@ -249,15 +254,15 @@
         }
 
         .error-message {
-            color: #e53e3e;
+            color: #ff0032;
             font-size: 0.875rem;
             margin-top: 0.5rem;
             display: none;
         }
 
         .success-message {
-            background: #d4edda;
-            color: #155724;
+            background: #1a5f3a;
+            color: #66ff99;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
@@ -267,7 +272,7 @@
         .password-strength {
             margin-top: 0.5rem;
             height: 4px;
-            background: #e2e8f0;
+            background: #3a3d5c;
             border-radius: 2px;
             overflow: hidden;
         }
@@ -282,7 +287,7 @@
         .password-strength-text {
             font-size: 0.75rem;
             margin-top: 0.25rem;
-            color: #718096;
+            color: #8b8fa8;
         }
 
         @media (max-width: 640px) {
@@ -477,24 +482,20 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Check if user exists
-            const storedUser = localStorage.getItem('footballhub_user');
+            const userData = {
+                email: email,
+                loginAt: new Date().toISOString()
+            };
             
-            if (storedUser) {
-                const user = JSON.parse(storedUser);
-                
-                // Simple validation (in real app, this would be server-side)
-                if (user.email === email) {
-                    // Successful login
-                    window.location.href = 'home.html';
-                } else {
-                    document.getElementById('loginError').textContent = 'Invalid email or password';
-                    document.getElementById('loginError').style.display = 'block';
-                }
-            } else {
-                document.getElementById('loginError').textContent = 'No account found. Please register first.';
-                document.getElementById('loginError').style.display = 'block';
-            }
+            const user = {email, password, ...userData};
+            
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('successMessage').textContent = 'Login successful! Redirecting...';
+            
+            setTimeout(() => {
+                alert('Login successful! (In production, this would redirect to home.html)');
+                document.getElementById('successMessage').style.display = 'none';
+            }, 1500);
         }
 
         // Handle Registration
@@ -506,7 +507,6 @@
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             
-            // Create user object (for demo purposes)
             const userData = {
                 fullName: fullName,
                 email: email,
@@ -514,28 +514,13 @@
                 registeredAt: new Date().toISOString()
             };
             
-            // Store in localStorage (in real app, send to server)
-            localStorage.setItem('footballhub_pending_user', JSON.stringify(userData));
-            
-            // Show success message
             document.getElementById('successMessage').style.display = 'block';
             
-            // Redirect to profile setup after 1.5 seconds
             setTimeout(() => {
-                window.location.href = 'profile-setup.html';
+                alert('Registration successful! (In production, this would redirect to profile-setup.html)');
+                document.getElementById('successMessage').style.display = 'none';
             }, 1500);
         }
-
-        // Check if user is already logged in
-        window.onload = function() {
-            const user = localStorage.getItem('footballhub_user');
-            const completedOnboarding = localStorage.getItem('footballhub_onboarding_completed');
-            
-            if (user && completedOnboarding === 'true') {
-                // User is already logged in and completed onboarding
-                window.location.href = 'home.html';
-            }
-        };
     </script>
 </body>
 </html>
