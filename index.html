@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FootballHub - Register Now</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #2d2a5f 50%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 480px;
+            padding: 3rem;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #764ba2 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e1b4b;
+        }
+
+        .auth-header h1 {
+            font-size: 1.875rem;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+        }
+
+        .auth-header p {
+            color: #718096;
+            font-size: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: #f7fafc;
+            padding: 0.375rem;
+            border-radius: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.875rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #718096;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            color: #1e1b4b;
+        }
+
+        .tab.active {
+            background: white;
+            color: #1e1b4b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+            font-weight: 500;
+            font-size: 0.9375rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e1b4b;
+            box-shadow: 0 0 0 3px rgba(30, 27, 75, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1e1b4b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2d2a5f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 27, 75, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #a0aec0;
+            font-size: 0.875rem;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #2d3748;
+        }
+
+        .btn-social:hover {
+            border-color: #1e1b4b;
+            background: #f7fafc;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .footer-text a {
+            color: #1e1b4b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .password-strength-text {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            color: #718096;
+        }
+
+        @media (max-width: 640px) {
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .auth-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="logo">
+                <div class="logo-icon">🏆</div>
+                <span class="logo-text">FootballHub</span>
+            </div>
+            <h1>Join FootballHub</h1>
+            <p>Start your football journey today</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
+            <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            Account created successfully! Redirecting...
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-section" id="loginForm">
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        placeholder="your@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input 
+                        type="password" 
+                        id="loginPassword" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <div class="error-message" id="loginError"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+
+            <div class="footer-text">
+                <a href="#" onclick="alert('Password reset coming soon!')">Forgot password?</a>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-section active" id="registerForm">
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        placeholder="John Doe"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="your@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        placeholder="+254 700 000000"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Create a strong password"
+                        oninput="checkPasswordStrength(this.value)"
+                        required
+                    >
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="password-strength-text" id="strengthText"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+
+            <div class="divider">or continue with</div>
+
+            <div class="social-buttons">
+                <button class="btn-social" onclick="alert('Google sign-in coming soon!')">
+                    <span>🔍</span>
+                    Continue with Google
+                </button>
+                <button class="btn-social" onclick="alert('Facebook sign-in coming soon!')">
+                    <span>📘</span>
+                    Continue with Facebook
+                </button>
+            </div>
+
+            <div class="footer-text">
+                By creating an account, you agree to our<br>
+                <a href="#" onclick="alert('Terms coming soon!')">Terms of Service</a> and 
+                <a href="#" onclick="alert('Privacy Policy coming soon!')">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Switch between login and register tabs
+        function switchTab(tab) {
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+
+            if (tab === 'login') {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+            }
+        }
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+
+            const colors = ['#e53e3e', '#ed8936', '#ecc94b', '#48bb78'];
+            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+            const widths = ['25%', '50%', '75%', '100%'];
+
+            if (password.length === 0) {
+                strengthBar.style.width = '0%';
+                strengthText.textContent = '';
+            } else {
+                const index = Math.min(strength, 3);
+                strengthBar.style.width = widths[index];
+                strengthBar.style.background = colors[index];
+                strengthText.textContent = texts[index];
+                strengthText.style.color = colors[index];
+            }
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Check if user exists
+            const storedUser = localStorage.getItem('footballhub_user');
+            
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                
+                // Simple validation (in real app, this would be server-side)
+                if (user.email === email) {
+                    // Successful login
+                    window.location.href = 'home.html';
+                } else {
+                    document.getElementById('loginError').textContent = 'Invalid email or password';
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            } else {
+                document.getElementById('loginError').textContent = 'No account found. Please register first.';
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        // Handle Registration
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            
+            // Create user object (for demo purposes)
+            const userData = {
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                registeredAt: new Date().toISOString()
+            };
+            
+            // Store in localStorage (in real app, send to server)
+            localStorage.setItem('footballhub_pending_user', JSON.stringify(userData));
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Redirect to profile setup after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'profile-setup.html';
+            }, 1500);
+        }
+
+        // Check if user is already logged in
+        window.onload = function() {
+            const user = localStorage.getItem('footballhub_user');
+            const completedOnboarding = localStorage.getItem('footballhub_onboarding_completed');
+            
+            if (user && completedOnboarding === 'true') {
+                // User is already logged in and completed onboarding
+                window.location.href = 'home.html';
+            }
+        };
+    </script>
+</body>
+</html>
