@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Profile - FootballHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .progress {
+            margin-bottom: 2rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1e1b4b;
+            transition: width 0.3s;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .step-description {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 3rem;
+        }
+
+        .user-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .user-type {
+            padding: 2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .user-type:hover {
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .user-type.selected {
+            border-color: #1e1b4b;
+            background: rgba(30, 27, 75, 0.05);
+        }
+
+        .user-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .user-type h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .user-type p {
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1e1b4b;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.75rem;
+            color: #a0aec0;
+            margin-top: 0.25rem;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1e1b4b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2d2a5f;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1e1b4b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #f7fafc;
+        }
+
+        @media (max-width: 640px) {
+            .user-types {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress">
+            <div class="progress-info">
+                <span id="stepText">Step 1 of 3</span>
+                <span id="percentText">33% Complete</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 33%"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- Step 1: Choose User Type -->
+            <div id="step1" class="step active">
+                <h2>Choose Your Role</h2>
+                <p class="step-description">Select how you'll be using FootballHub</p>
+
+                <div class="user-types">
+                    <div class="user-type" onclick="selectType('player')">
+                        <div class="user-icon">⚽</div>
+                        <h3>Player</h3>
+                        <p>Showcase skills and get discovered</p>
+                    </div>
+
+                    <div class="user-type" onclick="selectType('fan')">
+                        <div class="user-icon">❤️</div>
+                        <h3>Fan</h3>
+                        <p>Follow teams and support favorites</p>
+                    </div>
+
+                    <div class="user-type" onclick="selectType('club')">
+                        <div class="user-icon">👥</div>
+                        <h3>Club</h3>
+                        <p>Manage teams and recruit talent</p>
+                    </div>
+
+                    <div class="user-type" onclick="selectType('sponsor')">
+                        <div class="user-icon">⚡</div>
+                        <h3>Sponsor</h3>
+                        <p>Find partnerships and campaigns</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Profile Details -->
+            <div id="step2" class="step">
+                <h2>Tell Us About Yourself</h2>
+                <p class="step-description">Help us personalize your experience</p>
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" id="location" placeholder="e.g., Nairobi, Kenya" required>
+                </div>
+
+                <div id="playerFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input type="text" id="position" placeholder="e.g., Striker, Midfielder">
+                    </div>
+                    <div class="form-group">
+                        <label for="club">Current Club</label>
+                        <input type="text" id="club" placeholder="e.g., Manchester United">
+                    </div>
+                </div>
+
+                <div id="fanFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="favoriteTeam">Favorite Team</label>
+                        <input type="text" id="favoriteTeam" placeholder="e.g., Arsenal FC">
+                    </div>
+                </div>
+
+                <div id="clubFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="clubName">Club Name</label>
+                        <input type="text" id="clubName" placeholder="e.g., Youth Academy FC">
+                    </div>
+                </div>
+
+                <div id="sponsorFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" placeholder="e.g., Sports Brand Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <input type="text" id="industry" placeholder="e.g., Sports Equipment">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Bio -->
+            <div id="step3" class="step">
+                <h2>Almost Done!</h2>
+                <p class="step-description">Add a bio to complete your profile</p>
+
+                <div class="form-group">
+                    <label for="bio">Bio *</label>
+                    <textarea 
+                        id="bio" 
+                        maxlength="500"
+                        placeholder="Tell us about yourself, your goals, and what you're looking for..."
+                        oninput="updateCharCount()"
+                        required
+                    ></textarea>
+                    <div class="char-count">
+                        <span id="charCount">0</span> / 500 characters
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button id="backBtn" class="btn btn-secondary" onclick="prevStep()" style="visibility: hidden;">← Back</button>
+                <button id="nextBtn" class="btn btn-primary" onclick="nextStep()">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let userType = '';
+        let userData = JSON.parse(localStorage.getItem('footballhub_pending_user') || '{}');
+
+        function selectType(type) {
+            userType = type;
+            document.querySelectorAll('.user-type').forEach(el => el.classList.remove('selected'));
+            event.target.closest('.user-type').classList.add('selected');
+        }
+
+        function updateProgress() {
+            const percent = (currentStep / 3) * 100;
+            document.getElementById('stepText').textContent = `Step ${currentStep} of 3`;
+            document.getElementById('percentText').textContent = `${Math.round(percent)}% Complete`;
+            document.getElementById('progressFill').style.width = `${percent}%`;
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            document.getElementById('backBtn').style.visibility = step > 1 ? 'visible' : 'hidden';
+            document.getElementById('nextBtn').textContent = step === 3 ? 'Complete Profile' : 'Next →';
+            
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep === 1) {
+                if (!userType) {
+                    alert('Please select a user type');
+                    return;
+                }
+                
+                // Show relevant fields
+                document.getElementById('playerFields').style.display = userType === 'player' ? 'block' : 'none';
+                document.getElementById('fanFields').style.display = userType === 'fan' ? 'block' : 'none';
+                document.getElementById('clubFields').style.display = userType === 'club' ? 'block' : 'none';
+                document.getElementById('sponsorFields').style.display = userType === 'sponsor' ? 'block' : 'none';
+                
+                currentStep = 2;
+                showStep(2);
+            } else if (currentStep === 2) {
+                if (!document.getElementById('location').value.trim()) {
+                    alert('Please enter your location');
+                    return;
+                }
+                currentStep = 3;
+                showStep(3);
+            } else if (currentStep === 3) {
+                if (!document.getElementById('bio').value.trim()) {
+                    alert('Please add a bio');
+                    return;
+                }
+                
+                // Save complete profile
+                const profile = {
+                    ...userData,
+                    userType: userType,
+                    location: document.getElementById('location').value,
+                    bio: document.getElementById('bio').value,
+                    position: document.getElementById('position')?.value || '',
+                    club: document.getElementById('club')?.value || document.getElementById('clubName')?.value || '',
+                    favoriteTeam: document.getElementById('favoriteTeam')?.value || '',
+                    companyName: document.getElementById('companyName')?.value || '',
+                    industry: document.getElementById('industry')?.value || ''
+                };
+                
+                localStorage.setItem('footballhub_user', JSON.stringify(profile));
+                localStorage.removeItem('footballhub_pending_user');
+                
+                window.location.href = 'onboarding.html';
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function updateCharCount() {
+            const count = document.getElementById('bio').value.length;
+            document.getElementById('charCount').textContent = count;
+        }
+
+        // Initialize
+        showStep(1);
+    </script>
+</body>
+</html>
