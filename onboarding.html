@@ -20,7 +20,7 @@
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -29,7 +29,7 @@
         }
 
         .tour-modal {
-            background: white;
+            background: #252842;
             border-radius: 20px;
             padding: 3rem;
             max-width: 500px;
@@ -37,6 +37,7 @@
             text-align: center;
             animation: slideUp 0.4s ease;
             position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes slideUp {
@@ -53,23 +54,24 @@
         .tour-icon {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, #1e1b4b 0%, #764ba2 100%);
+            background: #ff0032;
             border-radius: 50%;
             margin: 0 auto 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            box-shadow: 0 8px 24px rgba(255, 0, 50, 0.3);
         }
 
         h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: #ffffff;
         }
 
         p {
-            color: #718096;
+            color: #8b8fa8;
             line-height: 1.6;
             margin-bottom: 2rem;
             font-size: 1.125rem;
@@ -86,12 +88,12 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #e2e8f0;
+            background: #3a3d5c;
             transition: all 0.3s;
         }
 
         .dot.active {
-            background: #1e1b4b;
+            background: #ff0032;
             width: 24px;
             border-radius: 4px;
         }
@@ -113,28 +115,29 @@
         }
 
         .btn-primary {
-            background: #1e1b4b;
+            background: #ff0032;
             color: white;
             flex: 1;
         }
 
         .btn-primary:hover {
-            background: #2d2a5f;
+            background: #e6002d;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 50, 0.4);
         }
 
         .btn-secondary {
             background: transparent;
-            color: #718096;
+            color: #8b8fa8;
             border: 2px solid transparent;
         }
 
         .btn-secondary:hover {
-            color: #1e1b4b;
+            color: #ffffff;
         }
 
         .step-counter {
-            color: #a0aec0;
+            color: #8b8fa8;
             font-size: 0.875rem;
             margin-bottom: 1rem;
         }
@@ -177,8 +180,7 @@
 
     <script>
         let currentStep = 0;
-        const user = JSON.parse(localStorage.getItem('footballhub_user') || '{}');
-        const userType = user.userType || 'player';
+        let userType = 'player'; // Default to player for demo
 
         const tours = {
             player: [
@@ -325,8 +327,8 @@
         }
 
         function complete() {
-            localStorage.setItem('footballhub_onboarding_completed', 'true');
-            window.location.href = 'home.html';
+            alert('Onboarding complete! (In production, this would redirect to home.html)');
+            document.getElementById('overlay').style.display = 'none';
         }
 
         // Initialize
