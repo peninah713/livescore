@@ -22,7 +22,7 @@
         }
 
         .auth-container {
-            background: #252842;
+            background: #252947;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             width: 100%;
@@ -58,7 +58,7 @@
         .logo-icon {
             width: 56px;
             height: 56px;
-            background: #ff0032;
+            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -79,7 +79,7 @@
         }
 
         .auth-header p {
-            color: #8b8fa8;
+            color: #a0a3bd;
             font-size: 1rem;
         }
 
@@ -101,7 +101,7 @@
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
-            color: #8b8fa8;
+            color: #a0a3bd;
             transition: all 0.3s;
         }
 
@@ -110,9 +110,9 @@
         }
 
         .tab.active {
-            background: #ff0032;
+            background: #ff1744;
             color: #ffffff;
-            box-shadow: 0 2px 8px rgba(255, 0, 50, 0.3);
+            box-shadow: 0 2px 8px rgba(255, 23, 68, 0.3);
         }
 
         .form-section {
@@ -139,7 +139,7 @@
         .form-group select {
             width: 100%;
             padding: 0.875rem 1rem;
-            border: 2px solid #3a3d5c;
+            border: 2px solid #3a3f5c;
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
@@ -148,14 +148,14 @@
         }
 
         .form-group input::placeholder {
-            color: #6b6e87;
+            color: #6b6f8f;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #ff0032;
-            box-shadow: 0 0 0 3px rgba(255, 0, 50, 0.1);
+            border-color: #ff1744;
+            box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
         }
 
         .btn {
@@ -170,14 +170,14 @@
         }
 
         .btn-primary {
-            background: #ff0032;
+            background: #ff1744;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #e6002d;
+            background: #f50057;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 0, 50, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
         }
 
         .btn-primary:active {
@@ -187,7 +187,7 @@
         .divider {
             text-align: center;
             margin: 1.5rem 0;
-            color: #8b8fa8;
+            color: #6b6f8f;
             font-size: 0.875rem;
             position: relative;
         }
@@ -199,7 +199,7 @@
             top: 50%;
             width: 40%;
             height: 1px;
-            background: #3a3d5c;
+            background: #3a3f5c;
         }
 
         .divider::before {
@@ -221,7 +221,7 @@
             justify-content: center;
             gap: 0.75rem;
             padding: 0.875rem;
-            border: 2px solid #3a3d5c;
+            border: 2px solid #3a3f5c;
             background: #1a1d3a;
             border-radius: 8px;
             font-size: 1rem;
@@ -232,19 +232,19 @@
         }
 
         .btn-social:hover {
-            border-color: #ff0032;
-            background: #252842;
+            border-color: #ff1744;
+            background: #252947;
         }
 
         .footer-text {
             text-align: center;
             margin-top: 1.5rem;
-            color: #8b8fa8;
+            color: #a0a3bd;
             font-size: 0.875rem;
         }
 
         .footer-text a {
-            color: #ff0032;
+            color: #ff1744;
             text-decoration: none;
             font-weight: 600;
         }
@@ -254,25 +254,26 @@
         }
 
         .error-message {
-            color: #ff0032;
+            color: #ff1744;
             font-size: 0.875rem;
             margin-top: 0.5rem;
             display: none;
         }
 
         .success-message {
-            background: #1a5f3a;
-            color: #66ff99;
+            background: #2d5016;
+            color: #a3e635;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
             display: none;
+            border: 1px solid #4ade80;
         }
 
         .password-strength {
             margin-top: 0.5rem;
             height: 4px;
-            background: #3a3d5c;
+            background: #3a3f5c;
             border-radius: 2px;
             overflow: hidden;
         }
@@ -287,7 +288,7 @@
         .password-strength-text {
             font-size: 0.75rem;
             margin-top: 0.25rem;
-            color: #8b8fa8;
+            color: #a0a3bd;
         }
 
         @media (max-width: 640px) {
@@ -305,7 +306,7 @@
     <div class="auth-container">
         <div class="auth-header">
             <div class="logo">
-                <div class="logo-icon">🏆</div>
+                <div class="logo-icon">⚽</div>
                 <span class="logo-text">FootballHub</span>
             </div>
             <h1>Join FootballHub</h1>
@@ -320,7 +321,7 @@
 
         <!-- Success Message -->
         <div class="success-message" id="successMessage">
-            Account created successfully! Redirecting...
+            Account created successfully! Redirecting to profile setup...
         </div>
 
         <!-- Login Form -->
@@ -459,7 +460,7 @@
             if (password.match(/[0-9]/)) strength++;
             if (password.match(/[^a-zA-Z0-9]/)) strength++;
 
-            const colors = ['#e53e3e', '#ed8936', '#ecc94b', '#48bb78'];
+            const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
             const texts = ['Weak', 'Fair', 'Good', 'Strong'];
             const widths = ['25%', '50%', '75%', '100%'];
 
@@ -475,30 +476,44 @@
             }
         }
 
-        // Handle Login
+        // Handle Login - FIXED
         function handleLogin(event) {
             event.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            const userData = {
-                email: email,
-                loginAt: new Date().toISOString()
-            };
+            // Check if user exists
+            const storedUserData = sessionStorage.getItem('footballhub_user');
             
-            const user = {email, password, ...userData};
-            
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('successMessage').textContent = 'Login successful! Redirecting...';
-            
-            setTimeout(() => {
-                alert('Login successful! (In production, this would redirect to home.html)');
-                document.getElementById('successMessage').style.display = 'none';
-            }, 1500);
+            if (storedUserData) {
+                const user = JSON.parse(storedUserData);
+                
+                // Simple validation
+                if (user.email === email) {
+                    // Check if profile setup is completed
+                    const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
+                    
+                    if (profileCompleted === 'true') {
+                        // Go to home page
+                        alert('Login successful! Redirecting to home page...');
+                        // window.location.href = 'home.html';
+                    } else {
+                        // Go to profile setup
+                        alert('Login successful! Please complete your profile setup...');
+                        // window.location.href = 'profile-setup.html';
+                    }
+                } else {
+                    document.getElementById('loginError').textContent = 'Invalid email or password';
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            } else {
+                document.getElementById('loginError').textContent = 'No account found. Please register first.';
+                document.getElementById('loginError').style.display = 'block';
+            }
         }
 
-        // Handle Registration
+        // Handle Registration - FIXED
         function handleRegister(event) {
             event.preventDefault();
             
@@ -507,6 +522,7 @@
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             
+            // Create user object
             const userData = {
                 fullName: fullName,
                 email: email,
@@ -514,13 +530,36 @@
                 registeredAt: new Date().toISOString()
             };
             
+            // Store user data
+            sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
+            sessionStorage.setItem('footballhub_profile_completed', 'false');
+            
+            // Show success message
             document.getElementById('successMessage').style.display = 'block';
             
+            // Redirect to profile setup after 1.5 seconds
             setTimeout(() => {
-                alert('Registration successful! (In production, this would redirect to profile-setup.html)');
-                document.getElementById('successMessage').style.display = 'none';
+                alert('Redirecting to profile setup page...\n(In production, this would go to profile-setup.html)');
+                
+              window.location.href = 'profile-setup.html';
             }, 1500);
         }
+
+        // Check if user is already logged in
+        window.onload = function() {
+            const user = sessionStorage.getItem('footballhub_user');
+            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
+            
+            if (user && profileCompleted === 'true') {
+                // User is already logged in and completed profile
+                
+                window.location.href = 'home.html';
+            } else if (user && profileCompleted === 'false') {
+                // User registered but hasn't completed profile
+                alert('Please complete your profile setup...');
+                 window.location.href = 'profile-setup.html';
+            }
+        };
     </script>
 </body>
 </html>
