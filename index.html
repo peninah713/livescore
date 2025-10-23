@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to FootballHub - Register Now</title>
+    <title>FootballHub - Register</title>
     <style>
         * {
             margin: 0;
@@ -135,8 +135,7 @@
             font-size: 0.9375rem;
         }
 
-        .form-group input,
-        .form-group select {
+        .form-group input {
             width: 100%;
             padding: 0.875rem 1rem;
             border: 2px solid #3a3f5c;
@@ -151,8 +150,7 @@
             color: #6b6f8f;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
+        .form-group input:focus {
             outline: none;
             border-color: #ff1744;
             box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
@@ -181,10 +179,6 @@
             box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
         .btn-guest {
             background: transparent;
             color: #ffffff;
@@ -194,58 +188,6 @@
         .btn-guest:hover {
             border-color: #6b6f8f;
             background: #1a1d3a;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 1.5rem 0;
-            color: #6b6f8f;
-            font-size: 0.875rem;
-            position: relative;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: #3a3f5c;
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
-        }
-
-        .social-buttons {
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .btn-social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 0.875rem;
-            border: 2px solid #3a3f5c;
-            background: #1a1d3a;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #ffffff;
-        }
-
-        .btn-social:hover {
-            border-color: #ff1744;
-            background: #252947;
         }
 
         .footer-text {
@@ -263,13 +205,6 @@
 
         .footer-text a:hover {
             text-decoration: underline;
-        }
-
-        .error-message {
-            color: #ff1744;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            display: none;
         }
 
         .password-strength {
@@ -320,27 +255,18 @@
             <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
         </div>
 
+        <!-- LOGIN FORM -->
         <div class="form-section" id="loginForm">
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
-                    <input 
-                        type="email" 
-                        id="loginEmail" 
-                        placeholder="your@email.com"
-                        required
-                    >
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
                 </div>
 
                 <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <input 
-                        type="password" 
-                        id="loginPassword" 
-                        placeholder="Enter your password"
-                        required
-                    >
-                    <div class="error-message" id="loginError"></div>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    <div class="error-message" id="loginError" style="color:#ff1744;font-size:0.875rem;display:none;"></div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Sign In</button>
@@ -352,47 +278,27 @@
             </div>
         </div>
 
+        <!-- REGISTER FORM -->
         <div class="form-section active" id="registerForm">
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
-                    <input 
-                        type="text" 
-                        id="fullName" 
-                        placeholder="John Doe"
-                        required
-                    >
+                    <input type="text" id="fullName" placeholder="John Doe" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="your@email.com"
-                        required
-                    >
+                    <input type="email" id="email" placeholder="your@email.com" required>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input 
-                        type="tel" 
-                        id="phone" 
-                        placeholder="+254 700 000000"
-                        required
-                    >
+                    <input type="tel" id="phone" placeholder="+254 700 000000" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        placeholder="Create a strong password"
-                        oninput="checkPasswordStrength(this.value)"
-                        required
-                    >
+                    <input type="password" id="password" placeholder="Create a strong password" oninput="checkPasswordStrength(this.value)" required>
                     <div class="password-strength">
                         <div class="password-strength-bar" id="strengthBar"></div>
                     </div>
@@ -402,19 +308,6 @@
                 <button type="submit" class="btn btn-primary">Create Account</button>
                 <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
             </form>
-
-            <div class="divider">or continue with</div>
-
-            <div class="social-buttons">
-                <button class="btn-social">
-                    <span>🔍</span>
-                    Continue with Google
-                </button>
-                <button class="btn-social">
-                    <span>📘</span>
-                    Continue with Facebook
-                </button>
-            </div>
 
             <div class="footer-text">
                 By creating an account, you agree to our<br>
@@ -445,102 +338,92 @@
         }
 
         function checkPasswordStrength(password) {
-            const strengthBar = document.getElementById('strengthBar');
-            const strengthText = document.getElementById('strengthText');
-            
+            const bar = document.getElementById('strengthBar');
+            const text = document.getElementById('strengthText');
             let strength = 0;
+
             if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-            if (password.match(/[0-9]/)) strength++;
-            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
 
             const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
             const texts = ['Weak', 'Fair', 'Good', 'Strong'];
             const widths = ['25%', '50%', '75%', '100%'];
 
-            if (password.length === 0) {
-                strengthBar.style.width = '0%';
-                strengthText.textContent = '';
-            } else {
-                const index = Math.min(strength, 3);
-                strengthBar.style.width = widths[index];
-                strengthBar.style.background = colors[index];
-                strengthText.textContent = texts[index];
-                strengthText.style.color = colors[index];
+            if (!password) {
+                bar.style.width = '0%';
+                text.textContent = '';
+                return;
             }
+
+            const index = Math.min(strength, 3);
+            bar.style.width = widths[index];
+            bar.style.background = colors[index];
+            text.textContent = texts[index];
+            text.style.color = colors[index];
         }
 
         function handleLogin(event) {
             event.preventDefault();
-            
             const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            const storedUserData = sessionStorage.getItem('footballhub_user');
-            
-            if (storedUserData) {
-                const user = JSON.parse(storedUserData);
-                
-                if (user.email === email) {
-                    const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
-                    
-                    if (profileCompleted === 'true') {
-                        window.location.href = 'home.html';
-                    } else {
-                        window.location.href = 'profile-setup.html';
-                    }
-                } else {
-                    document.getElementById('loginError').textContent = 'Invalid email or password';
-                    document.getElementById('loginError').style.display = 'block';
-                }
+            const stored = sessionStorage.getItem('footballhub_user');
+            const error = document.getElementById('loginError');
+
+            if (!stored) {
+                error.textContent = 'No account found. Please register first.';
+                error.style.display = 'block';
+                return;
+            }
+
+            const user = JSON.parse(stored);
+            if (user.email === email) {
+                const completed = sessionStorage.getItem('footballhub_profile_completed');
+                window.location.href = completed === 'true' ? 'home.html' : 'profile-setup.html';
             } else {
-                document.getElementById('loginError').textContent = 'No account found. Please register first.';
-                document.getElementById('loginError').style.display = 'block';
+                error.textContent = 'Invalid email or password.';
+                error.style.display = 'block';
             }
         }
 
         function handleRegister(event) {
             event.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            
+
             const userData = {
-                fullName: fullName,
-                email: email,
-                phone: phone,
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
                 registeredAt: new Date().toISOString(),
                 isGuest: false
             };
-            
+
             sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
             sessionStorage.setItem('footballhub_profile_completed', 'false');
-            
+
+            // Go to profile setup page immediately
             window.location.href = 'profile-setup.html';
         }
 
         function guestLogin() {
-            const guestData = {
+            const guest = {
                 fullName: 'Guest User',
                 email: 'guest@footballhub.com',
                 phone: '',
                 isGuest: true,
                 registeredAt: new Date().toISOString()
             };
-            
-            sessionStorage.setItem('footballhub_user', JSON.stringify(guestData));
+
+            sessionStorage.setItem('footballhub_user', JSON.stringify(guest));
             sessionStorage.setItem('footballhub_profile_completed', 'true');
             sessionStorage.setItem('footballhub_guest_mode', 'true');
-            
+
+            // Go directly to home page
             window.location.href = 'home.html';
         }
 
         window.onload = function() {
             const user = sessionStorage.getItem('footballhub_user');
             const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
-            
             if (user && profileCompleted === 'true') {
                 window.location.href = 'home.html';
             } else if (user && profileCompleted === 'false') {
