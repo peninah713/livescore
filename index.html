@@ -539,8 +539,7 @@
             
             // Redirect to profile setup after 1.5 seconds
             setTimeout(() => {
-                alert('Redirecting to profile setup page...\n(In production, this would go to profile-setup.html)');
-                
+               
               window.location.href = 'profile-setup.html';
             }, 1500);
         }
@@ -556,7 +555,7 @@
                 window.location.href = 'home.html';
             } else if (user && profileCompleted === 'false') {
                 // User registered but hasn't completed profile
-                alert('Please complete your profile setup...');
+              
                  window.location.href = 'profile-setup.html';
             }
         };
