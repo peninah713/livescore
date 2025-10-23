@@ -167,7 +167,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 0.75rem;
         }
 
         .btn-primary {
@@ -181,19 +180,20 @@
             box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
         }
 
-        .btn-secondary {
-            background: #3a3f5c;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #4a4f6c;
-            transform: translateY(-2px);
-        }
-
-        .btn-primary:active,
-        .btn-secondary:active {
+        .btn-primary:active {
             transform: translateY(0);
+        }
+
+        .btn-guest {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #3a3f5c;
+            margin-top: 1rem;
+        }
+
+        .btn-guest:hover {
+            border-color: #6b6f8f;
+            background: #1a1d3a;
         }
 
         .divider {
@@ -282,6 +282,17 @@
             border: 1px solid #4ade80;
         }
 
+        .guest-message {
+            background: #1e3a5f;
+            color: #60a5fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            border: 1px solid #3b82f6;
+            text-align: center;
+        }
+
         .password-strength {
             margin-top: 0.5rem;
             height: 4px;
@@ -336,6 +347,11 @@
             Account created successfully! Redirecting to profile setup...
         </div>
 
+        <!-- Guest Message -->
+        <div class="guest-message" id="guestMessage">
+            🎉 Logging in as Guest... Redirecting to home page!
+        </div>
+
         <!-- Login Form -->
         <div class="form-section" id="loginForm">
             <form onsubmit="handleLogin(event)">
@@ -361,7 +377,9 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Sign In</button>
-                <button type="button" class="btn btn-secondary" onclick="continueAsGuest()">Continue as Guest</button>
+                <button type="button" class="btn btn-guest" onclick="handleGuestLogin()">
+                    👤 Continue as Guest
+                </button>
             </form>
 
             <div class="footer-text">
@@ -418,7 +436,9 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Create Account</button>
-                <button type="button" class="btn btn-secondary" onclick="continueAsGuest()">Continue as Guest</button>
+                <button type="button" class="btn btn-guest" onclick="handleGuestLogin()">
+                    👤 Continue as Guest
+                </button>
             </form>
 
             <div class="divider">or continue with</div>
@@ -461,6 +481,25 @@
                 registerForm.classList.add('active');
                 loginForm.classList.remove('active');
             }
+        }
+
+        // Handle Guest Login
+        function handleGuestLogin() {
+            // Create guest user data
+            const guestData = {
+                fullName: 'Guest User',
+                email: 'guest@footballhub.com',
+                isGuest: true,
+                loginTime: new Date().toISOString()
+            };
+            
+            // Store guest data
+            sessionStorage.setItem('footballhub_user', JSON.stringify(guestData));
+            sessionStorage.setItem('footballhub_profile_completed', 'true');
+            sessionStorage.setItem('footballhub_guest_mode', 'true');
+            
+            // Redirect directly to home page
+            window.location.href = 'home.html';
         }
 
         // Password strength checker
@@ -509,10 +548,10 @@
                     const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
                     
                     if (profileCompleted === 'true') {
-                        // Redirect to home page
+                        // Go to home page
                         window.location.href = 'home.html';
                     } else {
-                        // Redirect to profile setup
+                        // Go to profile setup
                         window.location.href = 'profile-setup.html';
                     }
                 } else {
@@ -539,35 +578,17 @@
                 fullName: fullName,
                 email: email,
                 phone: phone,
-                registeredAt: new Date().toISOString(),
-                isGuest: false
+                isGuest: false,
+                registeredAt: new Date().toISOString()
             };
             
             // Store user data
             sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
             sessionStorage.setItem('footballhub_profile_completed', 'false');
+            sessionStorage.removeItem('footballhub_guest_mode');
             
             // Redirect immediately to profile setup
             window.location.href = 'profile-setup.html';
-        }
-
-        // Continue as Guest
-        function continueAsGuest() {
-            // Create guest user data
-            const guestData = {
-                fullName: 'Guest User',
-                email: 'guest@footballhub.com',
-                phone: '',
-                isGuest: true,
-                registeredAt: new Date().toISOString()
-            };
-            
-            // Store guest data
-            sessionStorage.setItem('footballhub_user', JSON.stringify(guestData));
-            sessionStorage.setItem('footballhub_profile_completed', 'true');
-            
-            // Redirect directly to home page
-            window.location.href = 'home.html';
         }
 
         // Check if user is already logged in
