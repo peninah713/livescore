@@ -1,488 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FootballHub - Register</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FootballHub - Register</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #1a1d3a;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #1a1d3a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding-top: 5vh; /* Keeps it stable even if height changes */
+      padding-bottom: 5vh;
+    }
 
-        .auth-container {
-            background: #252947;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            width: 100%;
-            max-width: 480px;
-            padding: 3rem;
-            animation: slideUp 0.5s ease;
-        }
+    .auth-container {
+      background: #252947;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 480px;
+      padding: 3rem;
+      animation: slideUp 0.6s ease;
+      animation-fill-mode: forwards;
+    }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .logo-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
+    .logo-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
 
-        .logo-text {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
 
-        .auth-header h1 {
-            font-size: 1.875rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
+    .auth-header h1 {
+      font-size: 1.875rem;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
 
-        .auth-header p {
-            color: #a0a3bd;
-            font-size: 1rem;
-        }
+    .auth-header p {
+      color: #a0a3bd;
+      font-size: 1rem;
+    }
 
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            background: #1a1d3a;
-            padding: 0.375rem;
-            border-radius: 10px;
-        }
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: #1a1d3a;
+      padding: 0.375rem;
+      border-radius: 10px;
+    }
 
-        .tab {
-            flex: 1;
-            padding: 0.875rem;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #a0a3bd;
-            transition: all 0.3s;
-        }
+    .tab {
+      flex: 1;
+      padding: 0.875rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #a0a3bd;
+      transition: all 0.3s;
+    }
 
-        .tab:hover {
-            color: #ffffff;
-        }
+    .tab:hover {
+      color: #ffffff;
+    }
 
-        .tab.active {
-            background: #ff1744;
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(255, 23, 68, 0.3);
-        }
+    .tab.active {
+      background: #ff1744;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(255, 23, 68, 0.3);
+    }
 
-        .form-section {
-            display: none;
-        }
+    /* Smooth show/hide sections */
+    .form-section {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
 
-        .form-section.active {
-            display: block;
-        }
+    .form-section.active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 0.9375rem;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
 
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border: 2px solid #3a3f5c;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: #1a1d3a;
-            color: #ffffff;
-        }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid #3a3f5c;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #1a1d3a;
+      color: #ffffff;
+    }
 
-        .form-group input::placeholder {
-            color: #6b6f8f;
-        }
+    .form-group input::placeholder {
+      color: #6b6f8f;
+    }
 
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #ff1744;
-            box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
-        }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ff1744;
+      box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
+    }
 
-        .form-group select {
-            cursor: pointer;
-        }
+    .btn {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
 
-        .form-group select option {
-            background: #252947;
-            color: #ffffff;
-        }
+    .btn-primary {
+      background: #ff1744;
+      color: white;
+      margin-bottom: 0.75rem;
+    }
 
-        .btn {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+    .btn-primary:hover {
+      background: #f50057;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
+    }
 
-        .btn-primary {
-            background: #ff1744;
-            color: white;
-            margin-bottom: 0.75rem;
-        }
+    .btn-guest {
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid #3a3f5c;
+    }
 
-        .btn-primary:hover {
-            background: #f50057;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
-        }
+    .btn-guest:hover {
+      border-color: #6b6f8f;
+      background: #1a1d3a;
+    }
 
-        .btn-primary:disabled {
-            background: #6b6f8f;
-            cursor: not-allowed;
-            transform: none;
-        }
+    .footer-text {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #a0a3bd;
+      font-size: 0.875rem;
+    }
 
-        .btn-guest {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid #3a3f5c;
-        }
+    .footer-text a {
+      color: #ff1744;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-        .btn-guest:hover {
-            border-color: #6b6f8f;
-            background: #1a1d3a;
-        }
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
 
-        .footer-text {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #a0a3bd;
-            font-size: 0.875rem;
-        }
+    .password-strength {
+      margin-top: 0.5rem;
+      height: 4px;
+      background: #3a3f5c;
+      border-radius: 2px;
+      overflow: hidden;
+    }
 
-        .footer-text a {
-            color: #ff1744;
-            text-decoration: none;
-            font-weight: 600;
-        }
+    .password-strength-bar {
+      height: 100%;
+      width: 0%;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
 
-        .footer-text a:hover {
-            text-decoration: underline;
-        }
+    .password-strength-text {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      color: #a0a3bd;
+    }
 
-        .password-strength {
-            margin-top: 0.5rem;
-            height: 4px;
-            background: #3a3f5c;
-            border-radius: 2px;
-            overflow: hidden;
-        }
+    .error-message {
+      color: #ff1744;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
 
-        .password-strength-bar {
-            height: 100%;
-            width: 0%;
-            transition: all 0.3s;
-            border-radius: 2px;
-        }
+    @media (max-width: 640px) {
+      .auth-container {
+        padding: 2rem 1.5rem;
+      }
 
-        .password-strength-text {
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            color: #a0a3bd;
-        }
-
-        .error-message {
-            color: #ff1744;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        @media (max-width: 640px) {
-            .auth-container {
-                padding: 2rem 1.5rem;
-            }
-
-            .auth-header h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+      .auth-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-header">
-            <div class="logo">
-                <div class="logo-icon">⚽</div>
-                <span class="logo-text">FootballHub</span>
-            </div>
-            <h1>Welcome to FootballHub</h1>
-            <p>Start your football journey today</p>
-        </div>
-
-        <div class="tabs">
-            <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
-            <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
-        </div>
-
-        <!-- LOGIN FORM -->
-        <div class="form-section" id="loginForm">
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                    <div class="error-message" id="loginError"></div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Sign In</button>
-                <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
-            </form>
-
-            <div class="footer-text">
-                <a href="#">Forgot password?</a>
-            </div>
-        </div>
-
-        <!-- REGISTER FORM -->
-        <div class="form-section active" id="registerForm">
-            <form onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" placeholder="John Doe" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="your@email.com" required>
-                    <div class="error-message" id="emailError"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="+254 700 000000" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a strong password" oninput="checkPasswordStrength(this.value)" required>
-                    <div class="password-strength">
-                        <div class="password-strength-bar" id="strengthBar"></div>
-                    </div>
-                    <div class="password-strength-text" id="strengthText"></div>
-                </div>
-
-                <button type="submit" class="btn btn-primary" id="registerBtn">Create Account</button>
-                <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
-            </form>
-
-            <div class="footer-text">
-                By creating an account, you agree to our<br>
-                <a href="#">Terms of Service</a> and 
-                <a href="#">Privacy Policy</a>
-            </div>
-        </div>
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="logo">
+        <div class="logo-icon">⚽</div>
+        <span class="logo-text">FootballHub</span>
+      </div>
+      <h1>Welcome to FootballHub</h1>
+      <p>Start your football journey today</p>
     </div>
 
-    <script>
-        function switchTab(tab) {
-            const loginTab = document.getElementById('loginTab');
-            const registerTab = document.getElementById('registerTab');
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
+    <div class="tabs">
+      <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
+      <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
+    </div>
 
-            if (tab === 'login') {
-                loginTab.classList.add('active');
-                registerTab.classList.remove('active');
-                loginForm.classList.add('active');
-                registerForm.classList.remove('active');
-            } else {
-                registerTab.classList.add('active');
-                loginTab.classList.remove('active');
-                registerForm.classList.add('active');
-                loginForm.classList.remove('active');
-            }
+    <!-- LOGIN FORM -->
+    <div class="form-section" id="loginForm">
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="your@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required />
+          <div class="error-message" id="loginError"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
+      </form>
+
+      <div class="footer-text">
+        <a href="#">Forgot password?</a>
+      </div>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="form-section active" id="registerForm">
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="John Doe" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="your@email.com" required />
+          <div class="error-message" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+254 700 000000" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a strong password" oninput="checkPasswordStrength(this.value)" required />
+          <div class="password-strength">
+            <div class="password-strength-bar" id="strengthBar"></div>
+          </div>
+          <div class="password-strength-text" id="strengthText"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="registerBtn">Create Account</button>
+        <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
+      </form>
+
+      <div class="footer-text">
+        By creating an account, you agree to our<br />
+        <a href="#">Terms of Service</a> and
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+      } else {
+        registerTab.classList.add('active');
+        loginTab.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+      }
+    }
+
+    function checkPasswordStrength(password) {
+      const bar = document.getElementById('strengthBar');
+      const text = document.getElementById('strengthText');
+      let strength = 0;
+
+      if (password.length >= 8) strength++;
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+      const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
+      const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+      const widths = ['25%', '50%', '75%', '100%'];
+
+      if (!password) {
+        bar.style.width = '0%';
+        text.textContent = '';
+        return;
+      }
+
+      const index = Math.min(strength, 3);
+      bar.style.width = widths[index];
+      bar.style.background = colors[index];
+      text.textContent = texts[index];
+      text.style.color = colors[index];
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const stored = localStorage.getItem('footballhub_user');
+      const error = document.getElementById('loginError');
+
+      error.style.display = 'none';
+
+      if (!stored) {
+        error.textContent = 'No account found. Please register first.';
+        error.style.display = 'block';
+        return;
+      }
+
+      const user = JSON.parse(stored);
+      if (user.email === email && user.password === password) {
+        window.location.href = 'home.html';
+      } else {
+        error.textContent = 'Invalid email or password.';
+        error.style.display = 'block';
+      }
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const emailError = document.getElementById('emailError');
+      const registerBtn = document.getElementById('registerBtn');
+
+      emailError.style.display = 'none';
+
+      const existingUser = localStorage.getItem('footballhub_user');
+      if (existingUser) {
+        const user = JSON.parse(existingUser);
+        if (user.email === email) {
+          emailError.textContent = 'This email is already registered. Please sign in.';
+          emailError.style.display = 'block';
+          return;
         }
+      }
 
-        function checkPasswordStrength(password) {
-            const bar = document.getElementById('strengthBar');
-            const text = document.getElementById('strengthText');
-            let strength = 0;
+      registerBtn.disabled = true;
+      registerBtn.textContent = 'Creating Account...';
 
-            if (password.length >= 8) strength++;
-            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-            if (/[0-9]/.test(password)) strength++;
-            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+      const userData = {
+        fullName: document.getElementById('fullName').value,
+        email: email,
+        phone: document.getElementById('phone').value,
+        password: document.getElementById('password').value,
+        registeredAt: new Date().toISOString(),
+        isGuest: false,
+      };
 
-            const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
-            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
-            const widths = ['25%', '50%', '75%', '100%'];
+      localStorage.setItem('footballhub_user', JSON.stringify(userData));
+      localStorage.setItem('footballhub_pending_user', JSON.stringify(userData));
 
-            if (!password) {
-                bar.style.width = '0%';
-                text.textContent = '';
-                return;
-            }
+      setTimeout(() => {
+        window.location.href = 'profile-setup.html';
+      }, 800);
+    }
 
-            const index = Math.min(strength, 3);
-            bar.style.width = widths[index];
-            bar.style.background = colors[index];
-            text.textContent = texts[index];
-            text.style.color = colors[index];
-        }
+    function guestLogin() {
+      const guest = {
+        fullName: 'Guest User',
+        email: 'guest@footballhub.com',
+        phone: '',
+        userType: 'guest',
+        isGuest: true,
+        registeredAt: new Date().toISOString(),
+      };
 
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const stored = localStorage.getItem('footballhub_user');
-            const error = document.getElementById('loginError');
+      localStorage.setItem('footballhub_user', JSON.stringify(guest));
+      localStorage.setItem('footballhub_onboarding_completed', 'true');
+      localStorage.setItem('footballhub_guest_mode', 'true');
 
-            error.style.display = 'none';
+      window.location.href = 'home.html';
+    }
 
-            if (!stored) {
-                error.textContent = 'No account found. Please register first.';
-                error.style.display = 'block';
-                return;
-            }
+    window.onload = function () {
+      const user = localStorage.getItem('footballhub_user');
+      const onboardingCompleted = localStorage.getItem('footballhub_onboarding_completed');
 
-            const user = JSON.parse(stored);
-            if (user.email === email && user.password === password) {
-                window.location.href = 'home.html';
-            } else {
-                error.textContent = 'Invalid email or password.';
-                error.style.display = 'block';
-            }
-        }
+      if (user && onboardingCompleted === 'true') {
+        window.location.href = 'home.html';
+      }
 
-        function handleRegister(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const emailError = document.getElementById('emailError');
-            const registerBtn = document.getElementById('registerBtn');
-            
-            emailError.style.display = 'none';
-
-            // Check if email already exists
-            const existingUser = localStorage.getItem('footballhub_user');
-            if (existingUser) {
-                const user = JSON.parse(existingUser);
-                if (user.email === email) {
-                    emailError.textContent = 'This email is already registered. Please sign in.';
-                    emailError.style.display = 'block';
-                    return;
-                }
-            }
-
-            registerBtn.disabled = true;
-            registerBtn.textContent = 'Creating Account...';
-
-            const userData = {
-                fullName: document.getElementById('fullName').value,
-                email: email,
-                phone: document.getElementById('phone').value,
-                password: document.getElementById('password').value,
-                registeredAt: new Date().toISOString(),
-                isGuest: false
-            };
-
-            // Save to localStorage
-            localStorage.setItem('footballhub_user', JSON.stringify(userData));
-            localStorage.setItem('footballhub_pending_user', JSON.stringify(userData));
-
-            // Redirect to profile setup page
-            setTimeout(() => {
-                window.location.href = 'profile-setup.html';
-            }, 800);
-        }
-
-        function guestLogin() {
-            const guest = {
-                fullName: 'Guest User',
-                email: 'guest@footballhub.com',
-                phone: '',
-                userType: 'guest',
-                isGuest: true,
-                registeredAt: new Date().toISOString()
-            };
-
-            // Save to localStorage
-            localStorage.setItem('footballhub_user', JSON.stringify(guest));
-            localStorage.setItem('footballhub_onboarding_completed', 'true');
-            localStorage.setItem('footballhub_guest_mode', 'true');
-
-            // Go directly to home page
-            window.location.href = 'home.html';
-        }
-
-        // Check if user is already logged in
-        window.onload = function() {
-            const user = localStorage.getItem('footballhub_user');
-            const onboardingCompleted = localStorage.getItem('footballhub_onboarding_completed');
-            
-            if (user && onboardingCompleted === 'true') {
-                window.location.href = 'home.html';
-            }
-        };
-    </script>
+      // Stop re-triggering the container animation
+      setTimeout(() => {
+        document.querySelector('.auth-container').style.animation = 'none';
+      }, 800);
+    };
+  </script>
 </body>
 </html>
