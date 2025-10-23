@@ -237,11 +237,11 @@
                     description: "Follow your favorite teams, engage with content, and enjoy the beautiful game!"
                 }
             ],
-            club: [
+            coach: [
                 {
                     icon: '👥',
-                    title: 'Welcome to Your Club Hub!',
-                    description: 'Manage your team, discover talent, and grow your club with FootballHub.'
+                    title: 'Welcome Coach!',
+                    description: 'Manage your team, discover talent, and grow your coaching career with FootballHub.'
                 },
                 {
                     icon: '🔍',
@@ -251,49 +251,60 @@
                 {
                     icon: '📱',
                     title: 'Manage Your Team',
-                    description: 'Post updates, share match results, and keep your fans engaged with regular content.'
-                },
-                {
-                    icon: '🤝',
-                    title: 'Find Sponsors',
-                    description: 'Connect with potential sponsors and partnerships to help your club grow.'
-                },
-                {
-                    icon: '🎯',
-                    title: "Let's Build Something Great!",
-                    description: 'Start managing your club, recruiting talent, and achieving your goals!'
-                }
-            ],
-            sponsor: [
-                {
-                    icon: '⚡',
-                    title: 'Welcome Sponsor Partner!',
-                    description: 'Connect with the perfect partnerships and maximize your brand exposure in football.'
-                },
-                {
-                    icon: '🎯',
-                    title: 'Find the Right Match',
-                    description: 'Browse teams, players, and events that align with your brand values and goals.'
+                    description: 'Post updates, share match results, and keep your team engaged with regular content.'
                 },
                 {
                     icon: '📊',
-                    title: 'Track Your ROI',
-                    description: 'View engagement metrics, reach statistics, and measure the impact of your sponsorships.'
+                    title: 'Training Resources',
+                    description: 'Access training drills, tactical analysis, and resources to improve your coaching skills.'
+                },
+                {
+                    icon: '🎯',
+                    title: "Let's Build Champions!",
+                    description: 'Start managing your team, developing talent, and achieving your coaching goals!'
+                }
+            ],
+            analyst: [
+                {
+                    icon: '⚡',
+                    title: 'Welcome Analyst!',
+                    description: 'Dive deep into match data, tactics, and performance analytics with FootballHub.'
+                },
+                {
+                    icon: '🎯',
+                    title: 'Advanced Analytics',
+                    description: 'Access detailed match statistics, heat maps, and performance metrics for in-depth analysis.'
+                },
+                {
+                    icon: '📊',
+                    title: 'Track Trends',
+                    description: 'Monitor player performance, team tactics, and league trends with comprehensive data tools.'
                 },
                 {
                     icon: '🤝',
-                    title: 'Build Partnerships',
-                    description: 'Connect directly with clubs, players, and event organizers to create meaningful partnerships.'
+                    title: 'Share Insights',
+                    description: 'Publish your analysis, connect with other analysts, and contribute to the football community.'
                 },
                 {
                     icon: '🚀',
-                    title: 'Ready to Make an Impact!',
-                    description: 'Start exploring opportunities and make your mark in the football community!'
+                    title: 'Ready to Analyze!',
+                    description: 'Start exploring data, creating insights, and making your mark in football analysis!'
                 }
             ]
         };
 
-        const steps = tours[userType] || tours.player;
+        // Get user role from profile
+        function getUserRole() {
+            const userData = sessionStorage.getItem('footballhub_user');
+            if (userData) {
+                const user = JSON.parse(userData);
+                return user.role || 'fan'; // Default to fan if no role specified
+            }
+            return 'fan';
+        }
+
+        userType = getUserRole();
+        const steps = tours[userType] || tours.fan;
 
         function updateTour() {
             const step = steps[currentStep];
@@ -327,9 +338,27 @@
         }
 
         function complete() {
-            alert('Onboarding complete! (In production, this would redirect to home.html)');
-            document.getElementById('overlay').style.display = 'none';
+            // Mark tour as completed
+            sessionStorage.setItem('footballhub_tour_completed', 'true');
+            
+            // Redirect to home page
+            window.location.href = 'home.html';
         }
+
+        // Check if user should see this tour
+        window.onload = function() {
+            const user = sessionStorage.getItem('footballhub_user');
+            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
+            const tourCompleted = sessionStorage.getItem('footballhub_tour_completed');
+            
+            if (!user || profileCompleted !== 'true') {
+                // User hasn't completed registration/profile
+                window.location.href = 'index.html';
+            } else if (tourCompleted === 'true') {
+                // User already saw the tour
+                window.location.href = 'home.html';
+            }
+        };
 
         // Initialize
         updateTour();
