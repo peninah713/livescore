@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Your Profile - FootballHub</title>
+    <title>Profile Setup - FootballHub</title>
     <style>
         * {
             margin: 0;
@@ -12,118 +12,117 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: #1a1d3a;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 2rem;
         }
 
         .container {
-            width: 100%;
-            max-width: 700px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .progress {
-            margin-bottom: 2rem;
+        .profile-card {
+            background: #252947;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            padding: 3rem;
+            animation: slideUp 0.5s ease;
         }
 
-        .progress-info {
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+            border-radius: 14px;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #ffffff;
             margin-bottom: 0.5rem;
-            color: #8b8fa8;
-            font-size: 0.875rem;
+        }
+
+        .header p {
+            color: #a0a3bd;
+            font-size: 1rem;
         }
 
         .progress-bar {
-            height: 6px;
-            background: #3a3d5c;
-            border-radius: 999px;
+            background: #1a1d3a;
+            height: 8px;
+            border-radius: 10px;
+            margin-bottom: 2rem;
             overflow: hidden;
         }
 
         .progress-fill {
+            background: linear-gradient(90deg, #ff1744 0%, #f50057 100%);
             height: 100%;
-            background: #ff0032;
-            transition: width 0.3s;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
         }
 
-        .card {
-            background: #252842;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            color: #a0a3bd;
+            font-size: 0.875rem;
         }
 
         .step {
-            display: none;
+            text-align: center;
+            flex: 1;
         }
 
         .step.active {
+            color: #ff1744;
+            font-weight: 600;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
             display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .step-description {
-            text-align: center;
-            color: #8b8fa8;
-            margin-bottom: 3rem;
-        }
-
-        .user-types {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .user-type {
-            padding: 2rem;
-            border: 2px solid #3a3d5c;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-            background: #1a1d3a;
-        }
-
-        .user-type:hover {
-            border-color: #5a5d7c;
-            transform: translateY(-2px);
-        }
-
-        .user-type.selected {
-            border-color: #ff0032;
-            background: rgba(255, 0, 50, 0.1);
-        }
-
-        .user-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .user-type h3 {
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .user-type p {
-            color: #8b8fa8;
-            font-size: 0.875rem;
         }
 
         .form-group {
@@ -133,57 +132,169 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
             color: #ffffff;
+            font-weight: 500;
+            font-size: 0.9375rem;
         }
 
         .form-group input,
+        .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid #3a3d5c;
+            padding: 0.875rem 1rem;
+            border: 2px solid #3a3f5c;
             border-radius: 8px;
             font-size: 1rem;
-            transition: border-color 0.3s;
-            font-family: inherit;
+            transition: all 0.3s;
             background: #1a1d3a;
             color: #ffffff;
+            font-family: inherit;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: #6b6e87;
+            color: #6b6f8f;
         }
 
         .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #ff0032;
-            box-shadow: 0 0 0 3px rgba(255, 0, 50, 0.1);
+            border-color: #ff1744;
+            box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
         }
 
-        textarea {
+        .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
-        .char-count {
-            text-align: right;
-            font-size: 0.75rem;
-            color: #8b8fa8;
-            margin-top: 0.25rem;
-        }
-
-        .buttons {
+        .profile-picture-upload {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            border: 2px dashed #3a3f5c;
+            border-radius: 12px;
+            background: #1a1d3a;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .profile-picture-upload:hover {
+            border-color: #ff1744;
+            background: #252947;
+        }
+
+        .profile-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            overflow: hidden;
+        }
+
+        .profile-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-text {
+            color: #a0a3bd;
+            font-size: 0.875rem;
+            text-align: center;
+        }
+
+        .upload-text span {
+            color: #ff1744;
+            font-weight: 600;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #1a1d3a;
+            border: 2px solid #3a3f5c;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-item:hover {
+            border-color: #ff1744;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #ff1744;
+        }
+
+        .checkbox-item.selected {
+            border-color: #ff1744;
+            background: rgba(255, 23, 68, 0.1);
+        }
+
+        .radio-group {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #1a1d3a;
+            border: 2px solid #3a3f5c;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-item:hover {
+            border-color: #ff1744;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #ff1744;
+        }
+
+        .radio-item.selected {
+            border-color: #ff1744;
+            background: rgba(255, 23, 68, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
             margin-top: 2rem;
         }
 
         .btn {
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
+            flex: 1;
+            padding: 1rem;
             border: none;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -191,245 +302,453 @@
         }
 
         .btn-primary {
-            background: #ff0032;
+            background: #ff1744;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #e6002d;
+            background: #f50057;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 0, 50, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
         }
 
         .btn-secondary {
-            background: #1a1d3a;
-            color: #ffffff;
-            border: 2px solid #3a3d5c;
+            background: transparent;
+            color: #a0a3bd;
+            border: 2px solid #3a3f5c;
         }
 
         .btn-secondary:hover {
-            background: #252842;
-            border-color: #5a5d7c;
+            border-color: #ff1744;
+            color: #ffffff;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-content {
+            background: #252947;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 400px;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .success-content h2 {
+            color: #ffffff;
+            font-size: 1.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-content p {
+            color: #a0a3bd;
+            margin-bottom: 2rem;
         }
 
         @media (max-width: 640px) {
-            .user-types {
+            .profile-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .checkbox-group {
                 grid-template-columns: 1fr;
             }
 
-            .card {
-                padding: 2rem 1.5rem;
+            .button-group {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="progress">
-            <div class="progress-info">
-                <span id="stepText">Step 1 of 3</span>
-                <span id="percentText">33% Complete</span>
+        <div class="profile-card">
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">⚽</div>
+                    <span class="logo-text">FootballHub</span>
+                </div>
+                <h1>Complete Your Profile</h1>
+                <p>Let's personalize your football experience</p>
             </div>
+
+            <!-- Progress Bar -->
             <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 33%"></div>
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" id="step1Indicator">Profile Info</div>
+                <div class="step" id="step2Indicator">Preferences</div>
+                <div class="step" id="step3Indicator">Favorites</div>
+            </div>
+
+            <!-- Step 1: Profile Information -->
+            <div class="form-section active" id="step1">
+                <form>
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <div class="profile-picture-upload" onclick="document.getElementById('profilePic').click()">
+                            <div class="profile-preview" id="profilePreview">
+                                👤
+                            </div>
+                            <div class="upload-text">
+                                <span>Click to upload</span> or drag and drop<br>
+                                PNG, JPG up to 5MB
+                            </div>
+                            <input type="file" id="profilePic" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            placeholder="Choose a unique username"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Bio (Optional)</label>
+                        <textarea 
+                            id="bio" 
+                            placeholder="Tell us about yourself..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            placeholder="City, Country"
+                            required
+                        >
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Preferences -->
+            <div class="form-section" id="step2">
+                <form>
+                    <div class="form-group">
+                        <label>What's your role?</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="role" value="fan" onchange="selectRadio(this)">
+                                <div>
+                                    <strong style="color: #ffffff;">Fan</strong><br>
+                                    <small style="color: #a0a3bd;">Watch and enjoy football</small>
+                                </div>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="role" value="player" onchange="selectRadio(this)">
+                                <div>
+                                    <strong style="color: #ffffff;">Player</strong><br>
+                                    <small style="color: #a0a3bd;">I play football regularly</small>
+                                </div>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="role" value="coach" onchange="selectRadio(this)">
+                                <div>
+                                    <strong style="color: #ffffff;">Coach</strong><br>
+                                    <small style="color: #a0a3bd;">I coach or train players</small>
+                                </div>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="role" value="analyst" onchange="selectRadio(this)">
+                                <div>
+                                    <strong style="color: #ffffff;">Analyst</strong><br>
+                                    <small style="color: #a0a3bd;">I analyze matches and tactics</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Content Interests (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="goals" onchange="toggleCheckbox(this)">
+                                <span style="color: #ffffff;">Goals & Highlights</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="skills" onchange="toggleCheckbox(this)">
+                                <span style="color: #ffffff;">Skills & Tricks</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="matches" onchange="toggleCheckbox(this)">
+                                <span style="color: #ffffff;">Full Matches</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="training" onchange="toggleCheckbox(this)">
+                                <span style="color: #ffffff;">Training Videos</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="analysis" onchange="toggleCheckbox(this)">
+                                <span style="color: #ffffff;">Tactical Analysis</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="news" onchange="toggleCheckbox(this)">
+                                <span style="color: #ffffff;">Football News</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: Favorites -->
+            <div class="form-section" id="step3">
+                <form>
+                    <div class="form-group">
+                        <label for="favTeam">Favorite Team</label>
+                        <input 
+                            type="text" 
+                            id="favTeam" 
+                            placeholder="e.g., Manchester United, Barcelona"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favPlayer">Favorite Player</label>
+                        <input 
+                            type="text" 
+                            id="favPlayer" 
+                            placeholder="e.g., Lionel Messi, Cristiano Ronaldo"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favLeague">Favorite League</label>
+                        <select id="favLeague" required>
+                            <option value="">Select a league</option>
+                            <option value="premier-league">Premier League</option>
+                            <option value="la-liga">La Liga</option>
+                            <option value="bundesliga">Bundesliga</option>
+                            <option value="serie-a">Serie A</option>
+                            <option value="ligue-1">Ligue 1</option>
+                            <option value="champions-league">Champions League</option>
+                            <option value="europa-league">Europa League</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favPosition">Favorite Position (If you play)</label>
+                        <select id="favPosition">
+                            <option value="">Select position</option>
+                            <option value="goalkeeper">Goalkeeper</option>
+                            <option value="defender">Defender</option>
+                            <option value="midfielder">Midfielder</option>
+                            <option value="forward">Forward</option>
+                            <option value="winger">Winger</option>
+                            <option value="striker">Striker</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="button-group">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">
+                    Previous
+                </button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                    Next
+                </button>
             </div>
         </div>
+    </div>
 
-        <div class="card">
-            <!-- Step 1: Choose User Type -->
-            <div id="step1" class="step active">
-                <h2>Choose Your Role</h2>
-                <p class="step-description">Select how you'll be using FootballHub</p>
-
-                <div class="user-types">
-                    <div class="user-type" onclick="selectType('player')">
-                        <div class="user-icon">⚽</div>
-                        <h3>Player</h3>
-                        <p>Showcase skills and get discovered</p>
-                    </div>
-
-                    <div class="user-type" onclick="selectType('fan')">
-                        <div class="user-icon">❤️</div>
-                        <h3>Fan</h3>
-                        <p>Follow teams and support favorites</p>
-                    </div>
-
-                    <div class="user-type" onclick="selectType('club')">
-                        <div class="user-icon">👥</div>
-                        <h3>Club</h3>
-                        <p>Manage teams and recruit talent</p>
-                    </div>
-
-                    <div class="user-type" onclick="selectType('sponsor')">
-                        <div class="user-icon">⚡</div>
-                        <h3>Sponsor</h3>
-                        <p>Find partnerships and campaigns</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 2: Profile Details -->
-            <div id="step2" class="step">
-                <h2>Tell Us About Yourself</h2>
-                <p class="step-description">Help us personalize your experience</p>
-
-                <div class="form-group">
-                    <label for="location">Location *</label>
-                    <input type="text" id="location" placeholder="e.g., Nairobi, Kenya" required>
-                </div>
-
-                <div id="playerFields" style="display: none;">
-                    <div class="form-group">
-                        <label for="position">Position</label>
-                        <input type="text" id="position" placeholder="e.g., Striker, Midfielder">
-                    </div>
-                    <div class="form-group">
-                        <label for="club">Current Club</label>
-                        <input type="text" id="club" placeholder="e.g., Manchester United">
-                    </div>
-                </div>
-
-                <div id="fanFields" style="display: none;">
-                    <div class="form-group">
-                        <label for="favoriteTeam">Favorite Team</label>
-                        <input type="text" id="favoriteTeam" placeholder="e.g., Arsenal FC">
-                    </div>
-                </div>
-
-                <div id="clubFields" style="display: none;">
-                    <div class="form-group">
-                        <label for="clubName">Club Name</label>
-                        <input type="text" id="clubName" placeholder="e.g., Youth Academy FC">
-                    </div>
-                </div>
-
-                <div id="sponsorFields" style="display: none;">
-                    <div class="form-group">
-                        <label for="companyName">Company Name</label>
-                        <input type="text" id="companyName" placeholder="e.g., Sports Brand Inc.">
-                    </div>
-                    <div class="form-group">
-                        <label for="industry">Industry</label>
-                        <input type="text" id="industry" placeholder="e.g., Sports Equipment">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 3: Bio -->
-            <div id="step3" class="step">
-                <h2>Almost Done!</h2>
-                <p class="step-description">Add a bio to complete your profile</p>
-
-                <div class="form-group">
-                    <label for="bio">Bio *</label>
-                    <textarea 
-                        id="bio" 
-                        maxlength="500"
-                        placeholder="Tell us about yourself, your goals, and what you're looking for..."
-                        oninput="updateCharCount()"
-                        required
-                    ></textarea>
-                    <div class="char-count">
-                        <span id="charCount">0</span> / 500 characters
-                    </div>
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button id="backBtn" class="btn btn-secondary" onclick="prevStep()" style="visibility: hidden;">← Back</button>
-                <button id="nextBtn" class="btn btn-primary" onclick="nextStep()">Next →</button>
-            </div>
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Welcome to FootballHub!</h2>
+            <p>Your profile has been set up successfully</p>
+            <button class="btn btn-primary" onclick="completeSetup()">
+                Get Started
+            </button>
         </div>
     </div>
 
     <script>
         let currentStep = 1;
-        let userType = '';
-        let userData = {};
+        const totalSteps = 3;
 
-        function selectType(type) {
-            userType = type;
-            document.querySelectorAll('.user-type').forEach(el => el.classList.remove('selected'));
-            event.target.closest('.user-type').classList.add('selected');
-        }
-
+        // Update progress bar
         function updateProgress() {
-            const percent = (currentStep / 3) * 100;
-            document.getElementById('stepText').textContent = `Step ${currentStep} of 3`;
-            document.getElementById('percentText').textContent = `${Math.round(percent)}% Complete`;
-            document.getElementById('progressFill').style.width = `${percent}%`;
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // Update step indicators
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step${i}Indicator`);
+                if (i <= currentStep) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            }
+
+            // Update buttons
+            document.getElementById('prevBtn').style.display = currentStep === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Complete Setup' : 'Next';
         }
 
-        function showStep(step) {
-            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-            document.getElementById(`step${step}`).classList.add('active');
-            
-            document.getElementById('backBtn').style.visibility = step > 1 ? 'visible' : 'hidden';
-            document.getElementById('nextBtn').textContent = step === 3 ? 'Complete Profile' : 'Next →';
-            
-            updateProgress();
-        }
-
-        function nextStep() {
-            if (currentStep === 1) {
-                if (!userType) {
-                    alert('Please select a user type');
-                    return;
-                }
-                
-                // Show relevant fields
-                document.getElementById('playerFields').style.display = userType === 'player' ? 'block' : 'none';
-                document.getElementById('fanFields').style.display = userType === 'fan' ? 'block' : 'none';
-                document.getElementById('clubFields').style.display = userType === 'club' ? 'block' : 'none';
-                document.getElementById('sponsorFields').style.display = userType === 'sponsor' ? 'block' : 'none';
-                
-                currentStep = 2;
-                showStep(2);
-            } else if (currentStep === 2) {
-                if (!document.getElementById('location').value.trim()) {
-                    alert('Please enter your location');
-                    return;
-                }
-                currentStep = 3;
-                showStep(3);
-            } else if (currentStep === 3) {
-                if (!document.getElementById('bio').value.trim()) {
-                    alert('Please add a bio');
-                    return;
-                }
-                
-                // Save complete profile
-                const profile = {
-                    ...userData,
-                    userType: userType,
-                    location: document.getElementById('location').value,
-                    bio: document.getElementById('bio').value,
-                    position: document.getElementById('position')?.value || '',
-                    club: document.getElementById('club')?.value || document.getElementById('clubName')?.value || '',
-                    favoriteTeam: document.getElementById('favoriteTeam')?.value || '',
-                    companyName: document.getElementById('companyName')?.value || '',
-                    industry: document.getElementById('industry')?.value || ''
+        // Handle image upload
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePreview').innerHTML = 
+                        `<img src="${e.target.result}" alt="Profile">`;
                 };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Toggle checkbox styling
+        function toggleCheckbox(checkbox) {
+            const item = checkbox.closest('.checkbox-item');
+            if (checkbox.checked) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        }
+
+        // Select radio styling
+        function selectRadio(radio) {
+            const items = document.querySelectorAll('.radio-item');
+            items.forEach(item => item.classList.remove('selected'));
+            radio.closest('.radio-item').classList.add('selected');
+        }
+
+        // Next step
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                // Hide current step
+                document.getElementById(`step${currentStep}`).classList.remove('active');
                 
-                alert('Profile completed successfully! (In production, this would redirect to onboarding.html)');
-                console.log('Profile data:', profile);
+                // Show next step
+                currentStep++;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                
+                updateProgress();
+            } else {
+                // Complete setup
+                saveProfileData();
             }
         }
 
-        function prevStep() {
+        // Previous step
+        function previousStep() {
             if (currentStep > 1) {
+                // Hide current step
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                // Show previous step
                 currentStep--;
-                showStep(currentStep);
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                
+                updateProgress();
             }
         }
 
-        function updateCharCount() {
-            const count = document.getElementById('bio').value.length;
-            document.getElementById('charCount').textContent = count;
+        // Save profile data
+        function saveProfileData() {
+            // Get user data
+            const userData = JSON.parse(sessionStorage.getItem('footballhub_user') || '{}');
+
+            // Add profile data
+            const profileData = {
+                ...userData,
+                username: document.getElementById('username').value,
+                bio: document.getElementById('bio').value,
+                location: document.getElementById('location').value,
+                role: document.querySelector('input[name="role"]:checked')?.value || '',
+                interests: Array.from(document.querySelectorAll('.checkbox-item input:checked')).map(cb => cb.value),
+                favoriteTeam: document.getElementById('favTeam').value,
+                favoritePlayer: document.getElementById('favPlayer').value,
+                favoriteLeague: document.getElementById('favLeague').value,
+                favoritePosition: document.getElementById('favPosition').value,
+                profileCompleted: true
+            };
+
+            // Save to sessionStorage
+            sessionStorage.setItem('footballhub_user', JSON.stringify(profileData));
+            sessionStorage.setItem('footballhub_profile_completed', 'true');
+
+            // Show success modal
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        // Complete setup and redirect
+        function completeSetup() {
+            window.location.href = 'welcome-tour.html';
         }
 
         // Initialize
-        showStep(1);
+        updateProgress();
+
+        // Check if user came from registration
+        window.onload = function() {
+            const user = sessionStorage.getItem('footballhub_user');
+            if (!user) {
+                // No user data, redirect to register
+                window.location.href = 'index.html';
+            }
+        };
     </script>
 </body>
 </html>
