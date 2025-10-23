@@ -135,7 +135,8 @@
             font-size: 0.9375rem;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 0.875rem 1rem;
             border: 2px solid #3a3f5c;
@@ -150,10 +151,20 @@
             color: #6b6f8f;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #ff1744;
             box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #252947;
+            color: #ffffff;
         }
 
         .btn {
@@ -177,6 +188,12 @@
             background: #f50057;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #6b6f8f;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .btn-guest {
@@ -228,6 +245,23 @@
             color: #a0a3bd;
         }
 
+        .error-message {
+            color: #ff1744;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            background: rgba(107, 207, 127, 0.2);
+            color: #6bcf7f;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
         @media (max-width: 640px) {
             .auth-container {
                 padding: 2rem 1.5rem;
@@ -257,6 +291,7 @@
 
         <!-- LOGIN FORM -->
         <div class="form-section" id="loginForm">
+            <div class="success-message" id="loginSuccess"></div>
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
@@ -266,7 +301,7 @@
                 <div class="form-group">
                     <label for="loginPassword">Password</label>
                     <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                    <div class="error-message" id="loginError" style="color:#ff1744;font-size:0.875rem;display:none;"></div>
+                    <div class="error-message" id="loginError"></div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Sign In</button>
@@ -280,6 +315,7 @@
 
         <!-- REGISTER FORM -->
         <div class="form-section active" id="registerForm">
+            <div class="success-message" id="registerSuccess"></div>
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
@@ -289,11 +325,25 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="your@email.com" required>
+                    <div class="error-message" id="emailError"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
                     <input type="tel" id="phone" placeholder="+254 700 000000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userType">I am a</label>
+                    <select id="userType" required>
+                        <option value="">Select your role</option>
+                        <option value="player">Player</option>
+                        <option value="coach">Coach</option>
+                        <option value="scout">Scout</option>
+                        <option value="fan">Fan</option>
+                        <option value="agent">Agent</option>
+                        <option value="sponsor">Sponsor</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -305,7 +355,7 @@
                     <div class="password-strength-text" id="strengthText"></div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary" id="registerBtn">Create Account</button>
                 <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
             </form>
 
@@ -367,8 +417,11 @@
         function handleLogin(event) {
             event.preventDefault();
             const email = document.getElementById('loginEmail').value;
-            const stored = sessionStorage.getItem('footballhub_user');
+            const password = document.getElementById('loginPassword').value;
+            const stored = localStorage.getItem('footballhub_user');
             const error = document.getElementById('loginError');
+
+            error.style.display = 'none';
 
             if (!stored) {
                 error.textContent = 'No account found. Please register first.';
@@ -377,9 +430,16 @@
             }
 
             const user = JSON.parse(stored);
-            if (user.email === email) {
-                const completed = sessionStorage.getItem('footballhub_profile_completed');
-                window.location.href = completed === 'true' ? 'home.html' : 'profile-setup.html';
+            if (user.email === email && user.password === password) {
+                // Show success message
+                const success = document.getElementById('loginSuccess');
+                success.textContent = '✓ Login successful! Redirecting...';
+                success.style.display = 'block';
+                
+                // Redirect to home page
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
             } else {
                 error.textContent = 'Invalid email or password.';
                 error.style.display = 'block';
@@ -389,19 +449,50 @@
         function handleRegister(event) {
             event.preventDefault();
 
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            const registerBtn = document.getElementById('registerBtn');
+            
+            emailError.style.display = 'none';
+
+            // Check if email already exists
+            const existingUser = localStorage.getItem('footballhub_user');
+            if (existingUser) {
+                const user = JSON.parse(existingUser);
+                if (user.email === email) {
+                    emailError.textContent = 'This email is already registered. Please sign in.';
+                    emailError.style.display = 'block';
+                    return;
+                }
+            }
+
+            // Disable button during registration
+            registerBtn.disabled = true;
+            registerBtn.textContent = 'Creating Account...';
+
             const userData = {
                 fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
+                email: email,
                 phone: document.getElementById('phone').value,
+                userType: document.getElementById('userType').value,
+                password: document.getElementById('password').value,
                 registeredAt: new Date().toISOString(),
                 isGuest: false
             };
 
-            sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
-            sessionStorage.setItem('footballhub_profile_completed', 'false');
+            // Save to localStorage (not sessionStorage!)
+            localStorage.setItem('footballhub_user', JSON.stringify(userData));
+            localStorage.setItem('footballhub_onboarding_completed', 'true');
 
-            // Go to profile setup page immediately
-            window.location.href = 'profile-setup.html';
+            // Show success message
+            const success = document.getElementById('registerSuccess');
+            success.textContent = '✓ Account created successfully! Redirecting to home...';
+            success.style.display = 'block';
+
+            // Redirect to home page after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
         }
 
         function guestLogin() {
@@ -409,25 +500,28 @@
                 fullName: 'Guest User',
                 email: 'guest@footballhub.com',
                 phone: '',
+                userType: 'guest',
                 isGuest: true,
                 registeredAt: new Date().toISOString()
             };
 
-            sessionStorage.setItem('footballhub_user', JSON.stringify(guest));
-            sessionStorage.setItem('footballhub_profile_completed', 'true');
-            sessionStorage.setItem('footballhub_guest_mode', 'true');
+            // Save to localStorage
+            localStorage.setItem('footballhub_user', JSON.stringify(guest));
+            localStorage.setItem('footballhub_onboarding_completed', 'true');
+            localStorage.setItem('footballhub_guest_mode', 'true');
 
             // Go directly to home page
             window.location.href = 'home.html';
         }
 
+        // Check if user is already logged in
         window.onload = function() {
-            const user = sessionStorage.getItem('footballhub_user');
-            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
-            if (user && profileCompleted === 'true') {
+            const user = localStorage.getItem('footballhub_user');
+            const onboardingCompleted = localStorage.getItem('footballhub_onboarding_completed');
+            
+            if (user && onboardingCompleted === 'true') {
+                // User is already logged in, redirect to home
                 window.location.href = 'home.html';
-            } else if (user && profileCompleted === 'false') {
-                window.location.href = 'profile-setup.html';
             }
         };
     </script>
