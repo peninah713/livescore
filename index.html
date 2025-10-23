@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to FootballHub - Register Now</title>
+    <title>Welcome to FootballHub</title>
     <style>
         * {
             margin: 0;
@@ -115,11 +115,11 @@
             box-shadow: 0 2px 8px rgba(255, 23, 68, 0.3);
         }
 
-        .form-section {
+        .page {
             display: none;
         }
 
-        .form-section.active {
+        .page.active {
             display: block;
         }
 
@@ -167,6 +167,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            margin-bottom: 0.75rem;
         }
 
         .btn-primary {
@@ -180,7 +181,18 @@
             box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
         }
 
-        .btn-primary:active {
+        .btn-secondary {
+            background: #3a3f5c;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4a4f6c;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active,
+        .btn-secondary:active {
             transform: translateY(0);
         }
 
@@ -291,6 +303,59 @@
             color: #a0a3bd;
         }
 
+        .profile-setup {
+            text-align: center;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .home-content {
+            text-align: center;
+        }
+
+        .welcome-card {
+            background: #1a1d3a;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: #1a1d3a;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff1744;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #a0a3bd;
+        }
+
         @media (max-width: 640px) {
             .auth-container {
                 padding: 2rem 1.5rem;
@@ -299,136 +364,249 @@
             .auth-header h1 {
                 font-size: 1.5rem;
             }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="auth-container">
-        <div class="auth-header">
-            <div class="logo">
-                <div class="logo-icon">⚽</div>
-                <span class="logo-text">FootballHub</span>
+        <!-- Login/Register Page -->
+        <div class="page active" id="authPage">
+            <div class="auth-header">
+                <div class="logo">
+                    <div class="logo-icon">⚽</div>
+                    <span class="logo-text">FootballHub</span>
+                </div>
+                <h1>Join FootballHub</h1>
+                <p>Start your football journey today</p>
             </div>
-            <h1>Join FootballHub</h1>
-            <p>Start your football journey today</p>
-        </div>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
-            <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
-        </div>
+            <div class="tabs">
+                <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
+                <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
+            </div>
 
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage">
-            Account created successfully! Redirecting to profile setup...
-        </div>
+            <div class="success-message" id="successMessage">
+                Account created successfully! Redirecting to profile setup...
+            </div>
 
-        <!-- Login Form -->
-        <div class="form-section" id="loginForm">
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input 
-                        type="email" 
-                        id="loginEmail" 
-                        placeholder="your@email.com"
-                        required
-                    >
+            <!-- Login Form -->
+            <div class="form-section" id="loginForm">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input 
+                            type="email" 
+                            id="loginEmail" 
+                            placeholder="your@email.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            placeholder="Enter your password"
+                            required
+                        >
+                        <div class="error-message" id="loginError"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                    <button type="button" class="btn btn-secondary" onclick="continueAsGuest()">Continue as Guest</button>
+                </form>
+
+                <div class="footer-text">
+                    <a href="#" onclick="alert('Password reset coming soon!')">Forgot password?</a>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="form-section active" id="registerForm">
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            placeholder="John Doe"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            placeholder="your@email.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            placeholder="+254 700 000000"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            placeholder="Create a strong password"
+                            oninput="checkPasswordStrength(this.value)"
+                            required
+                        >
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="strengthBar"></div>
+                        </div>
+                        <div class="password-strength-text" id="strengthText"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                    <button type="button" class="btn btn-secondary" onclick="continueAsGuest()">Continue as Guest</button>
+                </form>
+
+                <div class="divider">or continue with</div>
+
+                <div class="social-buttons">
+                    <button class="btn-social" onclick="alert('Google sign-in coming soon!')">
+                        <span>🔍</span>
+                        Continue with Google
+                    </button>
+                    <button class="btn-social" onclick="alert('Facebook sign-in coming soon!')">
+                        <span>📘</span>
+                        Continue with Facebook
+                    </button>
                 </div>
 
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input 
-                        type="password" 
-                        id="loginPassword" 
-                        placeholder="Enter your password"
-                        required
-                    >
-                    <div class="error-message" id="loginError"></div>
+                <div class="footer-text">
+                    By creating an account, you agree to our<br>
+                    <a href="#" onclick="alert('Terms coming soon!')">Terms of Service</a> and 
+                    <a href="#" onclick="alert('Privacy Policy coming soon!')">Privacy Policy</a>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Sign In</button>
-            </form>
-
-            <div class="footer-text">
-                <a href="#" onclick="alert('Password reset coming soon!')">Forgot password?</a>
             </div>
         </div>
 
-        <!-- Register Form -->
-        <div class="form-section active" id="registerForm">
-            <form onsubmit="handleRegister(event)">
+        <!-- Profile Setup Page -->
+        <div class="page" id="profilePage">
+            <div class="auth-header profile-setup">
+                <div class="profile-icon">👤</div>
+                <h1>Complete Your Profile</h1>
+                <p>Tell us more about yourself</p>
+            </div>
+
+            <form onsubmit="handleProfileSetup(event)">
                 <div class="form-group">
-                    <label for="fullName">Full Name</label>
+                    <label for="favoriteTeam">Favorite Team</label>
                     <input 
                         type="text" 
-                        id="fullName" 
-                        placeholder="John Doe"
+                        id="favoriteTeam" 
+                        placeholder="e.g., Manchester United"
                         required
                     >
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="your@email.com"
-                        required
-                    >
+                    <label for="position">Preferred Position</label>
+                    <select id="position" required>
+                        <option value="">Select position</option>
+                        <option value="Goalkeeper">Goalkeeper</option>
+                        <option value="Defender">Defender</option>
+                        <option value="Midfielder">Midfielder</option>
+                        <option value="Forward">Forward</option>
+                        <option value="Fan">Just a Fan</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input 
-                        type="tel" 
-                        id="phone" 
-                        placeholder="+254 700 000000"
-                        required
-                    >
+                    <label for="experienceLevel">Experience Level</label>
+                    <select id="experienceLevel" required>
+                        <option value="">Select level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Professional">Professional</option>
+                    </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        placeholder="Create a strong password"
-                        oninput="checkPasswordStrength(this.value)"
-                        required
-                    >
-                    <div class="password-strength">
-                        <div class="password-strength-bar" id="strengthBar"></div>
-                    </div>
-                    <div class="password-strength-text" id="strengthText"></div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary">Complete Setup</button>
+                <button type="button" class="btn btn-secondary" onclick="skipProfile()">Skip for Now</button>
             </form>
+        </div>
 
-            <div class="divider">or continue with</div>
+        <!-- Home Page -->
+        <div class="page" id="homePage">
+            <div class="home-content">
+                <div class="auth-header">
+                    <div class="logo">
+                        <div class="logo-icon">⚽</div>
+                        <span class="logo-text">FootballHub</span>
+                    </div>
+                    <h1>Welcome Back!</h1>
+                    <p id="welcomeName">Guest User</p>
+                </div>
 
-            <div class="social-buttons">
-                <button class="btn-social" onclick="alert('Google sign-in coming soon!')">
-                    <span>🔍</span>
-                    Continue with Google
-                </button>
-                <button class="btn-social" onclick="alert('Facebook sign-in coming soon!')">
-                    <span>📘</span>
-                    Continue with Facebook
-                </button>
-            </div>
+                <div class="welcome-card">
+                    <h2 style="color: #ffffff; margin-bottom: 0.5rem;">Your Football Dashboard</h2>
+                    <p style="color: #a0a3bd;">Track your progress and connect with players</p>
+                </div>
 
-            <div class="footer-text">
-                By creating an account, you agree to our<br>
-                <a href="#" onclick="alert('Terms coming soon!')">Terms of Service</a> and 
-                <a href="#" onclick="alert('Privacy Policy coming soon!')">Privacy Policy</a>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Matches</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Goals</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Assists</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" style="margin-top: 2rem;" onclick="logout()">Logout</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Initialize on page load
+        window.onload = function() {
+            const user = sessionStorage.getItem('footballhub_user');
+            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
+            
+            if (user && profileCompleted === 'true') {
+                showPage('homePage');
+                displayUserInfo();
+            } else if (user && profileCompleted === 'false') {
+                showPage('profilePage');
+            } else {
+                showPage('authPage');
+            }
+        };
+
+        // Show specific page
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
         // Switch between login and register tabs
         function switchTab(tab) {
             const loginTab = document.getElementById('loginTab');
@@ -476,32 +654,54 @@
             }
         }
 
-        // Handle Login - FIXED
+        // Handle Registration
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            
+            const userData = {
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                registeredAt: new Date().toISOString(),
+                isGuest: false
+            };
+            
+            sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
+            sessionStorage.setItem('footballhub_profile_completed', 'false');
+            
+            document.getElementById('successMessage').style.display = 'block';
+            
+            setTimeout(() => {
+                showPage('profilePage');
+                document.getElementById('successMessage').style.display = 'none';
+            }, 1500);
+        }
+
+        // Handle Login
         function handleLogin(event) {
             event.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Check if user exists
             const storedUserData = sessionStorage.getItem('footballhub_user');
             
             if (storedUserData) {
                 const user = JSON.parse(storedUserData);
                 
-                // Simple validation
                 if (user.email === email) {
-                    // Check if profile setup is completed
                     const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
                     
                     if (profileCompleted === 'true') {
-                        // Go to home page
-                        alert('Login successful! Redirecting to home page...');
-                        // window.location.href = 'home.html';
+                        showPage('homePage');
+                        displayUserInfo();
                     } else {
-                        // Go to profile setup
-                        
-                         window.location.href = 'profile-setup.html';
+                        showPage('profilePage');
                     }
                 } else {
                     document.getElementById('loginError').textContent = 'Invalid email or password';
@@ -513,52 +713,64 @@
             }
         }
 
-        // Handle Registration - FIXED
-        function handleRegister(event) {
-            event.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            
-            // Create user object
-            const userData = {
-                fullName: fullName,
-                email: email,
-                phone: phone,
+        // Continue as Guest
+        function continueAsGuest() {
+            const guestData = {
+                fullName: 'Guest User',
+                email: 'guest@footballhub.com',
+                phone: '',
+                isGuest: true,
                 registeredAt: new Date().toISOString()
             };
             
-            // Store user data
-            sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
-            sessionStorage.setItem('footballhub_profile_completed', 'false');
+            sessionStorage.setItem('footballhub_user', JSON.stringify(guestData));
+            sessionStorage.setItem('footballhub_profile_completed', 'true');
             
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Redirect to profile setup after 1.5 seconds
-            setTimeout(() => {
-               
-              window.location.href = 'profile-setup.html';
-            }, 1500);
+            showPage('homePage');
+            displayUserInfo();
         }
 
-        // Check if user is already logged in
-        window.onload = function() {
-            const user = sessionStorage.getItem('footballhub_user');
-            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
+        // Handle Profile Setup
+        function handleProfileSetup(event) {
+            event.preventDefault();
             
-            if (user && profileCompleted === 'true') {
-                // User is already logged in and completed profile
-                
-                window.location.href = 'home.html';
-            } else if (user && profileCompleted === 'false') {
-                // User registered but hasn't completed profile
-              
-                 window.location.href = 'profile-setup.html';
+            const favoriteTeam = document.getElementById('favoriteTeam').value;
+            const position = document.getElementById('position').value;
+            const experienceLevel = document.getElementById('experienceLevel').value;
+            
+            const user = JSON.parse(sessionStorage.getItem('footballhub_user'));
+            user.favoriteTeam = favoriteTeam;
+            user.position = position;
+            user.experienceLevel = experienceLevel;
+            
+            sessionStorage.setItem('footballhub_user', JSON.stringify(user));
+            sessionStorage.setItem('footballhub_profile_completed', 'true');
+            
+            showPage('homePage');
+            displayUserInfo();
+        }
+
+        // Skip Profile
+        function skipProfile() {
+            sessionStorage.setItem('footballhub_profile_completed', 'true');
+            showPage('homePage');
+            displayUserInfo();
+        }
+
+        // Display User Info
+        function displayUserInfo() {
+            const user = JSON.parse(sessionStorage.getItem('footballhub_user'));
+            if (user) {
+                document.getElementById('welcomeName').textContent = user.fullName;
             }
-        };
+        }
+
+        // Logout
+        function logout() {
+            sessionStorage.clear();
+            showPage('authPage');
+            switchTab('register');
+        }
     </script>
 </body>
 </html>
