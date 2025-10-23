@@ -282,7 +282,6 @@
       text-align: center;
     }
 
-    /* User Profile Section */
     .user-info {
       display: flex;
       align-items: center;
@@ -382,15 +381,11 @@
       border-radius: 2px 2px 0 0;
     }
 
-    /* Welcome Banner */
     .welcome-banner {
-      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
       color: white;
       padding: 2rem;
       margin: 25px;
-      border-radius: 16px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
       animation: fadeIn 0.5s ease;
     }
 
@@ -398,11 +393,12 @@
       font-size: 2rem;
       margin-bottom: 0.5rem;
       font-weight: 700;
+      color: white;
     }
 
     .welcome-banner p {
       font-size: 1.1rem;
-      opacity: 0.95;
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .highlights {
@@ -614,7 +610,6 @@
       transform: scale(1.2);
     }
 
-    /* Upload Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -884,7 +879,6 @@
       </div>
     </nav>
 
-    <!-- Welcome Banner -->
     <div class="welcome-banner">
       <h1 id="welcomeMessage">Welcome back!</h1>
       <p id="welcomeSubtext">Ready to watch amazing football highlights</p>
@@ -1051,7 +1045,6 @@
     </section>
   </main>
 
-  <!-- Upload Modal -->
   <div class="modal-overlay" id="uploadModal">
     <div class="upload-modal">
       <div class="modal-header">
@@ -1135,30 +1128,50 @@
     let isDropdownOpen = false;
     let uploadedFile = null;
 
-    // User data (simulating localStorage)
-    let userData = {
-      fullName: "John Doe",
-      email: "john@example.com",
-      userType: "player"
-    };
+    // Get user data from sessionStorage
+    let userData = null;
 
     // Initialize user on page load
     function initializeUser() {
-      if (userData && userData.fullName) {
-        document.getElementById('welcomeMessage').textContent = `Welcome back, ${userData.fullName}!`;
-        document.getElementById('welcomeSubtext').textContent = `You're logged in as a ${userData.userType || 'member'}`;
+      // Get user data from sessionStorage
+      const storedUser = sessionStorage.getItem('footballhub_user');
+      
+      if (storedUser) {
+        userData = JSON.parse(storedUser);
         
+        // Update welcome message with user's name
+        if (userData.fullName) {
+          document.getElementById('welcomeMessage').textContent = `Welcome back, ${userData.fullName}!`;
+        }
+        
+        // Update subtext with user's role
+        if (userData.role) {
+          const roleText = userData.role.charAt(0).toUpperCase() + userData.role.slice(1);
+          document.getElementById('welcomeSubtext').textContent = `You're logged in as a ${roleText}`;
+        } else {
+          document.getElementById('welcomeSubtext').textContent = `Ready to watch amazing football highlights`;
+        }
+        
+        // Update avatar with user's initials
         const initial = userData.fullName?.charAt(0).toUpperCase() || 'U';
         document.getElementById('userAvatar').textContent = initial;
+        document.getElementById('userAvatar').title = userData.fullName || 'User Profile';
+      } else {
+        // No user logged in, redirect to login
+        window.location.href = 'index.html';
       }
     }
 
     function logout() {
       if (confirm('Are you sure you want to logout?')) {
-        userData = null;
+        // Clear session data
+        sessionStorage.removeItem('footballhub_user');
+        sessionStorage.removeItem('footballhub_profile_completed');
+        
         showToast('👋 Logged out successfully!');
+        
         setTimeout(() => {
-          alert('You have been logged out. (In production, this would redirect to login page)');
+          window.location.href = 'index.html';
         }, 1000);
       }
     }
@@ -1339,7 +1352,6 @@
       }, 2000);
     }
 
-    // Drag and drop functionality
     const uploadArea = document.getElementById('uploadArea');
     
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
