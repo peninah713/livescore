@@ -1,1394 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FootballHub - Home</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FootballHub - Register</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0c29 0%, #24243e 50%, #302b63 100%);
-      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #1a1d3a;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 25px;
-      background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo {
-      font-weight: bold;
-      font-size: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      flex-shrink: 0;
-    }
-    .logo i { 
-      color: #ff0000; 
-      font-size: 28px;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-5px); }
-      60% { transform: translateY(-3px); }
-    }
-
-    .search-bar {
-      display: flex;
-      flex: 0.5;
-      max-width: 500px;
-      position: relative;
-      margin: 0 30px;
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 12px 20px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 25px;
-      outline: none;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    .search-bar input::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-    .search-bar input:focus {
-      border-color: #ff0000;
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    }
-    .search-bar button {
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      border: none;
-      padding: 8px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      color: white;
-      transition: all 0.3s ease;
-    }
-    .search-bar button:hover {
-      background: linear-gradient(135deg, #cc0000, #aa0000);
-      transform: translateY(-50%) scale(1.05);
-    }
-
-    .top-icons {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-    
-    .upload-btn {
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 25px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
-      font-size: 14px;
-    }
-    
-    .upload-btn:hover {
-      background: linear-gradient(135deg, #cc0000, #aa0000);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(255, 0, 0, 0.4);
-    }
-    
-    .upload-btn i {
-      font-size: 18px;
-    }
-    
-    .top-icons > i {
-      cursor: pointer;
-      transition: all 0.3s ease;
-      padding: 8px;
-      border-radius: 50%;
-      position: relative;
-    }
-    .top-icons > i:hover {
-      color: #ff0000;
-      background: rgba(255, 0, 0, 0.1);
-      transform: scale(1.1);
-    }
-    
-    .notification-badge {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      background: #ff0000;
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-weight: bold;
-      border: 2px solid #1a1a33;
+      padding: 2rem;
     }
-    
-    .language-selector {
-      position: relative;
+
+    .auth-container {
+      background: #252947;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 480px;
+      padding: 3rem;
+      animation: slideUp 0.5s ease;
     }
-    
-    .language-trigger {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 14px;
-      color: white;
-    }
-    
-    .language-trigger:hover {
-      background: rgba(255, 0, 0, 0.1);
-      border-color: #ff0000;
-    }
-    
-    .language-dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      width: 320px;
-      max-height: 500px;
-      overflow-y: auto;
-      background: linear-gradient(145deg, #1f1f3f, #2a2a5f);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      display: none;
-    }
-    
-    .language-dropdown.show {
-      display: block;
-      animation: fadeInDropdown 0.2s ease;
-    }
-    
-    @keyframes fadeInDropdown {
-      from { opacity: 0; transform: translateY(-10px); }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
-    .dropdown-header {
-      padding: 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      justify-content: space-between;
+
+    .auth-header { text-align: center; margin-bottom: 2rem; }
+
+    .logo {
+      display: inline-flex;
       align-items: center;
-    }
-    
-    .dropdown-header span {
-      font-weight: 600;
-      font-size: 14px;
-    }
-    
-    .language-badge {
-      background: rgba(76, 175, 80, 0.2);
-      color: #4CAF50;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      border: 1px solid rgba(76, 175, 80, 0.3);
-    }
-    
-    .region-header {
-      padding: 10px 15px;
-      background: rgba(0, 0, 0, 0.3);
-      font-size: 11px;
-      font-weight: 600;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .language-item {
-      display: flex;
-      align-items: center;
-      padding: 10px 15px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      gap: 12px;
-    }
-    
-    .language-item:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .language-item.selected {
-      background: rgba(255, 0, 0, 0.1);
-    }
-    
-    .language-flag {
-      font-size: 20px;
-    }
-    
-    .language-name {
-      flex: 1;
-      font-size: 14px;
-    }
-    
-    .check-icon {
-      color: #ff0000;
-      font-size: 18px;
-      opacity: 0;
-    }
-    
-    .language-item.selected .check-icon {
-      opacity: 1;
-    }
-    
-    .dropdown-footer {
-      padding: 12px 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 11px;
-      color: #999;
-      text-align: center;
-    }
-    
-    .user-profile-btn {
-      padding: 8px 16px;
-      border-radius: 25px;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
-      font-size: 14px;
-      white-space: nowrap;
-      border: none;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
     }
 
-    .user-profile-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
-    }
-
-    .horizontal-nav {
-      background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0 25px;
-      position: sticky;
-      top: 72px;
-      z-index: 99;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2px;
-    }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 15px 20px;
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      position: relative;
-    }
-
-    .nav-link:hover {
-      color: white;
-      background: rgba(255, 0, 0, 0.1);
-    }
-
-    .nav-link.active {
-      color: #ff0000;
-      background: rgba(255, 0, 0, 0.15);
-    }
-
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: #ff0000;
-      border-radius: 2px 2px 0 0;
-    }
-
-    .highlights {
-      padding: 25px;
-      overflow-y: auto;
-      max-height: calc(100vh - 200px);
-    }
-    .highlights h1 {
-      margin-bottom: 25px;
-      font-size: 28px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #ff0000, #ff4444);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .filter-section {
-      margin-bottom: 25px;
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 25px;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 14px;
-      font-weight: 600;
-      backdrop-filter: blur(10px);
-    }
-    .filter-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: #ff0000;
-      transform: translateY(-2px);
-    }
-    .filter-btn.active {
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      border-color: #ff0000;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
-    }
-    
-    .video-card {
-      background: linear-gradient(145deg, #1a1a2e 0%, #2d2d5a 100%);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      will-change: transform;
-    }
-    
-    .video-card:hover { 
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(255, 0, 0, 0.25);
-      border-color: rgba(255, 0, 0, 0.4);
-    }
-
-    .video-thumbnail {
-      position: relative;
-      overflow: hidden;
-      background: #000;
-      height: 220px;
-    }
-    
-    .video-card iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      pointer-events: none;
-    }
-
-    .play-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, rgba(255, 0, 0, 0.9), rgba(204, 0, 0, 0.9));
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
+    .logo-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      color: white;
-      opacity: 0;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
-      pointer-events: auto;
-    }
-    
-    .video-card:hover .play-overlay {
-      opacity: 1;
-    }
-    
-    .video-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    
-    .author-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: bold;
-      color: white;
-      box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
-      flex-shrink: 0;
-    }
-    
-    .author-name {
-      font-size: 14px;
-      color: #b8b8c8;
-      font-weight: 600;
+      font-size: 2rem;
     }
 
-    .video-info { 
-      padding: 22px;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
-      backdrop-filter: blur(15px);
-      flex: 1;
-    }
-    
-    .video-info .title {
+    .logo-text {
+      font-size: 2rem;
       font-weight: 700;
-      margin-bottom: 12px;
-      font-size: 18px;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
       color: #ffffff;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
-    
-    .video-info .meta {
-      font-size: 14px;
-      color: #b8b8c8;
+
+    .auth-header h1 {
+      font-size: 1.875rem;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .auth-header p { color: #a0a3bd; font-size: 1rem; }
+
+    .tabs {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: #1a1d3a;
+      padding: 0.375rem;
+      border-radius: 10px;
     }
-    
-    .video-info .duration {
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      color: white;
-      padding: 5px 10px;
+
+    .tab {
+      flex: 1;
+      padding: 0.875rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
       border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #a0a3bd;
+      transition: all 0.3s;
     }
 
-    .video-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 22px;
-      background: rgba(0, 0, 0, 0.6);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-    }
-    
-    .video-actions i {
-      cursor: pointer;
-      padding: 12px;
-      border-radius: 50%;
-      transition: all 0.3s ease;
-      font-size: 20px;
-      color: #b8b8c8;
-    }
-    
-    .video-actions i:hover {
-      background: rgba(255, 0, 0, 0.2);
-      color: #ff0000;
-      transform: scale(1.15);
-    }
+    .tab:hover { color: #ffffff; }
+    .tab.active { background: #ff1744; color: #ffffff; }
 
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      animation: fadeIn 0.3s ease;
-    }
+    .form-section { display: none; }
+    .form-section.active { display: block; }
 
-    .modal-overlay.show {
-      display: flex;
-    }
-
-    .upload-modal {
-      background: linear-gradient(145deg, #1f1f3f, #2a2a5f);
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 600px;
-      width: 90%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      animation: slideUpModal 0.3s ease;
-    }
-
-    @keyframes slideUpModal {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .modal-header h2 {
-      font-size: 24px;
-      background: linear-gradient(135deg, #ff0000, #ff4444);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .close-modal {
-      cursor: pointer;
-      font-size: 28px;
-      color: #b8b8c8;
-      transition: all 0.3s ease;
-    }
-
-    .close-modal:hover {
-      color: #ff0000;
-      transform: rotate(90deg);
-    }
-
-    .upload-area {
-      border: 2px dashed rgba(255, 255, 255, 0.3);
-      border-radius: 15px;
-      padding: 40px;
-      text-align: center;
-      margin-bottom: 25px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .upload-area:hover {
-      border-color: #ff0000;
-      background: rgba(255, 0, 0, 0.1);
-    }
-
-    .upload-area.drag-over {
-      border-color: #ff0000;
-      background: rgba(255, 0, 0, 0.15);
-    }
-
-    .upload-icon {
-      font-size: 64px;
-      color: #ff0000;
-      margin-bottom: 15px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
+    .form-group { margin-bottom: 1.5rem; }
 
     .form-group label {
       display: block;
-      margin-bottom: 8px;
-      color: #b8b8c8;
-      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      font-weight: 500;
     }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
+    .form-group input {
       width: 100%;
-      padding: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-size: 14px;
+      padding: 0.875rem 1rem;
+      border: 2px solid #3a3f5c;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #1a1d3a;
+      color: #ffffff;
+    }
+
+    .form-group input::placeholder { color: #6b6f8f; }
+
+    .form-group input:focus {
       outline: none;
-      transition: all 0.3s ease;
+      border-color: #ff1744;
+      box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
     }
 
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: #ff0000;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .submit-btn {
+    .btn {
       width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
+      padding: 1rem;
       border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 16px;
+      border-radius: 8px;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
-    .submit-btn:hover:not(:disabled) {
+    .btn-primary {
+      background: #ff1744;
+      color: white;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn-primary:hover {
+      background: #f50057;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
     }
 
-    .submit-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .btn-guest {
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid #3a3f5c;
     }
 
-    .file-input {
+    .btn-guest:hover {
+      border-color: #6b6f8f;
+      background: #1a1d3a;
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #a0a3bd;
+      font-size: 0.875rem;
+    }
+
+    .footer-text a {
+      color: #ff1744;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-text a:hover { text-decoration: underline; }
+
+    .password-strength {
+      margin-top: 0.5rem;
+      height: 4px;
+      background: #3a3f5c;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .password-strength-bar {
+      height: 100%;
+      width: 0%;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .password-strength-text {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      color: #a0a3bd;
+    }
+
+    .error-message {
+      color: #ff1744;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
       display: none;
     }
 
-    .highlights::-webkit-scrollbar,
-    .language-dropdown::-webkit-scrollbar,
-    .upload-modal::-webkit-scrollbar {
-      width: 8px;
-    }
-    .highlights::-webkit-scrollbar-track,
-    .language-dropdown::-webkit-scrollbar-track,
-    .upload-modal::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-    .highlights::-webkit-scrollbar-thumb,
-    .language-dropdown::-webkit-scrollbar-thumb,
-    .upload-modal::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      border-radius: 10px;
-    }
-
-    @media (max-width: 1200px) {
-      .video-grid {
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      }
-    }
-
-    @media (max-width: 768px) {
-      .top-bar {
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .search-bar {
-        order: 3;
-        flex: 1;
-        max-width: none;
-        margin: 10px 0 0 0;
-      }
-      .video-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .highlights {
-        padding: 15px;
-      }
-      .language-dropdown {
-        width: 280px;
-      }
-      .nav-links {
-        overflow-x: auto;
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @media (max-width: 640px) {
+      .auth-container { padding: 2rem 1.5rem; }
+      .auth-header h1 { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <header class="top-bar">
+  <div class="auth-container">
+    <div class="auth-header">
       <div class="logo">
-        <i class='bx bx-football'></i> <span>FootballHub</span>
+        <div class="logo-icon">⚽</div>
+        <span class="logo-text">FootballHub</span>
       </div>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
-        <button onclick="performSearch()"><i class='bx bx-search'></i></button>
-      </div>
-      
-      <div class="top-icons">
-        <div class="language-selector">
-          <div class="language-trigger" id="languageTrigger" onclick="toggleLanguageDropdown()">
-            <span id="selectedFlag">🌎</span>
-            <span id="selectedCode">EN</span>
-          </div>
-          <div class="language-dropdown" id="languageDropdown">
-            <div class="dropdown-header">
-              <span>Select Language</span>
-              <span class="language-badge" id="languageCount">40+ Languages</span>
-            </div>
-            <div id="languageList"></div>
-            <div class="dropdown-footer">
-              🌍 Supporting grassroots football across all African regions
-            </div>
-          </div>
-        </div>
-        
-        <button class="upload-btn" onclick="openUploadModal()">
-          <i class='bx bx-plus'></i>
-          <span>Upload</span>
-        </button>
-        
-        <i class='bx bx-bell' title="Notifications" onclick="showToast('🔔 No new notifications')">
-          <span class="notification-badge">3</span>
-        </i>
-        
-        <button class="user-profile-btn" onclick="goToProfile()" id="userProfileBtn">
-          <i class='bx bx-user'></i>
-          <span id="userName">User</span>
-        </button>
-      </div>
-    </header>
+      <h1>Welcome to FootballHub</h1>
+      <p>Start your football journey today</p>
+    </div>
 
-    <nav class="horizontal-nav">
-      <div class="nav-container">
-        <div class="nav-links">
-          <a href="#" class="nav-link active" onclick="return false"><span>Home</span></a>
-          <a href="#" class="nav-link" onclick="showToast('🎥 Highlights page coming soon!')"><span>Highlights</span></a>
-          <a href="#" class="nav-link" onclick="showToast('📅 Events page coming soon!')"><span>Events</span></a>
-          <a href="#" class="nav-link" onclick="showToast('⚽ Players page coming soon!')"><span>Players</span></a>
-          <a href="#" class="nav-link" onclick="showToast('💼 Sponsors page coming soon!')"><span>Sponsors</span></a>
-          <a href="#" class="nav-link" onclick="showToast('🔍 Search page coming soon!')"><span>Search</span></a>
-        </div>
-      </div>
-    </nav>
+    <div class="tabs">
+      <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
+      <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
+    </div>
 
-    <section class="highlights">
-      <div class="section-header">
-        <h1>Top Football Highlights</h1>
-      </div>
-      
-      <div class="filter-section">
-        <button class="filter-btn active" onclick="filterVideos('all', event)">All</button>
-        <button class="filter-btn" onclick="filterVideos('goals', event)">Goals</button>
-        <button class="filter-btn" onclick="filterVideos('skills', event)">Skills</button>
-        <button class="filter-btn" onclick="filterVideos('matches', event)">Full Matches</button>
-        <button class="filter-btn" onclick="filterVideos('training', event)">Training</button>
-      </div>
-
-      <div class="video-grid" id="videoGrid">
-        <div class="video-card" data-category="goals">
-          <div class="video-thumbnail">
-            <iframe src="https://www.youtube.com/embed/8-92w5L55Zg" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">CR</div>
-              <div class="author-name">CR7 Highlights</div>
-            </div>
-            <p class="title">Cristiano Ronaldo Skills & Tricks Collection</p>
-            <div class="meta">
-              <span>1.8M views • 2 months ago</span>
-              <span class="duration">8:32</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        </div>
-
-        <div class="video-card" data-category="skills">
-          <div class="video-thumbnail">
-            <iframe src="https://www.youtube.com/embed/bxUqL2qYwH0" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">NJ</div>
-              <div class="author-name">Neymar Jr FC</div>
-            </div>
-            <p class="title">Neymar Jr Ultimate Skill Compilation</p>
-            <div class="meta">
-              <span>960k views • 3 weeks ago</span>
-              <span class="duration">12:20</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        </div>
-
-        <div class="video-card" data-category="matches">
-          <div class="video-thumbnail">
-            <iframe src="https://www.youtube.com/embed/H_IDhgKNsbQ" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">CL</div>
-              <div class="author-name">Champions League</div>
-            </div>
-            <p class="title">Champions League Final Best Moments</p>
-            <div class="meta">
-              <span>3.2M views • 1 week ago</span>
-              <span class="duration">15:30</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        </div>
-
-        <div class="video-card" data-category="goals">
-          <div class="video-thumbnail">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">PL</div>
-              <div class="author-name">Premier League</div>
-            </div>
-            <p class="title">Premier League Goals of the Season</p>
-            <div class="meta">
-              <span>1.5M views • 2 days ago</span>
-              <span class="duration">9:45</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        </div>
-
-        <div class="video-card" data-category="training">
-          <div class="video-thumbnail">
-            <iframe src="https://www.youtube.com/embed/H_IDhgKNsbQ" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">FT</div>
-              <div class="author-name">Football Training</div>
-            </div>
-            <p class="title">Professional Football Training Session</p>
-            <div class="meta">
-              <span>680k views • 4 days ago</span>
-              <span class="duration">22:15</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        </div>
-
-        <div class="video-card" data-category="skills">
-          <div class="video-thumbnail">
-            <iframe src="https://www.youtube.com/embed/zZxL8Ky-fYI" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">FS</div>
-              <div class="author-name">Football Stars</div>
-            </div>
-            <p class="title">Messi Top 10 Goals - Legendary Moments</p>
-            <div class="meta">
-              <span>2.3M views • 1 year ago</span>
-              <span class="duration">10:45</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="modal-overlay" id="uploadModal">
-    <div class="upload-modal">
-      <div class="modal-header">
-        <h2>Upload Video</h2>
-        <i class='bx bx-x close-modal' onclick="closeUploadModal()"></i>
-      </div>
-      
-      <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
-        <i class='bx bx-cloud-upload upload-icon'></i>
-        <h3>Drag & Drop your video here</h3>
-        <p style="color: #b8b8c8; margin-top: 10px;">or click to browse</p>
-        <input type="file" id="fileInput" class="file-input" accept="video/*" onchange="handleFileSelect(event)">
-      </div>
-
-      <form id="uploadForm" onsubmit="handleUpload(event)">
+    <!-- LOGIN FORM -->
+    <div class="form-section" id="loginForm">
+      <form onsubmit="handleLogin(event)">
         <div class="form-group">
-          <label for="videoTitle">Video Title *</label>
-          <input type="text" id="videoTitle" placeholder="Enter video title" required>
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="your@email.com" required>
         </div>
 
         <div class="form-group">
-          <label for="videoCategory">Category *</label>
-          <select id="videoCategory" required>
-            <option value="">Select category</option>
-            <option value="goals">Goals</option>
-            <option value="skills">Skills</option>
-            <option value="matches">Full Matches</option>
-            <option value="training">Training</option>
-          </select>
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+          <div class="error-message" id="loginError"></div>
         </div>
 
-        <div class="form-group">
-          <label for="videoDescription">Description</label>
-          <textarea id="videoDescription" placeholder="Enter video description"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="videoUrl">YouTube URL (Optional)</label>
-          <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          <i class='bx bx-upload'></i> Upload Video
-        </button>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
       </form>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="form-section active" id="registerForm">
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="your@email.com" required>
+          <div class="error-message" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+254 700 000000" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a strong password" oninput="checkPasswordStrength(this.value)" required>
+          <div class="password-strength">
+            <div class="password-strength-bar" id="strengthBar"></div>
+          </div>
+          <div class="password-strength-text" id="strengthText"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="registerBtn">Create Account</button>
+        <button type="button" class="btn btn-guest" onclick="guestLogin()">👤 Continue as Guest</button>
+      </form>
+
+      <div class="footer-text">
+        By creating an account, you agree to our<br>
+        <a href="#">Terms of Service</a> and 
+        <a href="#">Privacy Policy</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const languages = [
-      { code: "en", name: "English", flag: "🇬🇧", region: "Global" },
-      { code: "sw", name: "Swahili", flag: "🇰🇪", region: "East Africa" },
-      { code: "fr", name: "French", flag: "🇫🇷", region: "West/Central Africa" },
-      { code: "ar", name: "Arabic", flag: "🇸🇦", region: "North Africa" },
-      { code: "pt", name: "Portuguese", flag: "🇵🇹", region: "Southern Africa" },
-      { code: "om", name: "Oromo", flag: "🇪🇹", region: "East Africa" },
-      { code: "am", name: "Amharic", flag: "🇪🇹", region: "East Africa" },
-      { code: "so", name: "Somali", flag: "🇸🇴", region: "East Africa" },
-      { code: "rw", name: "Kinyarwanda", flag: "🇷🇼", region: "East Africa" },
-      { code: "rn", name: "Kirundi", flag: "🇧🇮", region: "East Africa" },
-      { code: "ha", name: "Hausa", flag: "🇳🇬", region: "West Africa" },
-      { code: "yo", name: "Yoruba", flag: "🇳🇬", region: "West Africa" },
-      { code: "ig", name: "Igbo", flag: "🇳🇬", region: "West Africa" },
-      { code: "ff", name: "Fulani", flag: "🇸🇳", region: "West Africa" },
-      { code: "wo", name: "Wolof", flag: "🇸🇳", region: "West Africa" },
-      { code: "bm", name: "Bambara", flag: "🇲🇱", region: "West Africa" },
-      { code: "zu", name: "Zulu", flag: "🇿🇦", region: "Southern Africa" },
-      { code: "xh", name: "Xhosa", flag: "🇿🇦", region: "Southern Africa" },
-      { code: "st", name: "Sesotho", flag: "🇱🇸", region: "Southern Africa" },
-      { code: "tn", name: "Setswana", flag: "🇧🇼", region: "Southern Africa" },
-      { code: "sn", name: "Shona", flag: "🇿🇼", region: "Southern Africa" },
-      { code: "ny", name: "Chichewa", flag: "🇲🇼", region: "Southern Africa" },
-      { code: "ln", name: "Lingala", flag: "🇨🇩", region: "Central Africa" },
-      { code: "kg", name: "Kongo", flag: "🇨🇩", region: "Central Africa" },
-      { code: "sg", name: "Sango", flag: "🇨🇫", region: "Central Africa" },
-      { code: "ber", name: "Berber", flag: "🇲🇦", region: "North Africa" },
-      { code: "kab", name: "Kabyle", flag: "🇩🇿", region: "North Africa" },
-    ];
+    function switchTab(tab) {
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
 
-    let selectedLanguage = languages.find(lang => lang.code === "en");
-    let isDropdownOpen = false;
-    let uploadedFile = null;
-    let currentUser = null;
-
-    function loadUserData() {
-      try {
-        const userData = JSON.parse(localStorage.getItem('footballhub_user') || 'null');
-        if (userData) {
-          currentUser = userData;
-          const userNameEl = document.getElementById('userName');
-          if (userNameEl) {
-            userNameEl.textContent = userData.isGuest ? 'Guest' : (userData.fullName || 'User').split(' ')[0];
-          }
-        }
-      } catch (err) {
-        console.error('Error loading user data:', err);
-      }
-    }
-
-    function goToProfile() {
-      if (currentUser && currentUser.isGuest) {
-        showToast('👤 Guest users cannot access profile. Please sign in!');
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
       } else {
-        showToast('👤 Profile page coming soon!');
+        registerTab.classList.add('active');
+        loginTab.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
       }
     }
 
-    function groupLanguagesByRegion() {
-      return languages.reduce((acc, lang) => {
-        if (!acc[lang.region]) acc[lang.region] = [];
-        acc[lang.region].push(lang);
-        return acc;
-      }, {});
-    }
+    function checkPasswordStrength(password) {
+      const bar = document.getElementById('strengthBar');
+      const text = document.getElementById('strengthText');
+      let strength = 0;
 
-    function renderLanguageDropdown() {
-      const groupedLanguages = groupLanguagesByRegion();
-      let html = '';
-      
-      for (const region in groupedLanguages) {
-        html += `<div class="region-header">${region}</div>`;
-        
-        groupedLanguages[region].forEach(lang => {
-          const isSelected = selectedLanguage.code === lang.code;
-          html += `
-            <div class="language-item ${isSelected ? 'selected' : ''}" onclick="selectLanguage('${lang.code}')">
-              <span class="language-flag">${lang.flag}</span>
-              <span class="language-name">${lang.name}</span>
-              <i class='bx bx-check check-icon'></i>
-            </div>
-          `;
-        });
+      if (password.length >= 8) strength++;
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+      const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
+      const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+      const widths = ['25%', '50%', '75%', '100%'];
+
+      if (!password) {
+        bar.style.width = '0%';
+        text.textContent = '';
+        return;
       }
-      
-      document.getElementById('languageList').innerHTML = html;
-      document.getElementById('selectedFlag').textContent = selectedLanguage.flag;
-      document.getElementById('selectedCode').textContent = selectedLanguage.code.toUpperCase();
+
+      const index = Math.min(strength, 3);
+      bar.style.width = widths[index];
+      bar.style.background = colors[index];
+      text.textContent = texts[index];
+      text.style.color = colors[index];
     }
 
-    function toggleLanguageDropdown() {
-      isDropdownOpen = !isDropdownOpen;
-      document.getElementById('languageDropdown').classList.toggle('show', isDropdownOpen);
-    }
-
-    function selectLanguage(code) {
-      const lang = languages.find(l => l.code === code);
-      if (lang) {
-        selectedLanguage = lang;
-        renderLanguageDropdown();
-        toggleLanguageDropdown();
-        showToast(`🌍 Language changed to ${lang.name}`);
-      }
-    }
-
-    function filterVideos(category, event) {
-      const cards = document.querySelectorAll('.video-card');
-      const buttons = document.querySelectorAll('.filter-btn');
-      
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    function searchVideos() {
-      const input = document.getElementById('searchInput');
-      const cards = document.querySelectorAll('.video-card');
-      const searchTerm = input.value.toLowerCase();
-
-      cards.forEach(card => {
-        const title = card.querySelector('.title').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    function performSearch() {
-      searchVideos();
-      showToast('🔍 Search completed!');
-    }
-
-    function likeVideo(element) {
-      element.style.color = element.style.color === 'rgb(255, 0, 0)' ? '' : '#ff0000';
-      showToast(element.style.color === 'rgb(255, 0, 0)' ? '❤️ Video liked!' : 'Like removed');
-    }
-
-    function saveVideo(element) {
-      element.style.color = element.style.color === 'rgb(255, 215, 0)' ? '' : '#ffd700';
-      showToast(element.style.color === 'rgb(255, 215, 0)' ? '💾 Video saved!' : 'Video unsaved');
-    }
-
-    function shareVideo(element) {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Football Highlight',
-          text: 'Check out this amazing football highlight!',
-          url: window.location.href
-        });
-      } else {
-        navigator.clipboard.writeText(window.location.href);
-        showToast('🔗 Link copied to clipboard!');
-      }
-    }
-
-    function openUploadModal() {
-      document.getElementById('uploadModal').classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeUploadModal() {
-      document.getElementById('uploadModal').classList.remove('show');
-      document.getElementById('uploadForm').reset();
-      uploadedFile = null;
-      document.body.style.overflow = 'auto';
-    }
-
-    function handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (file) {
-        uploadedFile = file;
-        showToast(`✅ File selected: ${file.name}`);
-      }
-    }
-
-    function handleUpload(event) {
+    function handleLogin(event) {
       event.preventDefault();
-      
-      const title = document.getElementById('videoTitle').value;
-      const category = document.getElementById('videoCategory').value;
-      const description = document.getElementById('videoDescription').value;
-      const videoUrl = document.getElementById('videoUrl').value;
-      const submitBtn = document.getElementById('submitBtn');
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const error = document.getElementById('loginError');
 
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Uploading...';
-      
-      showToast('⏳ Uploading video...');
-      
-      setTimeout(() => {
-        const videoGrid = document.getElementById('videoGrid');
-        const newCard = document.createElement('div');
-        newCard.className = 'video-card';
-        newCard.setAttribute('data-category', category);
-        
-        const embedUrl = videoUrl ? videoUrl.replace('watch?v=', 'embed/') : 'https://www.youtube.com/embed/dQw4w9WgXcQ';
-        
-        newCard.innerHTML = `
-          <div class="video-thumbnail">
-            <iframe src="${embedUrl}" allowfullscreen></iframe>
-            <div class="play-overlay"><i class='bx bx-play'></i></div>
-          </div>
-          <div class="video-info">
-            <div class="video-author">
-              <div class="author-avatar">YOU</div>
-              <div class="author-name">${currentUser ? currentUser.fullName : 'Your Channel'}</div>
-            </div>
-            <p class="title">${title}</p>
-            <div class="meta">
-              <span>Just now</span>
-              <span class="duration">NEW</span>
-            </div>
-          </div>
-          <div class="video-actions">
-            <i class='bx bx-like' title="Like" onclick="likeVideo(this)"></i>
-            <i class='bx bx-bookmark' title="Save" onclick="saveVideo(this)"></i>
-            <i class='bx bx-share' title="Share" onclick="shareVideo(this)"></i>
-            <i class='bx bx-dots-horizontal-rounded' title="More"></i>
-          </div>
-        `;
-        
-        videoGrid.insertBefore(newCard, videoGrid.firstChild);
-        
-        showToast('✅ Video uploaded successfully!');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="bx bx-upload"></i> Upload Video';
-        closeUploadModal();
-      }, 2000);
-    }
+      error.style.display = 'none';
 
-    const uploadArea = document.getElementById('uploadArea');
-    
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      uploadArea.addEventListener(eventName, preventDefaults, false);
-    });
+      const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
+      const user = storedUsers.find(u => u.email === email && u.password === password);
 
-    function preventDefaults(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+      if (user) {
+        const loginData = {
+          fullName: user.fullName,
+          email: user.email,
+          phone: user.phone,
+          isGuest: false,
+          profileComplete: user.profileComplete || false,
+          joinedDate: user.joinedDate
+        };
+        localStorage.setItem('footballhub_user', JSON.stringify(loginData));
 
-    ['dragenter', 'dragover'].forEach(eventName => {
-      uploadArea.addEventListener(eventName, () => {
-        uploadArea.classList.add('drag-over');
-      }, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-      uploadArea.addEventListener(eventName, () => {
-        uploadArea.classList.remove('drag-over');
-      }, false);
-    });
-
-    uploadArea.addEventListener('drop', (e) => {
-      const dt = e.dataTransfer;
-      const files = dt.files;
-      
-      if (files.length > 0) {
-        uploadedFile = files[0];
-        showToast(`✅ File dropped: ${files[0].name}`);
+        if (!user.profileComplete) {
+          window.location.href = 'profile-setup.html';
+        } else {
+          window.location.href = 'home.html';
+        }
+      } else {
+        error.textContent = 'Invalid email or password.';
+        error.style.display = 'block';
       }
-    }, false);
+    }
 
-    function showToast(message) {
-      const existingToast = document.querySelector('.toast-notification');
-      if (existingToast) existingToast.remove();
+    function handleRegister(event) {
+      event.preventDefault();
 
-      const toast = document.createElement('div');
-      toast.className = 'toast-notification';
-      toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, #ff0000, #cc0000);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        z-index: 10000;
-        font-weight: 500;
-        backdrop-filter: blur(10px);
-        animation: slideInRight 0.3s ease;
-      `;
-      toast.textContent = message;
-      document.body.appendChild(toast);
+      const email = document.getElementById('email').value;
+      const emailError = document.getElementById('emailError');
+      const registerBtn = document.getElementById('registerBtn');
+      
+      emailError.style.display = 'none';
+
+      const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
+      const existingUser = storedUsers.find(u => u.email === email);
+      
+      if (existingUser) {
+        emailError.textContent = 'This email is already registered. Please sign in.';
+        emailError.style.display = 'block';
+        return;
+      }
+
+      registerBtn.disabled = true;
+      registerBtn.textContent = 'Creating Account...';
+
+      const userData = {
+        fullName: document.getElementById('fullName').value,
+        email: email,
+        phone: document.getElementById('phone').value,
+        password: document.getElementById('password').value,
+        isGuest: false,
+        profileComplete: false,
+        joinedDate: new Date().toISOString()
+      };
+
+      storedUsers.push(userData);
+      localStorage.setItem('footballhub_all_users', JSON.stringify(storedUsers));
+
+      const currentUser = {
+        fullName: userData.fullName,
+        email: userData.email,
+        phone: userData.phone,
+        isGuest: false,
+        profileComplete: false,
+        joinedDate: userData.joinedDate
+      };
+      localStorage.setItem('footballhub_user', JSON.stringify(currentUser));
+
+      window.location.href = 'profile-setup.html';
+    }
+
+    function guestLogin() {
+      const guestData = {
+        fullName: 'Guest User',
+        email: 'guest@footballhub.com',
+        phone: '',
+        isGuest: true,
+        profileComplete: true,
+        joinedDate: new Date().toISOString()
+      };
+
+      localStorage.setItem('footballhub_user', JSON.stringify(guestData));
 
       setTimeout(() => {
-        toast.style.animation = 'slideOutRight 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-      }, 3000);
+        window.location.href = 'home.html';
+      }, 300);
     }
 
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideInRight {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes slideOutRight {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
-
-    document.addEventListener('DOMContentLoaded', function() {
-      loadUserData();
-      renderLanguageDropdown();
-      
-      document.addEventListener('click', (e) => {
-        const languageSelector = document.querySelector('.language-selector');
-        if (!languageSelector.contains(e.target) && isDropdownOpen) {
-          toggleLanguageDropdown();
-        }
-      });
-
-      document.getElementById('uploadModal').addEventListener('click', (e) => {
-        if (e.target.id === 'uploadModal') {
-          closeUploadModal();
-        }
-      });
-    });
-
-    console.log("⚽ FootballHub ready!");
+    console.log('⚽ FootballHub Registration Ready!');
   </script>
 </body>
 </html>
