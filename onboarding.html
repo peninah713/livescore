@@ -12,356 +12,534 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: white;
         }
 
-        .overlay {
+        /* Main App Preview (Behind overlay) */
+        .app-preview {
+            filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .preview-nav {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Onboarding Overlay */
+        .onboarding-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 1rem;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
         }
 
-        .tour-modal {
-            background: #252842;
-            border-radius: 20px;
-            padding: 3rem;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            animation: slideUp 0.4s ease;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideUp {
             from {
+                transform: translateY(20px);
                 opacity: 0;
-                transform: translateY(30px);
             }
             to {
-                opacity: 1;
                 transform: translateY(0);
+                opacity: 1;
             }
         }
 
-        .tour-icon {
-            width: 100px;
-            height: 100px;
-            background: #ff0032;
+        .onboarding-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #a0aec0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #f7fafc;
+            color: #718096;
+        }
+
+        .tour-content {
+            text-align: center;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: #1e1b4b;
             border-radius: 50%;
-            margin: 0 auto 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            box-shadow: 0 8px 24px rgba(255, 0, 50, 0.3);
+            margin: 0 auto 1.5rem;
         }
 
-        h2 {
-            font-size: 2rem;
+        .tour-content h3 {
+            font-size: 1.75rem;
             margin-bottom: 1rem;
-            color: #ffffff;
+            color: #1a202c;
         }
 
-        p {
-            color: #8b8fa8;
+        .tour-content p {
+            color: #718096;
+            font-size: 1.125rem;
             line-height: 1.6;
             margin-bottom: 2rem;
-            font-size: 1.125rem;
         }
 
+        /* Progress Dots */
         .progress-dots {
             display: flex;
-            gap: 0.5rem;
             justify-content: center;
+            gap: 0.5rem;
             margin-bottom: 2rem;
         }
 
         .dot {
-            width: 8px;
             height: 8px;
-            border-radius: 50%;
-            background: #3a3d5c;
+            border-radius: 999px;
             transition: all 0.3s;
         }
 
         .dot.active {
-            background: #ff0032;
-            width: 24px;
-            border-radius: 4px;
+            width: 32px;
+            background: #1e1b4b;
         }
 
-        .buttons {
+        .dot.completed {
+            width: 8px;
+            background: #10b981;
+        }
+
+        .dot.upcoming {
+            width: 8px;
+            background: #cbd5e0;
+        }
+
+        /* Buttons */
+        .button-group {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 0.75rem;
         }
 
         .btn {
-            padding: 0.875rem 2rem;
+            flex: 1;
+            padding: 0.875rem 1.5rem;
             border-radius: 8px;
             border: none;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .btn-primary {
-            background: #ff0032;
+            background: #1e1b4b;
             color: white;
-            flex: 1;
         }
 
         .btn-primary:hover {
-            background: #e6002d;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 0, 50, 0.4);
+            background: #2d2a5f;
         }
 
-        .btn-secondary {
+        .btn-outline {
             background: transparent;
-            color: #8b8fa8;
-            border: 2px solid transparent;
+            color: #718096;
+            border: 1px solid #e2e8f0;
         }
 
-        .btn-secondary:hover {
-            color: #ffffff;
+        .btn-outline:hover {
+            background: #f7fafc;
         }
 
         .step-counter {
-            color: #8b8fa8;
+            text-align: center;
+            color: #a0aec0;
             font-size: 0.875rem;
-            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-small {
+            width: 20px;
+            height: 20px;
+        }
+
+        .icon-white {
+            stroke: white;
         }
 
         @media (max-width: 640px) {
-            .tour-modal {
+            .onboarding-card {
                 padding: 2rem 1.5rem;
             }
 
-            h2 {
+            .tour-content h3 {
                 font-size: 1.5rem;
+            }
+
+            .tour-content p {
+                font-size: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column-reverse;
             }
         }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay">
-        <div class="tour-modal">
-            <div class="step-counter" id="stepCounter">Step 1 of 5</div>
-            
-            <div class="tour-icon" id="tourIcon">🏆</div>
-            
-            <h2 id="tourTitle">Welcome to FootballHub!</h2>
-            <p id="tourDescription">Let's take a quick tour to help you get started with your new platform.</p>
+    <!-- App Preview (Blurred Background) -->
+    <div class="app-preview">
+        <div class="preview-nav">
+            <div style="font-size: 1.5rem; font-weight: 600; color: #1e1b4b;">FootballHub</div>
+        </div>
+        <div class="preview-content">
+            <h1 style="font-size: 2rem; margin-bottom: 1rem;">Featured Videos</h1>
+            <div style="height: 400px; background: #f7fafc; border-radius: 12px;"></div>
+        </div>
+    </div>
 
-            <div class="progress-dots" id="progressDots">
-                <div class="dot active"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
+    <!-- Onboarding Overlay -->
+    <div class="onboarding-overlay" id="onboarding-overlay">
+        <div class="onboarding-card">
+            <button class="close-btn" onclick="skipTour()">
+                <svg class="icon-small" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
 
-            <div class="buttons">
-                <button class="btn btn-secondary" onclick="skip()">Skip Tour</button>
-                <button class="btn btn-primary" onclick="next()">Next</button>
+            <div class="tour-content">
+                <div class="icon-circle">
+                    <svg class="icon icon-white" id="step-icon" viewBox="0 0 24 24">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                        <path d="M4 22h16"></path>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                    </svg>
+                </div>
+
+                <h3 id="step-title">Welcome to FootballHub!</h3>
+                <p id="step-description">Let's take a quick tour of your personalized dashboard</p>
+
+                <div class="progress-dots" id="progress-dots"></div>
+
+                <div class="button-group">
+                    <button class="btn btn-outline" id="skip-btn" onclick="skipTour()">
+                        Skip Tour
+                    </button>
+                    <button class="btn btn-primary" id="next-btn" onclick="nextStep()">
+                        <span id="btn-text">Next</span>
+                        <svg class="icon-small" viewBox="0 0 24 24" id="btn-icon">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="step-counter">
+                    Step <span id="current-step">1</span> of <span id="total-steps">5</span>
+                </p>
             </div>
         </div>
     </div>
 
     <script>
-        let currentStep = 0;
-        let userType = 'player'; // Default to player for demo
+        let currentStepIndex = 0;
+        let tourSteps = [];
 
-        const tours = {
+        // Get user data
+        const userData = JSON.parse(localStorage.getItem('footballhub_user') || '{}');
+        const userType = userData.userType || 'player';
+
+        // Define tour steps based on user type
+        const allSteps = {
+            common: [
+                {
+                    title: "Welcome to FootballHub!",
+                    description: "Let's take a quick tour of your personalized dashboard",
+                    icon: `
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                        <path d="M4 22h16"></path>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                    `
+                }
+            ],
             player: [
                 {
-                    icon: '🏆',
-                    title: 'Welcome to FootballHub!',
-                    description: "We're excited to have you here. Let's explore what makes FootballHub perfect for players like you."
+                    title: "Watch & Learn",
+                    description: "Access training videos, match highlights, and tutorials from the Videos tab",
+                    icon: `
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    `
                 },
                 {
-                    icon: '📹',
-                    title: 'Share Your Highlights',
-                    description: 'Upload match videos, training clips, and showcase your skills to scouts and clubs worldwide.'
+                    title: "Share Your Journey",
+                    description: "Post your highlights, training sessions, and connect with scouts on Social",
+                    icon: `
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    `
                 },
                 {
-                    icon: '🤝',
-                    title: 'Connect with Scouts',
-                    description: 'Get discovered by professional scouts and clubs looking for talent just like you.'
+                    title: "Attend Events",
+                    description: "Find tryouts, tournaments, and training camps near you",
+                    icon: `
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    `
                 },
                 {
-                    icon: '📊',
-                    title: 'Track Your Progress',
-                    description: 'View your stats, performance analytics, and see how you compare with other players.'
-                },
-                {
-                    icon: '🌟',
-                    title: "You're All Set!",
-                    description: "Start building your profile, upload content, and take the next step in your football career!"
+                    title: "Build Your Profile",
+                    description: "Showcase your stats, achievements, and get discovered by scouts",
+                    icon: `
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    `
                 }
             ],
             fan: [
                 {
-                    icon: '❤️',
-                    title: 'Welcome Football Fan!',
-                    description: "You're about to experience football like never before. Let's get started!"
+                    title: "Watch Live Matches",
+                    description: "Stream live games and catch up on highlights in the Videos section",
+                    icon: `
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    `
                 },
                 {
-                    icon: '📺',
-                    title: 'Watch Live Matches',
-                    description: 'Stream live matches, highlights, and exclusive behind-the-scenes content from your favorite teams.'
+                    title: "Join the Community",
+                    description: "Follow your favorite teams, share content, and engage with other fans",
+                    icon: `
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    `
                 },
                 {
-                    icon: '💬',
-                    title: 'Join the Community',
-                    description: 'Chat with fellow fans, comment on posts, and be part of the conversation.'
+                    title: "Never Miss a Match",
+                    description: "Track upcoming games, tournaments, and fan events",
+                    icon: `
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    `
                 },
                 {
-                    icon: '🎟️',
-                    title: 'Get Event Updates',
-                    description: 'Never miss a match! Get notifications for upcoming games, events, and exclusive fan experiences.'
-                },
-                {
-                    icon: '⚽',
-                    title: 'Let the Games Begin!',
-                    description: "Follow your favorite teams, engage with content, and enjoy the beautiful game!"
+                    title: "Customize Your Feed",
+                    description: "Follow teams and players to personalize your experience",
+                    icon: `
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    `
                 }
             ],
-            coach: [
+            club: [
                 {
-                    icon: '👥',
-                    title: 'Welcome Coach!',
-                    description: 'Manage your team, discover talent, and grow your coaching career with FootballHub.'
+                    title: "Discover Talent",
+                    description: "Use the Scout Discovery feature to find players that match your needs",
+                    icon: `
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    `
                 },
                 {
-                    icon: '🔍',
-                    title: 'Scout New Talent',
-                    description: 'Browse player profiles, watch highlight reels, and find the perfect additions to your squad.'
+                    title: "Engage Your Community",
+                    description: "Share updates, match results, and build your club's following",
+                    icon: `
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    `
                 },
                 {
-                    icon: '📱',
-                    title: 'Manage Your Team',
-                    description: 'Post updates, share match results, and keep your team engaged with regular content.'
+                    title: "Organize Events",
+                    description: "Post tryouts, tournaments, and training sessions",
+                    icon: `
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    `
                 },
                 {
-                    icon: '📊',
-                    title: 'Training Resources',
-                    description: 'Access training drills, tactical analysis, and resources to improve your coaching skills.'
-                },
-                {
-                    icon: '🎯',
-                    title: "Let's Build Champions!",
-                    description: 'Start managing your team, developing talent, and achieving your coaching goals!'
+                    title: "Manage Your Club",
+                    description: "Track team stats, manage rosters, and attract sponsors",
+                    icon: `
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    `
                 }
             ],
-            analyst: [
+            sponsor: [
                 {
-                    icon: '⚡',
-                    title: 'Welcome Analyst!',
-                    description: 'Dive deep into match data, tactics, and performance analytics with FootballHub.'
+                    title: "Find Partnerships",
+                    description: "Browse players, clubs, and events for sponsorship opportunities",
+                    icon: `
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    `
                 },
                 {
-                    icon: '🎯',
-                    title: 'Advanced Analytics',
-                    description: 'Access detailed match statistics, heat maps, and performance metrics for in-depth analysis.'
+                    title: "Track Engagement",
+                    description: "Monitor social reach and engagement of potential partners",
+                    icon: `
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    `
                 },
                 {
-                    icon: '📊',
-                    title: 'Track Trends',
-                    description: 'Monitor player performance, team tactics, and league trends with comprehensive data tools.'
+                    title: "Sponsor Events",
+                    description: "Find and sponsor tournaments, matches, and community events",
+                    icon: `
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    `
                 },
                 {
-                    icon: '🤝',
-                    title: 'Share Insights',
-                    description: 'Publish your analysis, connect with other analysts, and contribute to the football community.'
-                },
-                {
-                    icon: '🚀',
-                    title: 'Ready to Analyze!',
-                    description: 'Start exploring data, creating insights, and making your mark in football analysis!'
+                    title: "Manage Campaigns",
+                    description: "Track your sponsorships and measure campaign performance",
+                    icon: `
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    `
                 }
             ]
         };
 
-        // Get user role from profile
-        function getUserRole() {
-            const userData = sessionStorage.getItem('footballhub_user');
-            if (userData) {
-                const user = JSON.parse(userData);
-                return user.role || 'fan'; // Default to fan if no role specified
-            }
-            return 'fan';
-        }
+        // Build tour steps
+        tourSteps = [...allSteps.common, ...(allSteps[userType] || allSteps.player)];
 
-        userType = getUserRole();
-        const steps = tours[userType] || tours.fan;
-
-        function updateTour() {
-            const step = steps[currentStep];
-            document.getElementById('stepCounter').textContent = `Step ${currentStep + 1} of ${steps.length}`;
-            document.getElementById('tourIcon').textContent = step.icon;
-            document.getElementById('tourTitle').textContent = step.title;
-            document.getElementById('tourDescription').textContent = step.description;
-
-            // Update dots
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentStep);
-            });
-
-            // Update button
-            const nextBtn = document.querySelector('.btn-primary');
-            nextBtn.textContent = currentStep === steps.length - 1 ? "Let's Go!" : 'Next';
-        }
-
-        function next() {
-            if (currentStep < steps.length - 1) {
-                currentStep++;
-                updateTour();
-            } else {
-                complete();
-            }
-        }
-
-        function skip() {
-            complete();
-        }
-
-        function complete() {
-            // Mark tour as completed
-            sessionStorage.setItem('footballhub_tour_completed', 'true');
+        function renderProgressDots() {
+            const container = document.getElementById('progress-dots');
+            container.innerHTML = '';
             
-            // Redirect to home page
+            tourSteps.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                
+                if (index === currentStepIndex) {
+                    dot.classList.add('active');
+                } else if (index < currentStepIndex) {
+                    dot.classList.add('completed');
+                } else {
+                    dot.classList.add('upcoming');
+                }
+                
+                container.appendChild(dot);
+            });
+        }
+
+        function updateStep() {
+            const step = tourSteps[currentStepIndex];
+            
+            document.getElementById('step-title').textContent = step.title;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('step-icon').innerHTML = step.icon;
+            document.getElementById('current-step').textContent = currentStepIndex + 1;
+            document.getElementById('total-steps').textContent = tourSteps.length;
+            
+            // Update button
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            
+            if (currentStepIndex === tourSteps.length - 1) {
+                btnText.textContent = 'Get Started';
+                btnIcon.innerHTML = `
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                `;
+            } else {
+                btnText.textContent = 'Next';
+                btnIcon.innerHTML = `
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                `;
+            }
+            
+            // Hide skip button on first step
+            const skipBtn = document.getElementById('skip-btn');
+            skipBtn.style.display = currentStepIndex > 0 ? 'flex' : 'none';
+            
+            renderProgressDots();
+        }
+
+        function nextStep() {
+            if (currentStepIndex < tourSteps.length - 1) {
+                currentStepIndex++;
+                updateStep();
+            } else {
+                completeTour();
+            }
+        }
+
+        function skipTour() {
+            completeTour();
+        }
+
+        function completeTour() {
+            localStorage.setItem('footballhub_onboarding_completed', 'true');
             window.location.href = 'home.html';
         }
 
-        // Check if user should see this tour
-        window.onload = function() {
-            const user = sessionStorage.getItem('footballhub_user');
-            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
-            const tourCompleted = sessionStorage.getItem('footballhub_tour_completed');
-            
-            if (!user || profileCompleted !== 'true') {
-                // User hasn't completed registration/profile
-                window.location.href = 'index.html';
-            } else if (tourCompleted === 'true') {
-                // User already saw the tour
-                window.location.href = 'home.html';
-            }
-        };
-
         // Initialize
-        updateTour();
+        updateStep();
     </script>
 </body>
 </html>
