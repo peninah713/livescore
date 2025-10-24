@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to FootballHub - Register Now</title>
+    <title>Complete Your Profile - FootballHub</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #1a1d3a;
+            background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -21,20 +21,57 @@
             padding: 2rem;
         }
 
-        .auth-container {
-            background: #252947;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        .setup-container {
             width: 100%;
-            max-width: 480px;
-            padding: 3rem;
-            animation: slideUp 0.5s ease;
+            max-width: 800px;
         }
 
-        @keyframes slideUp {
+        .progress-section {
+            margin-bottom: 2rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1e1b4b;
+            border-radius: 999px;
+            transition: width 0.3s ease;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -42,87 +79,75 @@
             }
         }
 
-        .auth-header {
+        .step-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .logo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .logo-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .step-header h2 {
             font-size: 2rem;
-        }
-
-        .logo-text {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .auth-header h1 {
-            font-size: 1.875rem;
             margin-bottom: 0.5rem;
-            color: #ffffff;
+            color: #1a202c;
         }
 
-        .auth-header p {
-            color: #a0a3bd;
-            font-size: 1rem;
+        .step-header p {
+            color: #718096;
+            font-size: 1.125rem;
         }
 
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            background: #1a1d3a;
-            padding: 0.375rem;
-            border-radius: 10px;
+        /* User Type Selection */
+        .user-types-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
         }
 
-        .tab {
-            flex: 1;
-            padding: 0.875rem;
-            border: none;
-            background: transparent;
+        .user-type-card {
+            padding: 2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             cursor: pointer;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #a0a3bd;
             transition: all 0.3s;
+            text-align: left;
         }
 
-        .tab:hover {
-            color: #ffffff;
+        .user-type-card:hover {
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
         }
 
-        .tab.active {
-            background: #ff1744;
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(255, 23, 68, 0.3);
+        .user-type-card.selected {
+            border-color: #1e1b4b;
+            background: rgba(30, 27, 75, 0.05);
         }
 
-        .form-section {
-            display: none;
+        .type-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
 
-        .form-section.active {
-            display: block;
+        .type-icon.blue { background: #3b82f6; }
+        .type-icon.red { background: #ef4444; }
+        .type-icon.green { background: #10b981; }
+        .type-icon.purple { background: #8b5cf6; }
+
+        .user-type-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
         }
 
+        .user-type-card p {
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        /* Form Styles */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -130,501 +155,578 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #ffffff;
             font-weight: 500;
-            font-size: 0.9375rem;
+            color: #2d3748;
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 0.875rem 1rem;
-            border: 2px solid #3a3f5c;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s;
-            background: #1a1d3a;
-            color: #ffffff;
-        }
-
-        .form-group input::placeholder {
-            color: #6b6f8f;
+            transition: border-color 0.3s;
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: #ff1744;
-            box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
+            border-color: #1e1b4b;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.75rem;
+            color: #a0aec0;
+            margin-top: 0.25rem;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+
+        .input-with-icon input {
+            padding-left: 2.5rem;
+        }
+
+        /* Profile Preview */
+        .profile-preview {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .profile-preview h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        .preview-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .preview-label {
+            color: #64748b;
+        }
+
+        .preview-value {
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
         }
 
         .btn {
-            width: 100%;
-            padding: 1rem;
-            border: none;
+            padding: 0.875rem 2rem;
             border-radius: 8px;
+            border: none;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-primary {
-            background: #ff1744;
+            background: #1e1b4b;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #f50057;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
+            background: #2d2a5f;
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-guest {
+        .btn-outline {
             background: transparent;
-            color: #ffffff;
-            border: 2px solid #3a3f5c;
-            margin-top: 1rem;
+            color: #1e1b4b;
+            border: 1px solid #e2e8f0;
         }
 
-        .btn-guest:hover {
-            border-color: #6b6f8f;
-            background: #1a1d3a;
+        .btn-outline:hover {
+            background: #f7fafc;
         }
 
-        .divider {
-            text-align: center;
-            margin: 1.5rem 0;
-            color: #6b6f8f;
-            font-size: 0.875rem;
-            position: relative;
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: #3a3f5c;
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
-        }
-
-        .social-buttons {
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .btn-social {
-            display: flex;
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: none;
             align-items: center;
-            justify-content: center;
             gap: 0.75rem;
-            padding: 0.875rem;
-            border: 2px solid #3a3f5c;
-            background: #1a1d3a;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #ffffff;
+            z-index: 1000;
         }
 
-        .btn-social:hover {
-            border-color: #ff1744;
-            background: #252947;
+        .notification.show {
+            display: flex;
+            animation: slideIn 0.3s ease;
         }
 
-        .footer-text {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #a0a3bd;
-            font-size: 0.875rem;
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
 
-        .footer-text a {
-            color: #ff1744;
-            text-decoration: none;
-            font-weight: 600;
+        .notification.error {
+            border-left: 4px solid #ef4444;
         }
 
-        .footer-text a:hover {
-            text-decoration: underline;
+        .notification.success {
+            border-left: 4px solid #10b981;
         }
 
-        .error-message {
-            color: #ff1744;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .success-message {
-            background: #2d5016;
-            color: #a3e635;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: none;
-            border: 1px solid #4ade80;
-        }
-
-        .guest-message {
-            background: #1e3a5f;
-            color: #60a5fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: none;
-            border: 1px solid #3b82f6;
-            text-align: center;
-        }
-
-        .password-strength {
-            margin-top: 0.5rem;
-            height: 4px;
-            background: #3a3f5c;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .password-strength-bar {
-            height: 100%;
-            width: 0%;
-            transition: all 0.3s;
-            border-radius: 2px;
-        }
-
-        .password-strength-text {
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            color: #a0a3bd;
-        }
-
-        @media (max-width: 640px) {
-            .auth-container {
+        @media (max-width: 768px) {
+            .card {
                 padding: 2rem 1.5rem;
             }
 
-            .auth-header h1 {
+            .user-types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-header h2 {
                 font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-header">
-            <div class="logo">
-                <div class="logo-icon">⚽</div>
-                <span class="logo-text">FootballHub</span>
+    <div class="setup-container">
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <div class="progress-info">
+                <span id="step-text">Step 1 of 3</span>
+                <span id="progress-percent">33% Complete</span>
             </div>
-            <h1>Join FootballHub</h1>
-            <p>Start your football journey today</p>
-        </div>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab" id="loginTab" onclick="switchTab('login')">Sign In</button>
-            <button class="tab active" id="registerTab" onclick="switchTab('register')">Create Account</button>
-        </div>
-
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage">
-            Account created successfully! Redirecting to profile setup...
-        </div>
-
-        <!-- Guest Message -->
-        <div class="guest-message" id="guestMessage">
-            🎉 Logging in as Guest... Redirecting to home page!
-        </div>
-
-        <!-- Login Form -->
-        <div class="form-section" id="loginForm">
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input 
-                        type="email" 
-                        id="loginEmail" 
-                        placeholder="your@email.com"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input 
-                        type="password" 
-                        id="loginPassword" 
-                        placeholder="Enter your password"
-                        required
-                    >
-                    <div class="error-message" id="loginError"></div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Sign In</button>
-                <button type="button" class="btn btn-guest" onclick="handleGuestLogin()">
-                    👤 Continue as Guest
-                </button>
-            </form>
-
-            <div class="footer-text">
-                <a href="#" onclick="alert('Password reset coming soon!')">Forgot password?</a>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 33%"></div>
             </div>
         </div>
 
-        <!-- Register Form -->
-        <div class="form-section active" id="registerForm">
-            <form onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input 
-                        type="text" 
-                        id="fullName" 
-                        placeholder="John Doe"
-                        required
-                    >
+        <div class="card">
+            <!-- Step 1: Choose User Type -->
+            <div id="step-1" class="step active">
+                <div class="step-header">
+                    <h2>Choose Your Role</h2>
+                    <p>Select how you'll be using FootballHub</p>
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="your@email.com"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input 
-                        type="tel" 
-                        id="phone" 
-                        placeholder="+254 700 000000"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        placeholder="Create a strong password"
-                        oninput="checkPasswordStrength(this.value)"
-                        required
-                    >
-                    <div class="password-strength">
-                        <div class="password-strength-bar" id="strengthBar"></div>
+                <div class="user-types-grid">
+                    <div class="user-type-card" onclick="selectUserType('player')">
+                        <div class="type-icon blue">
+                            <svg class="icon" style="stroke: white;" viewBox="0 0 24 24">
+                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                <path d="M4 22h16"></path>
+                                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                            </svg>
+                        </div>
+                        <h3>Player</h3>
+                        <p>Showcase your skills and get discovered</p>
                     </div>
-                    <div class="password-strength-text" id="strengthText"></div>
+
+                    <div class="user-type-card" onclick="selectUserType('fan')">
+                        <div class="type-icon red">
+                            <svg class="icon" style="stroke: white;" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+                        <h3>Fan</h3>
+                        <p>Follow teams and support your favorites</p>
+                    </div>
+
+                    <div class="user-type-card" onclick="selectUserType('club')">
+                        <div class="type-icon green">
+                            <svg class="icon" style="stroke: white;" viewBox="0 0 24 24">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3>Club</h3>
+                        <p>Manage teams and recruit talent</p>
+                    </div>
+
+                    <div class="user-type-card" onclick="selectUserType('sponsor')">
+                        <div class="type-icon purple">
+                            <svg class="icon" style="stroke: white;" viewBox="0 0 24 24">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <h3>Sponsor</h3>
+                        <p>Find partnerships and campaigns</p>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Create Account</button>
-                <button type="button" class="btn btn-guest" onclick="handleGuestLogin()">
-                    👤 Continue as Guest
-                </button>
-            </form>
-
-            <div class="divider">or continue with</div>
-
-            <div class="social-buttons">
-                <button class="btn-social" onclick="alert('Google sign-in coming soon!')">
-                    <span>🔍</span>
-                    Continue with Google
-                </button>
-                <button class="btn-social" onclick="alert('Facebook sign-in coming soon!')">
-                    <span>📘</span>
-                    Continue with Facebook
-                </button>
             </div>
 
-            <div class="footer-text">
-                By creating an account, you agree to our<br>
-                <a href="#" onclick="alert('Terms coming soon!')">Terms of Service</a> and 
-                <a href="#" onclick="alert('Privacy Policy coming soon!')">Privacy Policy</a>
+            <!-- Step 2: Profile Details -->
+            <div id="step-2" class="step">
+                <div class="step-header">
+                    <h2>Tell Us About Yourself</h2>
+                    <p>Help us personalize your experience</p>
+                </div>
+
+                <div id="player-fields" class="user-specific-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input type="text" id="position" placeholder="e.g., Striker, Midfielder, Goalkeeper">
+                    </div>
+                    <div class="form-group">
+                        <label for="club">Current Club</label>
+                        <input type="text" id="club" placeholder="e.g., Manchester United">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth</label>
+                        <div class="input-with-icon">
+                            <svg class="icon input-icon" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <input type="date" id="dateOfBirth">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="fan-fields" class="user-specific-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="favoriteTeam">Favorite Team</label>
+                        <input type="text" id="favoriteTeam" placeholder="e.g., Arsenal FC">
+                    </div>
+                </div>
+
+                <div id="club-fields" class="user-specific-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="clubName">Club Name</label>
+                        <input type="text" id="clubName" placeholder="e.g., Youth Academy FC">
+                    </div>
+                </div>
+
+                <div id="sponsor-fields" class="user-specific-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" placeholder="e.g., Sports Brand Inc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <input type="text" id="industry" placeholder="e.g., Sports Equipment">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location <span style="color: #ef4444;">*</span></label>
+                    <div class="input-with-icon">
+                        <svg class="icon input-icon" viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <input type="text" id="location" placeholder="e.g., Nairobi, Kenya" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Bio -->
+            <div id="step-3" class="step">
+                <div class="step-header">
+                    <h2>Almost Done!</h2>
+                    <p>Add a bio to complete your profile</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Bio <span style="color: #ef4444;">*</span></label>
+                    <textarea 
+                        id="bio" 
+                        rows="6" 
+                        maxlength="500"
+                        placeholder="Tell us about yourself, your goals, and what you're looking for..."
+                        required
+                    ></textarea>
+                    <div class="char-count">
+                        <span id="bio-count">0</span> / 500 characters
+                    </div>
+                </div>
+
+                <div class="profile-preview">
+                    <h4>Profile Preview</h4>
+                    <div class="preview-item">
+                        <span class="preview-label">Name:</span>
+                        <span class="preview-value" id="preview-name">-</span>
+                    </div>
+                    <div class="preview-item">
+                        <span class="preview-label">Role:</span>
+                        <span class="preview-value" id="preview-role">-</span>
+                    </div>
+                    <div class="preview-item">
+                        <span class="preview-label">Location:</span>
+                        <span class="preview-value" id="preview-location">Not set</span>
+                    </div>
+                    <div class="preview-item" id="preview-position-row" style="display: none;">
+                        <span class="preview-label">Position:</span>
+                        <span class="preview-value" id="preview-position">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="button-group">
+                <button class="btn btn-outline" id="back-btn" style="visibility: hidden;" onclick="previousStep()">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back
+                </button>
+
+                <button class="btn btn-primary" id="next-btn" onclick="nextStep()">
+                    Next
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
 
+    <!-- Notification Toast -->
+    <div class="notification" id="notification">
+        <svg class="icon" viewBox="0 0 24 24" id="notification-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="notification-text"></span>
+    </div>
+
     <script>
-        // Switch between login and register tabs
-        function switchTab(tab) {
-            const loginTab = document.getElementById('loginTab');
-            const registerTab = document.getElementById('registerTab');
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-
-            if (tab === 'login') {
-                loginTab.classList.add('active');
-                registerTab.classList.remove('active');
-                loginForm.classList.add('active');
-                registerForm.classList.remove('active');
-            } else {
-                registerTab.classList.add('active');
-                loginTab.classList.remove('active');
-                registerForm.classList.add('active');
-                loginForm.classList.remove('active');
-            }
-        }
-
-        // Handle Guest Login
-        function handleGuestLogin() {
-            // Create guest user data
-            const guestData = {
-                fullName: 'Guest User',
-                email: 'guest@footballhub.com',
-                isGuest: true,
-                loginTime: new Date().toISOString()
-            };
-            
-            // Store guest data
-            sessionStorage.setItem('footballhub_user', JSON.stringify(guestData));
-            sessionStorage.setItem('footballhub_profile_completed', 'true');
-            sessionStorage.setItem('footballhub_guest_mode', 'true');
-            
-            // Show guest message
-            document.getElementById('guestMessage').style.display = 'block';
-            
-            // Redirect to home page after 1.5 seconds
-            setTimeout(() => {
-                alert('Welcome Guest! Redirecting to home page...\n(In production, this would go to home.html)');
-                // window.location.href = 'home.html';
-            }, 1500);
-        }
-
-        // Password strength checker
-        function checkPasswordStrength(password) {
-            const strengthBar = document.getElementById('strengthBar');
-            const strengthText = document.getElementById('strengthText');
-            
-            let strength = 0;
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-            if (password.match(/[0-9]/)) strength++;
-            if (password.match(/[^a-zA-Z0-9]/)) strength++;
-
-            const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
-            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
-            const widths = ['25%', '50%', '75%', '100%'];
-
-            if (password.length === 0) {
-                strengthBar.style.width = '0%';
-                strengthText.textContent = '';
-            } else {
-                const index = Math.min(strength, 3);
-                strengthBar.style.width = widths[index];
-                strengthBar.style.background = colors[index];
-                strengthText.textContent = texts[index];
-                strengthText.style.color = colors[index];
-            }
-        }
-
-        // Handle Login
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Check if user exists
-            const storedUserData = sessionStorage.getItem('footballhub_user');
-            
-            if (storedUserData) {
-                const user = JSON.parse(storedUserData);
-                
-                // Simple validation
-                if (user.email === email) {
-                    // Check if profile setup is completed
-                    const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
-                    
-                    if (profileCompleted === 'true') {
-                        // Go to home page
-                        alert('Login successful! Redirecting to home page...');
-                        // window.location.href = 'home.html';
-                    } else {
-                        // Go to profile setup
-                        alert('Redirecting to profile setup...');
-                        // window.location.href = 'profile-setup.html';
-                    }
-                } else {
-                    document.getElementById('loginError').textContent = 'Invalid email or password';
-                    document.getElementById('loginError').style.display = 'block';
-                }
-            } else {
-                document.getElementById('loginError').textContent = 'No account found. Please register first.';
-                document.getElementById('loginError').style.display = 'block';
-            }
-        }
-
-        // Handle Registration
-        function handleRegister(event) {
-            event.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            
-            // Create user object
-            const userData = {
-                fullName: fullName,
-                email: email,
-                phone: phone,
-                isGuest: false,
-                registeredAt: new Date().toISOString()
-            };
-            
-            // Store user data
-            sessionStorage.setItem('footballhub_user', JSON.stringify(userData));
-            sessionStorage.setItem('footballhub_profile_completed', 'false');
-            sessionStorage.removeItem('footballhub_guest_mode');
-            
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Redirect to profile setup after 1.5 seconds
-            setTimeout(() => {
-                
-                 window.location.href = 'profile-setup.html';
-            }, 1500);
-        }
-
-        // Check if user is already logged in
-        window.onload = function() {
-            const user = sessionStorage.getItem('footballhub_user');
-            const profileCompleted = sessionStorage.getItem('footballhub_profile_completed');
-            const isGuestMode = sessionStorage.getItem('footballhub_guest_mode');
-            
-            if (user && profileCompleted === 'true') {
-                // User is already logged in and completed profile
-                if (isGuestMode === 'true') {
-                    alert('You are already logged in as Guest. Redirecting to home page...');
-                } else {
-                    alert('You are already logged in. Redirecting to home page...');
-                }
-                // window.location.href = 'home.html';
-            } else if (user && profileCompleted === 'false') {
-                // User registered but hasn't completed profile
-                alert('Please complete your profile setup...');
-                // window.location.href = 'profile-setup.html';
-            }
+        let currentStep = 1;
+        let profileData = {
+            userType: '',
+            position: '',
+            club: '',
+            location: '',
+            dateOfBirth: '',
+            bio: '',
+            favoriteTeam: '',
+            companyName: '',
+            industry: ''
         };
+
+        // Get user data from previous page
+        const userData = JSON.parse(localStorage.getItem('footballhub_pending_user') || 
+                                   localStorage.getItem('footballhub_user') || 
+                                   '{"fullName": "User", "email": "user@example.com", "phone": ""}');
+
+        // Update bio character count
+        document.getElementById('bio').addEventListener('input', function() {
+            const count = this.value.length;
+            document.getElementById('bio-count').textContent = count;
+        });
+
+        // Update location preview in real-time
+        document.getElementById('location').addEventListener('input', function() {
+            document.getElementById('preview-location').textContent = this.value || 'Not set';
+        });
+
+        function selectUserType(type) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.user-type-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selected class to clicked card
+            event.target.closest('.user-type-card').classList.add('selected');
+            
+            profileData.userType = type;
+        }
+
+        function showNotification(message, type = 'error') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notification-text');
+            
+            text.textContent = message;
+            notification.className = 'notification show ' + type;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / 3) * 100;
+            document.getElementById('step-text').textContent = `Step ${currentStep} of 3`;
+            document.getElementById('progress-percent').textContent = `${Math.round(percentage)}% Complete`;
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show current step
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+
+            // Update back button visibility
+            const backBtn = document.getElementById('back-btn');
+            backBtn.style.visibility = stepNumber > 1 ? 'visible' : 'hidden';
+
+            // Update next button text
+            const nextBtn = document.getElementById('next-btn');
+            if (stepNumber === 3) {
+                nextBtn.innerHTML = `
+                    Complete Profile
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                `;
+            } else {
+                nextBtn.innerHTML = `
+                    Next
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                `;
+            }
+
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep === 1) {
+                // Validate user type selection
+                if (!profileData.userType) {
+                    showNotification('Please select a user type', 'error');
+                    return;
+                }
+
+                // Show appropriate fields for step 2
+                document.querySelectorAll('.user-specific-fields').forEach(field => {
+                    field.style.display = 'none';
+                });
+                document.getElementById(`${profileData.userType}-fields`).style.display = 'block';
+                
+                currentStep = 2;
+                showStep(2);
+            } else if (currentStep === 2) {
+                // Validate location
+                const location = document.getElementById('location').value;
+                if (!location.trim()) {
+                    showNotification('Please enter your location', 'error');
+                    return;
+                }
+
+                // Save step 2 data
+                profileData.location = location;
+                profileData.position = document.getElementById('position')?.value || '';
+                profileData.club = document.getElementById('club')?.value || document.getElementById('clubName')?.value || '';
+                profileData.dateOfBirth = document.getElementById('dateOfBirth')?.value || '';
+                profileData.favoriteTeam = document.getElementById('favoriteTeam')?.value || '';
+                profileData.companyName = document.getElementById('companyName')?.value || '';
+                profileData.industry = document.getElementById('industry')?.value || '';
+
+                // Update preview
+                document.getElementById('preview-name').textContent = userData.fullName;
+                document.getElementById('preview-role').textContent = profileData.userType.charAt(0).toUpperCase() + profileData.userType.slice(1);
+                document.getElementById('preview-location').textContent = profileData.location;
+                
+                if (profileData.userType === 'player' && profileData.position) {
+                    document.getElementById('preview-position-row').style.display = 'flex';
+                    document.getElementById('preview-position').textContent = profileData.position;
+                }
+
+                currentStep = 3;
+                showStep(3);
+            } else if (currentStep === 3) {
+                // Validate bio
+                const bio = document.getElementById('bio').value;
+                if (!bio.trim()) {
+                    showNotification('Please add a bio', 'error');
+                    return;
+                }
+
+                profileData.bio = bio;
+
+                // Complete profile
+                const completeProfile = {
+                    ...userData,
+                    ...profileData
+                };
+
+                localStorage.setItem('footballhub_user', JSON.stringify(completeProfile));
+                localStorage.removeItem('footballhub_pending_user');
+                
+                showNotification('Profile created successfully!', 'success');
+                
+                // Redirect to onboarding or app
+                setTimeout(() => {
+                    window.location.href = 'onboarding.html';
+                }, 1500);
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // Initialize
+        showStep(1);
     </script>
 </body>
 </html>
