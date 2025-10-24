@@ -259,6 +259,13 @@
             display: none;
         }
 
+        .success-message {
+            color: #6bcf7f;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
         @media (max-width: 640px) {
             .auth-container {
                 padding: 2rem 1.5rem;
@@ -400,20 +407,35 @@
             event.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-            const stored = localStorage.getItem('footballhub_user');
             const error = document.getElementById('loginError');
 
             error.style.display = 'none';
 
-            if (!stored) {
-                error.textContent = 'No account found. Please register first.';
-                error.style.display = 'block';
-                return;
-            }
+            // Get all registered users (in real app, this would be from a database)
+            const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
+            
+            // Find user with matching email and password
+            const user = storedUsers.find(u => u.email === email && u.password === password);
 
-            const user = JSON.parse(stored);
-            if (user.email === email && user.password === password) {
-                window.location.href = 'home.html';
+            if (user) {
+                // Set current user
+                const loginData = {
+                    fullName: user.fullName,
+                    email: user.email,
+                    phone: user.phone,
+                    isGuest: false,
+                    profileComplete: user.profileComplete || false,
+                    joinedDate: user.joinedDate
+                };
+                
+                localStorage.setItem('footballhub_user', JSON.stringify(loginData));
+                
+                // Check if profile is complete
+                if (!user.profileComplete) {
+                    window.location.href = 'profile-setup.html';
+                } else {
+                    window.location.href = 'home.html';
+                }
             } else {
                 error.textContent = 'Invalid email or password.';
                 error.style.display = 'block';
@@ -430,14 +452,13 @@
             emailError.style.display = 'none';
 
             // Check if email already exists
-            const existingUser = localStorage.getItem('footballhub_user');
+            const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
+            const existingUser = storedUsers.find(u => u.email === email);
+            
             if (existingUser) {
-                const user = JSON.parse(existingUser);
-                if (user.email === email) {
-                    emailError.textContent = 'This email is already registered. Please sign in.';
-                    emailError.style.display = 'block';
-                    return;
-                }
+                emailError.textContent = 'This email is already registered. Please sign in.';
+                emailError.style.display = 'block';
+                return;
             }
 
             registerBtn.disabled = true;
@@ -448,13 +469,25 @@
                 email: email,
                 phone: document.getElementById('phone').value,
                 password: document.getElementById('password').value,
-                registeredAt: new Date().toISOString(),
-                isGuest: false
+                isGuest: false,
+                profileComplete: false,
+                joinedDate: new Date().toISOString()
             };
 
-            // Save to localStorage
-            localStorage.setItem('footballhub_user', JSON.stringify(userData));
-            localStorage.setItem('footballhub_pending_user', JSON.stringify(userData));
+            // Add to all users array
+            storedUsers.push(userData);
+            localStorage.setItem('footballhub_all_users', JSON.stringify(storedUsers));
+
+            // Set as current user (without password for security)
+            const currentUser = {
+                fullName: userData.fullName,
+                email: userData.email,
+                phone: userData.phone,
+                isGuest: false,
+                profileComplete: false,
+                joinedDate: userData.joinedDate
+            };
+            localStorage.setItem('footballhub_user', JSON.stringify(currentUser));
 
             // Redirect to profile setup page
             setTimeout(() => {
@@ -463,19 +496,17 @@
         }
 
         function guestLogin() {
-            const guest = {
+            const guestData = {
                 fullName: 'Guest User',
                 email: 'guest@footballhub.com',
                 phone: '',
-                userType: 'guest',
                 isGuest: true,
-                registeredAt: new Date().toISOString()
+                profileComplete: true, // Guests don't need profile setup
+                joinedDate: new Date().toISOString()
             };
 
-            // Save to localStorage
-            localStorage.setItem('footballhub_user', JSON.stringify(guest));
-            localStorage.setItem('footballhub_onboarding_completed', 'true');
-            localStorage.setItem('footballhub_guest_mode', 'true');
+            // Save current user as guest
+            localStorage.setItem('footballhub_user', JSON.stringify(guestData));
 
             // Go directly to home page
             window.location.href = 'home.html';
@@ -484,12 +515,21 @@
         // Check if user is already logged in
         window.onload = function() {
             const user = localStorage.getItem('footballhub_user');
-            const onboardingCompleted = localStorage.getItem('footballhub_onboarding_completed');
             
-            if (user && onboardingCompleted === 'true') {
-                window.location.href = 'home.html';
+            if (user) {
+                const userData = JSON.parse(user);
+                
+                // If user exists and profile is complete, go to home
+                if (userData.profileComplete) {
+                    window.location.href = 'home.html';
+                } else if (!userData.isGuest) {
+                    // If profile not complete and not guest, go to profile setup
+                    window.location.href = 'profile-setup.html';
+                }
             }
         };
+
+        console.log('⚽ FootballHub Registration Ready!');
     </script>
 </body>
 </html>
