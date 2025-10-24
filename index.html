@@ -356,180 +356,153 @@
         </div>
     </div>
 
-    <script>
-        function switchTab(tab) {
-            const loginTab = document.getElementById('loginTab');
-            const registerTab = document.getElementById('registerTab');
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
+   <script>
+    function switchTab(tab) {
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
 
-            if (tab === 'login') {
-                loginTab.classList.add('active');
-                registerTab.classList.remove('active');
-                loginForm.classList.add('active');
-                registerForm.classList.remove('active');
-            } else {
-                registerTab.classList.add('active');
-                loginTab.classList.remove('active');
-                registerForm.classList.add('active');
-                loginForm.classList.remove('active');
-            }
+        if (tab === 'login') {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        } else {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        }
+    }
+
+    function checkPasswordStrength(password) {
+        const bar = document.getElementById('strengthBar');
+        const text = document.getElementById('strengthText');
+        let strength = 0;
+
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+        const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
+        const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+        const widths = ['25%', '50%', '75%', '100%'];
+
+        if (!password) {
+            bar.style.width = '0%';
+            text.textContent = '';
+            return;
         }
 
-        function checkPasswordStrength(password) {
-            const bar = document.getElementById('strengthBar');
-            const text = document.getElementById('strengthText');
-            let strength = 0;
+        const index = Math.min(strength, 3);
+        bar.style.width = widths[index];
+        bar.style.background = colors[index];
+        text.textContent = texts[index];
+        text.style.color = colors[index];
+    }
 
-            if (password.length >= 8) strength++;
-            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-            if (/[0-9]/.test(password)) strength++;
-            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+    function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const error = document.getElementById('loginError');
 
-            const colors = ['#ff1744', '#ff6b35', '#ffd93d', '#6bcf7f'];
-            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
-            const widths = ['25%', '50%', '75%', '100%'];
+        error.style.display = 'none';
 
-            if (!password) {
-                bar.style.width = '0%';
-                text.textContent = '';
-                return;
-            }
+        const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
+        const user = storedUsers.find(u => u.email === email && u.password === password);
 
-            const index = Math.min(strength, 3);
-            bar.style.width = widths[index];
-            bar.style.background = colors[index];
-            text.textContent = texts[index];
-            text.style.color = colors[index];
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const error = document.getElementById('loginError');
-
-            error.style.display = 'none';
-
-            // Get all registered users (in real app, this would be from a database)
-            const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
-            
-            // Find user with matching email and password
-            const user = storedUsers.find(u => u.email === email && u.password === password);
-
-            if (user) {
-                // Set current user
-                const loginData = {
-                    fullName: user.fullName,
-                    email: user.email,
-                    phone: user.phone,
-                    isGuest: false,
-                    profileComplete: user.profileComplete || false,
-                    joinedDate: user.joinedDate
-                };
-                
-                localStorage.setItem('footballhub_user', JSON.stringify(loginData));
-                
-                // Check if profile is complete
-                if (!user.profileComplete) {
-                    window.location.href = 'profile-setup.html';
-                } else {
-                    window.location.href = 'home.html';
-                }
-            } else {
-                error.textContent = 'Invalid email or password.';
-                error.style.display = 'block';
-            }
-        }
-
-        function handleRegister(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const emailError = document.getElementById('emailError');
-            const registerBtn = document.getElementById('registerBtn');
-            
-            emailError.style.display = 'none';
-
-            // Check if email already exists
-            const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
-            const existingUser = storedUsers.find(u => u.email === email);
-            
-            if (existingUser) {
-                emailError.textContent = 'This email is already registered. Please sign in.';
-                emailError.style.display = 'block';
-                return;
-            }
-
-            registerBtn.disabled = true;
-            registerBtn.textContent = 'Creating Account...';
-
-            const userData = {
-                fullName: document.getElementById('fullName').value,
-                email: email,
-                phone: document.getElementById('phone').value,
-                password: document.getElementById('password').value,
+        if (user) {
+            const loginData = {
+                fullName: user.fullName,
+                email: user.email,
+                phone: user.phone,
                 isGuest: false,
-                profileComplete: false,
-                joinedDate: new Date().toISOString()
+                profileComplete: user.profileComplete || false,
+                joinedDate: user.joinedDate
             };
+            localStorage.setItem('footballhub_user', JSON.stringify(loginData));
 
-            // Add to all users array
-            storedUsers.push(userData);
-            localStorage.setItem('footballhub_all_users', JSON.stringify(storedUsers));
-
-            // Set as current user (without password for security)
-            const currentUser = {
-                fullName: userData.fullName,
-                email: userData.email,
-                phone: userData.phone,
-                isGuest: false,
-                profileComplete: false,
-                joinedDate: userData.joinedDate
-            };
-            localStorage.setItem('footballhub_user', JSON.stringify(currentUser));
-
-            // Redirect to profile setup page
-            setTimeout(() => {
+            if (!user.profileComplete) {
                 window.location.href = 'profile-setup.html';
-            }, 800);
-        }
-
-        function guestLogin() {
-            const guestData = {
-                fullName: 'Guest User',
-                email: 'guest@footballhub.com',
-                phone: '',
-                isGuest: true,
-                profileComplete: true, // Guests don't need profile setup
-                joinedDate: new Date().toISOString()
-            };
-
-            // Save current user as guest
-            localStorage.setItem('footballhub_user', JSON.stringify(guestData));
-
-            // Go directly to home page
-            window.location.href = 'home.html';
-        }
-
-        // Check if user is already logged in
-        window.onload = function() {
-            const user = localStorage.getItem('footballhub_user');
-            
-            if (user) {
-                const userData = JSON.parse(user);
-                
-                // If user exists and profile is complete, go to home
-                if (userData.profileComplete) {
-                    window.location.href = 'home.html';
-                } else if (!userData.isGuest) {
-                    // If profile not complete and not guest, go to profile setup
-                    window.location.href = 'profile-setup.html';
-                }
+            } else {
+                window.location.href = 'home.html';
             }
+        } else {
+            error.textContent = 'Invalid email or password.';
+            error.style.display = 'block';
+        }
+    }
+
+    function handleRegister(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const emailError = document.getElementById('emailError');
+        const registerBtn = document.getElementById('registerBtn');
+        
+        emailError.style.display = 'none';
+
+        const storedUsers = JSON.parse(localStorage.getItem('footballhub_all_users') || '[]');
+        const existingUser = storedUsers.find(u => u.email === email);
+        
+        if (existingUser) {
+            emailError.textContent = 'This email is already registered. Please sign in.';
+            emailError.style.display = 'block';
+            return;
+        }
+
+        registerBtn.disabled = true;
+        registerBtn.textContent = 'Creating Account...';
+
+        const userData = {
+            fullName: document.getElementById('fullName').value,
+            email: email,
+            phone: document.getElementById('phone').value,
+            password: document.getElementById('password').value,
+            isGuest: false,
+            profileComplete: false,
+            joinedDate: new Date().toISOString()
         };
 
+        storedUsers.push(userData);
+        localStorage.setItem('footballhub_all_users', JSON.stringify(storedUsers));
+
+        const currentUser = {
+            fullName: userData.fullName,
+            email: userData.email,
+            phone: userData.phone,
+            isGuest: false,
+            profileComplete: false,
+            joinedDate: userData.joinedDate
+        };
+        localStorage.setItem('footballhub_user', JSON.stringify(currentUser));
+
+        setTimeout(() => {
+            window.location.href = 'profile-setup.html';
+        }, 800);
+    }
+
+    function guestLogin() {
+        const guestData = {
+            fullName: 'Guest User',
+            email: 'guest@footballhub.com',
+            phone: '',
+            isGuest: true,
+            profileComplete: true,
+            joinedDate: new Date().toISOString()
+        };
+
+        localStorage.setItem('footballhub_user', JSON.stringify(guestData));
+        window.location.href = 'home.html';
+    }
+
+    // ✅ Updated: Only redirect if the user *just* logged in or registered
+    window.addEventListener('DOMContentLoaded', () => {
         console.log('⚽ FootballHub Registration Ready!');
-    </script>
+    });
+</script>
 </body>
 </html>
