@@ -5,31 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sponsor Marketplace | LiveScore</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* CSS Variables - Kept as requested */
         :root {
             --bg1: #25233c;
             --bg2: #141228;
-            --accent: #c92b2b; /* Original Red/Accent */
+            --accent: #c92b2b;
             --card-bg: rgba(255,255,255,0.05);
             --text: #f3f3f6;
             --muted: #d9dbe3;
-            --header-bg: rgba(37, 35, 60, 0.95);
         }
 
-        /* General Reset and Body */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Using gradient background for consistency with the last version */
             background: linear-gradient(135deg, #0f0c29 0%, #24243e 50%, #302b63 100%);
             color: white;
             min-height: 100vh;
         }
 
-        /* --- Global Header & Navigation Styles (Copied from previous optimized version) --- */
-
-        /* Top Bar */
+        /* Header & Navigation */
         .top-bar {
             display: flex;
             align-items: center;
@@ -38,7 +33,6 @@
             background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
-            gap: 20px;
         }
 
         .logo {
@@ -49,7 +43,6 @@
             gap: 10px;
             color: white;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            flex-shrink: 0;
         }
         .logo i {
             color: #ff0000;
@@ -63,7 +56,6 @@
             60% { transform: translateY(-3px); }
         }
 
-        /* Search Bar Styles */
         .search-bar {
             display: flex;
             flex: 1;
@@ -72,7 +64,7 @@
         }
         .search-bar input {
             flex: 1;
-            padding: 12px 20px;
+            padding: 12px 20px 12px 45px;
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             outline: none;
@@ -80,30 +72,37 @@
             color: white;
             font-size: 14px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
-        .search-bar button {
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ff4757;
+        }
+        .search-bar .search-icon {
             position: absolute;
-            right: 5px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, #ff0000, #cc0000);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            color: white;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-        .search-bar button:hover {
-            transform: translateY(-50%) scale(1.1);
-        }
-        .search-bar i {
-            font-size: 18px;
+            color: rgba(255,255,255,0.6);
         }
 
-        /* Horizontal Navigation */
+        .top-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 22px;
+        }
+        .top-icons > i {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        .top-icons > i:hover {
+            color: #ff0000;
+            background: rgba(255, 0, 0, 0.1);
+            transform: scale(1.2);
+        }
+
         .horizontal-nav {
             background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -129,7 +128,6 @@
             padding: 15px 20px;
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            border-radius: 8px;
             transition: all 0.3s ease;
             font-weight: 500;
             position: relative;
@@ -153,259 +151,461 @@
             border-radius: 2px 2px 0 0;
         }
 
-        /* Top Actions/Icons */
-        .top-icons {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 22px;
-            flex-shrink: 0;
-        }
-        .upload-btn {
-            background: linear-gradient(135deg, #ff0000, #cc0000);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
-            font-size: 14px;
-        }
-        .top-icons > i {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 8px;
-            border-radius: 50%;
-        }
-        .top-icons > i:hover {
-            color: #ff0000;
-            background: rgba(255, 0, 0, 0.1);
-            transform: scale(1.2);
-        }
-        .sign-in-btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #ff0000, #cc0000);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
-            font-size: 14px;
-            white-space: nowrap;
-        }
-        .sign-in-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
-        }
-
-        /* --- Sponsor Card Specific Styles --- */
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 0 20px;
+            text-align: center;
         }
-        h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: var(--text);
-            /* Consistent gradient heading */
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, #ff0000, #ff4444);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .hero p {
+            font-size: 1.1em;
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        /* Filter Section */
+        .filters {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        .filter-btn i {
+            font-size: 16px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-item .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff4757;
+        }
+        .stat-item .label {
+            color: var(--muted);
+            font-size: 0.9em;
+        }
+
+        /* Sponsor Cards */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
         .sponsor-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
             margin-top: 30px;
         }
         .card {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 20px;
-            transition: transform 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-            /* Consistent box shadow on hover */
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff0000, #ff4444);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         .card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            border-color: #ff4757;
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
         }
         .card h3 {
             margin: 0;
             color: white;
-            font-size: 1.3em;
-        }
-        .card p {
-            color: var(--muted);
-            font-size: 0.9em;
-            line-height: 1.5;
+            font-size: 1.4em;
+            margin-bottom: 5px;
         }
         .badge {
             background: var(--accent);
             color: white;
-            font-size: 0.8em;
-            border-radius: 10px;
-            padding: 3px 8px;
+            font-size: 0.75em;
+            border-radius: 12px;
+            padding: 5px 12px;
             display: inline-block;
-            margin-top: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge.club { background: #4CAF50; }
+        .badge.event { background: #FF9500; }
+        .badge.player { background: #2196F3; }
+        .card p {
+            color: var(--muted);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
         .metrics {
-            margin-top: 15px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 15px;
         }
         .metric {
-            background: #1c1a3b;
+            background: rgba(255,255,255,0.05);
             border-radius: 10px;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
         }
         .metric span {
             display: block;
             font-size: 0.8em;
             color: var(--muted);
+            margin-bottom: 5px;
         }
         .metric strong {
             color: var(--text);
-            font-size: 1.1em;
+            font-size: 1.15em;
         }
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 10px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
         .tags span {
-            background: rgba(255,255,255,0.1);
-            color: var(--text);
-            border-radius: 10px;
-            padding: 3px 7px;
+            background: rgba(255,71,87,0.15);
+            border: 1px solid rgba(255,71,87,0.3);
+            color: #ff4757;
+            border-radius: 15px;
+            padding: 5px 12px;
             font-size: 0.8em;
+            font-weight: 500;
         }
         .buttons {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
         }
         .buttons button {
             flex: 1;
-            padding: 10px; /* Slightly larger padding */
+            padding: 12px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         .btn-primary {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), #aa0000);
             color: white;
+            box-shadow: 0 2px 10px rgba(201, 43, 43, 0.3);
         }
         .btn-primary:hover {
-            background: #ff4444;
+            background: linear-gradient(135deg, #aa0000, #880000);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(201, 43, 43, 0.5);
         }
         .btn-outline {
             background: transparent;
             color: var(--text);
-            border: 1px solid var(--muted);
+            border: 2px solid rgba(255,255,255,0.2);
         }
         .btn-outline:hover {
             background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: linear-gradient(145deg, #1f1f3f, #2a2a5f);
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            color: white;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff4757;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .close-btn:hover {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+        }
+        .detail-section {
+            margin-bottom: 25px;
+        }
+        .detail-section h4 {
+            color: #ff4757;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        .detail-label {
+            color: var(--muted);
+            font-size: 0.9em;
+        }
+        .detail-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+        .empty-state i {
+            font-size: 64px;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 20px;
+        }
+        .empty-state h3 {
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .filters { justify-content: center; }
+            .sponsor-cards { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header class="top-bar">
-        <div class="logo">
-     <div class="logo">⚽ LiveScore</div>
-        </div>
-
+        <div class="logo">⚽ LiveScore</div>
         <div class="search-bar">
+            <i class='bx bx-search search-icon'></i>
             <input type="text" id="searchInput" placeholder="Search sponsorships...">
-            <button onclick="searchSponsor()">
-                <i class='bx bx-search'></i>
-            </button>
         </div>
-       
-          
-            <i class='bx bx-bell' title="Notifications" onclick="showNotifications()"></i>
-           
+        <div class="top-icons">
+            <i class='bx bx-bell' title="Notifications"></i>
         </div>
     </header>
 
     <nav class="horizontal-nav">
         <div class="nav-container">
             <div class="nav-links">
-                <a href="home.html" class="nav-link">
-                    <span>Home</span>
-                </a>
-                <a href="highlights.html" class="nav-link">
-                    <span>Highlights</span>
-                </a>
-                <a href="events.html" class="nav-link">
-                    <span>Events</span>
-                </a>
-                <a href="players.html" class="nav-link">
-                    <span>Players</span>
-                </a>
-                
-                </a>
-                 <a href="#" class="nav-link active">
-                    <span>Sponsors</span>
-                </a>
-                 <a href="search.html" class="nav-link">
-                    <span>Search</span>
-                </a>
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="highlights.html" class="nav-link">Highlights</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="players.html" class="nav-link">Players</a>
+                <a href="sponsors.html" class="nav-link active">Sponsors</a>
+                <a href="search.html" class="nav-link">Search</a>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="hero">
         <h1>Sponsor Marketplace</h1>
         <p>Connect with clubs, events, and athletes seeking sponsorships</p>
+    </div>
 
-        <div class="sponsor-cards" id="sponsorList">
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="number" id="totalOpportunities">0</div>
+            <div class="label">Total Opportunities</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">$2.5M+</div>
+            <div class="label">Total Budget Pool</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">1.2M+</div>
+            <div class="label">Combined Reach</div>
+        </div>
+        <div class="stat-item">
+            <div class="number" id="activeFilters">All</div>
+            <div class="label">Current Filter</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all" onclick="filterByType('all')">
+            <i class='bx bx-grid-alt'></i> All
+        </button>
+        <button class="filter-btn" data-filter="Club" onclick="filterByType('Club')">
+            <i class='bx bx-football'></i> Clubs
+        </button>
+        <button class="filter-btn" data-filter="Event" onclick="filterByType('Event')">
+            <i class='bx bx-calendar-event'></i> Events
+        </button>
+        <button class="filter-btn" data-filter="Player" onclick="filterByType('Player')">
+            <i class='bx bx-user'></i> Players
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="sponsor-cards" id="sponsorList"></div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Opportunity Details</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
+            <div id="modalBody"></div>
+            <div style="display: flex; gap: 15px; margin-top: 25px;">
+                <button class="btn-outline" style="flex: 1;" onclick="closeModal()">Close</button>
+                <button class="btn-primary" style="flex: 2;" onclick="expressInterestFromModal()">
+                    <i class="fa-solid fa-handshake"></i> Express Interest
+                </button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 1. DATA AND DOM ELEMENTS
         const opportunities = [
-            { name: "Gor Mahia FC", type: "Club", desc: "Premier League club seeking jersey sponsor for 2024/25 season.", reach: "500K", budget: "$50K - $100K", location: "Nairobi", tags: ["Premier League", "Fanbase"], duration: "1 year" },
-            { name: "Nairobi Youth Tournament", type: "Event", desc: "Annual youth tournament for 32 teams.", reach: "150K", budget: "$10K - $25K", location: "Nairobi", tags: ["Youth", "Community"], duration: "3 months" },
-            { name: "James Ochieng", type: "Player", desc: "Rising star forward seeking personal brand sponsors.", reach: "45K", budget: "$5K - $15K", location: "Nairobi", tags: ["Rising Star", "Brand"], duration: "6 months" },
-            { name: "AFC Leopards", type: "Club", desc: "Historic club seeking stadium naming rights partner.", reach: "450K", budget: "$75K - $150K", location: "Nairobi", tags: ["Historic", "Naming Rights"], duration: "3 years" },
-            { name: "Mombasa Beach Soccer", type: "Event", desc: "Unique beach soccer event with high visibility.", reach: "80K", budget: "$8K - $20K", location: "Mombasa", tags: ["Tourism", "Beach Soccer"], duration: "1 month" }
+            { name: "Gor Mahia FC", type: "Club", desc: "Premier League club seeking jersey sponsor for 2024/25 season. Strong fanbase across East Africa with championship-winning track record.", reach: "500K", budget: "$50K - $100K", location: "Nairobi", tags: ["Premier League", "Fanbase", "Champions"], duration: "1 year", contact: "sponsors@gormahia.co.ke" },
+            { name: "Nairobi Youth Tournament", type: "Event", desc: "Annual youth tournament featuring 32 teams from across the region. Great community engagement opportunity.", reach: "150K", budget: "$10K - $25K", location: "Nairobi", tags: ["Youth", "Community", "Grassroots"], duration: "3 months", contact: "info@nairobiyouth.org" },
+            { name: "James Ochieng", type: "Player", desc: "Rising star forward seeking personal brand sponsors. Currently top scorer in the league with strong social media presence.", reach: "45K", budget: "$5K - $15K", location: "Nairobi", tags: ["Rising Star", "Brand", "Social Media"], duration: "6 months", contact: "james.ochieng@sports.com" },
+            { name: "AFC Leopards", type: "Club", desc: "Historic club seeking stadium naming rights partner. One of Kenya's most beloved teams with over 50 years of history.", reach: "450K", budget: "$75K - $150K", location: "Nairobi", tags: ["Historic", "Naming Rights", "Legacy"], duration: "3 years", contact: "commercial@afcleopards.com" },
+            { name: "Mombasa Beach Soccer", type: "Event", desc: "Unique beach soccer event with high visibility along the coast. Perfect for tourism and lifestyle brands.", reach: "80K", budget: "$8K - $20K", location: "Mombasa", tags: ["Tourism", "Beach Soccer", "Coastal"], duration: "1 month", contact: "mombasa@beachsoccer.co.ke" },
+            { name: "Tusker FC", type: "Club", desc: "Top-tier club with consistent performance seeking kit sponsor. Multiple championship wins and continental experience.", reach: "380K", budget: "$40K - $80K", location: "Nairobi", tags: ["Premier League", "Champions", "Performance"], duration: "2 years", contact: "partnerships@tuskerfc.com" },
+            { name: "Women's League Finals", type: "Event", desc: "Championship finals of the women's football league. Growing audience and strong community support.", reach: "120K", budget: "$15K - $30K", location: "Kisumu", tags: ["Women's Sports", "Finals", "Growing"], duration: "2 weeks", contact: "womens@league.co.ke" },
+            { name: "Sarah Mwangi", type: "Player", desc: "National team midfielder with international experience. Looking for equipment and personal brand sponsorship.", reach: "65K", budget: "$8K - $18K", location: "Nairobi", tags: ["National Team", "Midfielder", "International"], duration: "1 year", contact: "sarah.mwangi@pro.com" }
         ];
 
         const sponsorList = document.getElementById("sponsorList");
         const searchInput = document.getElementById("searchInput");
+        let currentFilter = "all";
+        let currentOpportunity = null;
 
-        // 2. OPTIMIZED DOM RENDERING (using map/join for performance)
         function displaySponsors(list) {
-            // Check if the list is empty first
             if (list.length === 0) {
-                 sponsorList.innerHTML = '<p style="text-align:center; color: var(--muted); grid-column: 1 / -1;">No sponsorship opportunities matched your search.</p>';
-                 return;
+                sponsorList.innerHTML = `
+                    <div class="empty-state">
+                        <i class='bx bx-search-alt'></i>
+                        <h3>No opportunities found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                `;
+                return;
             }
 
-            // Use map to create an array of HTML strings, then join into a single string
             const sponsorHTML = list.map(o => `
                 <div class="card">
-                    <h3>${o.name}</h3>
-                    <div class="badge">${o.type}</div>
+                    <div class="card-header">
+                        <div>
+                            <h3>${o.name}</h3>
+                            <div class="badge ${o.type.toLowerCase()}">${o.type}</div>
+                        </div>
+                    </div>
                     <p>${o.desc}</p>
                     <div class="metrics">
                         <div class="metric"><span>Reach</span><strong>${o.reach}</strong></div>
@@ -415,70 +615,125 @@
                     </div>
                     <div class="tags">${o.tags.map(tag => `<span>${tag}</span>`).join("")}</div>
                     <div class="buttons">
-                        <button class="btn-primary" onclick="expressInterest('${o.name}')">Express Interest</button>
-                        <button class="btn-outline" onclick="viewDetails('${o.name}')">View Details</button>
+                        <button class="btn-primary" onclick='expressInterest("${o.name}")'>
+                            <i class="fa-solid fa-handshake"></i> Express Interest
+                        </button>
+                        <button class="btn-outline" onclick='viewDetails("${o.name}")'>
+                            <i class="fa-solid fa-eye"></i> Details
+                        </button>
                     </div>
                 </div>
             `).join('');
 
-            // Write to the DOM *once*
             sponsorList.innerHTML = sponsorHTML;
+            document.getElementById('totalOpportunities').textContent = list.length;
         }
 
-        // 3. SEARCH FUNCTION
         function searchSponsor() {
-            // Get the query, normalize, and trim
             const query = searchInput.value.toLowerCase().trim();
-            
-            const filtered = opportunities.filter(o => 
-                o.name.toLowerCase().includes(query) ||
-                o.type.toLowerCase().includes(query) ||
-                o.location.toLowerCase().includes(query) ||
-                o.tags.some(tag => tag.toLowerCase().includes(query)) // Search within tags too
-            );
-            
+            let filtered = opportunities;
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(o => o.type === currentFilter);
+            }
+
+            if (query) {
+                filtered = filtered.filter(o => 
+                    o.name.toLowerCase().includes(query) ||
+                    o.type.toLowerCase().includes(query) ||
+                    o.location.toLowerCase().includes(query) ||
+                    o.desc.toLowerCase().includes(query) ||
+                    o.tags.some(tag => tag.toLowerCase().includes(query))
+                );
+            }
+
             displaySponsors(filtered);
         }
-        
-        // Attach event listener for best practice
-        searchInput.addEventListener('keyup', searchSponsor);
 
-        // 4. ACTION FUNCTIONS (Cleaned up for consistency)
-        function signIn() {
-            showToast("Signing in...");
-        }
-
-        function openUploadModal() {
-            showToast("Opening 'List Opportunity' modal...");
+        function filterByType(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.filter-btn').classList.add('active');
+            document.getElementById('activeFilters').textContent = type === 'all' ? 'All' : type + 's';
+            searchSponsor();
         }
 
-        function showNotifications() {
-            showToast("🔔 No new notifications");
-        }
-        
-        function expressInterest(name) {
-             showToast(`Interest expressed for ${name}! We'll be in touch.`);
-        }
-        
         function viewDetails(name) {
-             showToast(`Viewing details for ${name}...`);
+            currentOpportunity = opportunities.find(o => o.name === name);
+            if (!currentOpportunity) return;
+
+            document.getElementById('modalTitle').textContent = currentOpportunity.name;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <h4>Overview</h4>
+                    <p style="color: var(--muted); line-height: 1.6;">${currentOpportunity.desc}</p>
+                </div>
+                <div class="detail-section">
+                    <h4>Key Metrics</h4>
+                    <div class="detail-row">
+                        <span class="detail-label">Type</span>
+                        <span class="detail-value">${currentOpportunity.type}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Audience Reach</span>
+                        <span class="detail-value">${currentOpportunity.reach}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Budget Range</span>
+                        <span class="detail-value">${currentOpportunity.budget}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Location</span>
+                        <span class="detail-value">${currentOpportunity.location}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Duration</span>
+                        <span class="detail-value">${currentOpportunity.duration}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Contact</span>
+                        <span class="detail-value">${currentOpportunity.contact}</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>Categories</h4>
+                    <div class="tags">${currentOpportunity.tags.map(tag => `<span>${tag}</span>`).join("")}</div>
+                </div>
+            `;
+            document.getElementById('detailsModal').classList.add('active');
         }
 
-        // 5. TOAST NOTIFICATION FUNCTIONALITY (Copied for consistency)
+        function closeModal() {
+            document.getElementById('detailsModal').classList.remove('active');
+        }
+
+        function expressInterest(name) {
+            const opp = opportunities.find(o => o.name === name);
+            showToast(`🤝 Interest expressed for ${name}! We'll contact you at ${opp.contact}`);
+        }
+
+        function expressInterestFromModal() {
+            if (currentOpportunity) {
+                expressInterest(currentOpportunity.name);
+                closeModal();
+            }
+        }
+
         function showToast(message) {
             const toast = document.createElement('div');
             toast.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: linear-gradient(135deg, #ff0000, #cc0000);
+                background: linear-gradient(135deg, #4CAF50, #45a049);
                 color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-                z-index: 1000;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                z-index: 3000;
                 font-weight: 500;
                 animation: slideIn 0.3s ease;
+                max-width: 400px;
             `;
             toast.textContent = message;
             document.body.appendChild(toast);
@@ -487,13 +742,16 @@
                 toast.style.opacity = '0';
                 toast.style.transition = 'opacity 0.3s ease';
                 setTimeout(() => document.body.removeChild(toast), 300);
-            }, 3000);
+            }, 4000);
         }
 
-        // 6. INITIALIZATION
-        displaySponsors(opportunities);
-        console.log("Sponsor Marketplace ready!");
-    </script>
+        searchInput.addEventListener('input', searchSponsor);
+        
+        window.addEventListener('click', (e) => {
+            if (e.target.id === 'detailsModal') closeModal();
+        });
 
+        displaySponsors(opportunities);
+    </script>
 </body>
 </html>
