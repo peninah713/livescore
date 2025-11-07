@@ -18,15 +18,132 @@
       min-height: 100vh;
     }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 25px;
-      background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
-    }
+   .top-bar-nav {
+  background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.logo i { 
+  color: #ff0000; 
+  font-size: 28px;
+  animation: bounce 2s infinite;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.15);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ff0000;
+  border-radius: 2px 2px 0 0;
+}
+
+.top-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.top-icons > i {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.top-icons > i:hover {
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  transform: scale(1.2);
+}
+
+.sign-in-btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
+  font-size: 14px;
+  border: none;
+}
+
+.sign-in-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .nav-wrapper {
+    flex-wrap: wrap;
+  }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+}
 
     .logo {
       font-weight: bold;
@@ -1111,30 +1228,28 @@
   </style>
 </head>
 <body>
-  <header class="top-bar">
-  
-       <div class="logo">⚽ LiveScore</div>
+  <header class="top-bar-nav">
+  <div class="nav-wrapper">
+    <!-- Logo -->
+    <div class="logo">⚽ LiveScore</div>
+    
+    <!-- Nav Links (centered) -->
+    <div class="nav-links">
+      <a href="home.html" class="nav-link"><span>Home</span></a>
+      <a href="highlights.html" class="nav-link"><span>Highlights</span></a>
+      <a href="events.html" class="nav-link active"><span>Events</span></a>
+      <a href="players.html" class="nav-link"><span>Players</span></a>
+      <a href="sponsors.html" class="nav-link"><span>Sponsors</span></a>
+      <a href="search.html" class="nav-link"><span>Search</span></a>
     </div>
-  </header>
-
-  <nav class="horizontal-nav">
-    <div class="nav-container">
-      <div class="nav-links">
-        <a href="home.html" class="nav-link"><span>Home</span></a>
-        <a href="highlights.html" class="nav-link"><span>Highlights</span></a>
-        <a href="events.html" class="nav-link active"><span>Events</span></a>
-        <a href="players.html" class="nav-link"><span>Players</span></a>
-        <a href="sponsors.html" class="nav-link"><span>Sponsors</span></a>
-        <a href="search.html" class="nav-link"><span>Search</span></a>
-      </div>
+    
+    <!-- Right Icons -->
+    <div class="top-icons">
+      <i class='bx bx-bell' title="Notifications"></i>
       
-      <div class="top-icons">
-       
-        <i class='bx bx-bell' title="Notifications"></i>
-        
-      </div>
     </div>
-  </nav>
+  </div>
+</header>
 
   <!-- SEARCH SECTION -->
   <section class="search-section">
