@@ -704,39 +704,32 @@
   </style>
 </head>
 <body>
-  <!-- Top Bar -->
-  <header class="top-bar">
-     <div class="logo">⚽ LiveScore</div>
-    </div>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
-      <button onclick="performSearch()"><i class='bx bx-search'></i></button>
-    </div>
-  </header>
-
-  <!-- Navigation Menu -->
-  <nav class="horizontal-nav">
-    <div class="nav-container">
-      <div class="nav-links">
-        <a href="home.html" class="nav-link">Home</a>
-        <a href="highlights.html" class="nav-link active">Highlights</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="players.html" class="nav-link">Players</a>
-        <a href="sponsors.html" class="nav-link">Sponsors</a>
-        <a href="search.html" class="nav-link">Search</a>
-      </div>
-      
-      <div class="top-icons">
-        <button class="upload-btn" onclick="openUploadModal()">
-          <i class='bx bx-plus'></i>
-          <span>Upload</span>
-        </button>
-        <i class='bx bx-bell' title="Notifications" onclick="showNotifications()"></i>
-        <div class="sign-in-btn" onclick="window.location.href='profile.html'">Sign In</div>
-      </div>
-    </div>
-  </nav>
-
+ <!-- Combined Navigation -->
+<header class="top-bar">
+  <div class="logo">⚽ LiveScore</div>
+  
+  <div class="nav-links">
+    <a href="home.html" class="nav-link">Home</a>
+    <a href="highlights.html" class="nav-link active">Highlights</a>
+    <a href="events.html" class="nav-link">Events</a>
+    <a href="players.html" class="nav-link">Players</a>
+    <a href="sponsors.html" class="nav-link">Sponsors</a>
+    
+  </div>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
+    <button onclick="performSearch()"><i class='bx bx-search'></i></button>
+  </div>
+  
+  <div class="top-icons">
+    <button class="upload-btn" onclick="openUploadModal()">
+      <i class='bx bx-plus'></i>
+      <span>Upload</span>
+    </button>
+    <i class='bx bx-bell' title="Notifications" onclick="showNotifications()"></i>
+  </div>
+</header>
   <!-- Upload Modal -->
   <div class="modal" id="uploadModal">
     <div class="upload-modal-content">
@@ -1183,5 +1176,3 @@
       }
     });
   </script>
-
-
