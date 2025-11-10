@@ -256,13 +256,13 @@
 
         /* Horizontal Navigation */
         .horizontal-nav {
-            background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0 25px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 25px;
+    position: static;  /* ← ADD THIS */
+    z-index: 100;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+}
         .nav-container {
             display: flex;
             justify-content: space-between;
@@ -887,34 +887,17 @@
 
     
         
-        <nav class="horizontal-nav">
-    <div class="nav-container">
-        <div class="logo">
-            <i class='bx bx-football'></i>
-            <span>⚽ LiveScore</span>
-        </div>
-        
-        <div class="nav-links">
-            <a href="home.html" class="nav-link">
-                <span>Home</span>
-            </a>
-            <a href="highlights.html" class="nav-link">
-                <span>Highlights</span>
-            </a>
-            <a href="events.html" class="nav-link">
-                <span>Events</span>
-            </a>
-            <a href="players.html" class="nav-link active">
-                <span>Players</span>
-            </a>
-            <a href="sponsors.html" class="nav-link">
-                <span>Sponsors</span>
-            </a>
-            <a href="search.html" class="nav-link">
-                <span>Search</span>
-            </a>
-        </div>
-
+       <header class="top-bar">
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search players, clubs, or positions..." onkeyup="searchPlayer()">
+        <button onclick="performSearch()">
+            <i class='bx bx-search'></i>
+        </button>
+    </div>
+    <div class="top-icons">
+        <i class='bx bx-bell' title="Notifications" onclick="showNotifications()"></i>
+    </div>
+</header>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search players, clubs, or positions..." onkeyup="searchPlayer()">
             <button onclick="performSearch()">
