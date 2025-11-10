@@ -20,19 +20,198 @@
       display: flex;
       flex-direction: column;
     }
+/* Update top-bar to be sticky */
+/* Update top-bar to be sticky - REPLACE the existing one */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 25px;
+  background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 25px;
-      background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+.logo {
+  flex-shrink: 0;
+}
+
+.search-bar {
+  flex: 0 1 400px;
+  max-width: 400px;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.top-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+}
+/* Remove old horizontal-nav styles and add nav-links to top-bar */
+.nav-links {
+  display: flex;
+  gap: 2px;
+  margin: 0 auto;
+}
+
+/* Partner Banner Sidebar */
+.partner-banner {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 320px;
+  max-height: calc(100vh - 140px);
+  background: linear-gradient(145deg, #1f1f3f, #2a2a5f);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 999;
+  overflow: hidden;
+  animation: slideInRight 0.3s ease;
+}
+
+.banner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.banner-header h3 {
+  font-size: 18px;
+  color: #ff0000;
+  margin: 0;
+}
+
+.banner-header i {
+  cursor: pointer;
+  font-size: 24px;
+  color: #b8b8c8;
+  transition: all 0.3s ease;
+}
+
+.banner-header i:hover {
+  color: #ff0000;
+  transform: rotate(90deg);
+}
+
+.banner-content {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 220px);
+}
+
+.banner-content p {
+  color: #b8b8c8;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+#partnerFormSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#partnerFormSidebar input,
+#partnerFormSidebar textarea {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#partnerFormSidebar input:focus,
+#partnerFormSidebar textarea:focus {
+  border-color: #ff0000;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#partnerFormSidebar button {
+  padding: 12px;
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#partnerFormSidebar button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+}
+
+.partner-banner-collapsed {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+  z-index: 999;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.partner-banner-collapsed:hover {
+  transform: scale(1.1);
+}
+
+.partner-banner-collapsed i {
+  font-size: 24px;
+  color: white;
+}
+
+.partner-banner-collapsed span {
+  font-size: 10px;
+  color: white;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5); }
+  50% { box-shadow: 0 8px 35px rgba(255, 0, 0, 0.8); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+  .partner-banner,
+  .partner-banner-collapsed {
+    display: none !important;
+  }
+}
+   
 
     .logo {
       font-weight: bold;
@@ -312,28 +491,15 @@
       box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
     }
 
-    .horizontal-nav {
-      background: linear-gradient(135deg, #1a1a33 0%, #2a2a50 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0 25px;
-      position: sticky;
-      top: 72px;
-      z-index: 99;
-    }
+    
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2px;
-    }
-
+    /* Update this section */
+.nav-links {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  flex-shrink: 0;
+}
     .nav-link {
       display: flex;
       align-items: center;
@@ -790,62 +956,78 @@
 </head>
 <body>
   <main>
-    <header class="top-bar">
-      <div class="logo">
-         <div class="logo">⚽ LiveScore</div>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
-        <button onclick="performSearch()"><i class='bx bx-search'></i></button>
-      </div>
-      
-      <div class="top-icons">
-        <div class="language-selector">
-          <div class="language-trigger" id="languageTrigger" onclick="toggleLanguageDropdown()">
-            <span id="selectedFlag">🌎</span>
-            <span id="selectedCode">EN</span>
-          </div>
-          <div class="language-dropdown" id="languageDropdown">
-            <div class="dropdown-header">
-              <span>Select Language</span>
-              <span class="language-badge" id="languageCount">40+ Languages</span>
-            </div>
-            <div id="languageList"></div>
-            <div class="dropdown-footer">
-              🌍 Supporting grassroots football across all African regions
-            </div>
-          </div>
-        </div>
-        
-        <button class="upload-btn" onclick="openUploadModal()">
-          <i class='bx bx-plus'></i>
-          <span>Upload</span>
-        </button>
-        
-        <i class='bx bx-bell' title="Notifications" onclick="showToast('🔔 No new notifications')">
-          <span class="notification-badge">3</span>
-        </i>
-        
-        <button class="user-profile-btn" onclick="goToProfile()" id="userProfileBtn">
-          <i class='bx bx-user'></i>
-          <span id="userName">User</span>
-        </button>
-      </div>
-    </header>
+    <!-- Partner Banner Sidebar -->
+<div class="partner-banner" id="partnerBanner">
+  <div class="banner-header">
+    <h3>🤝 Partner With Us</h3>
+    <i class='bx bx-x' onclick="togglePartnerBanner()"></i>
+  </div>
+  <div class="banner-content">
+    <p>Join our network and grow your brand with grassroots football!</p>
+    <form id="partnerFormSidebar" onsubmit="submitPartnerForm(event)">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="text" placeholder="Organization" required>
+      <textarea placeholder="Partnership interest..." required rows="3"></textarea>
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+</div>
 
-    <nav class="horizontal-nav">
-      <div class="nav-container">
-        <div class="nav-links">
-        <a href="index.html" class="nav-link active"><span>Home</span></a>
-<a href="highlights.html" class="nav-link"><span>Highlights</span></a>
-<a href="events.html" class="nav-link"><span>Events</span></a>
-<a href="players.html" class="nav-link"><span>Players</span></a>
-<a href="sponsors.html" class="nav-link"><span>Sponsors</span></a>
-<a href="search.html" class="nav-link"><span>Search</span></a>
-
+<div class="partner-banner-collapsed" id="partnerBannerCollapsed" onclick="togglePartnerBanner()" style="display:none;">
+  <i class='bx bx-handshake'></i>
+  <span>Partner</span>
+</div>
+   <header class="top-bar">
+  <div class="logo">⚽ LiveScore</div>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
+    <button onclick="performSearch()"><i class='bx bx-search'></i></button>
+  </div>
+  
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active"><span>Home</span></a>
+    <a href="highlights.html" class="nav-link"><span>Highlights</span></a>
+    <a href="events.html" class="nav-link"><span>Events</span></a>
+    <a href="players.html" class="nav-link"><span>Players</span></a>
+    <a href="sponsors.html" class="nav-link"><span>Sponsors</span></a>
+    <a href="search.html" class="nav-link"><span>Search</span></a>
+  </div>
+  
+  <div class="top-icons">
+    <div class="language-selector">
+      <div class="language-trigger" id="languageTrigger" onclick="toggleLanguageDropdown()">
+        <span id="selectedFlag">🌎</span>
+        <span id="selectedCode">EN</span>
+      </div>
+      <div class="language-dropdown" id="languageDropdown">
+        <div class="dropdown-header">
+          <span>Select Language</span>
+          <span class="language-badge" id="languageCount">40+ Languages</span>
+        </div>
+        <div id="languageList"></div>
+        <div class="dropdown-footer">
+          🌍 Supporting grassroots football across all African regions
         </div>
       </div>
-    </nav>
+    </div>
+    
+    <button class="upload-btn" onclick="openUploadModal()">
+      <i class='bx bx-plus'></i>
+      <span>Upload</span>
+    </button>
+    
+    <i class='bx bx-bell' title="Notifications" onclick="showToast('🔔 No new notifications')">
+      <span class="notification-badge">3</span>
+    </i>
+    
+    <button class="user-profile-btn" onclick="goToProfile()" id="userProfileBtn">
+      <i class='bx bx-user'></i>
+      <span id="userName">User</span>
+    </button>
+  </div>
+</header>
 
     <section class="highlights">
       <div class="section-header">
@@ -1007,19 +1189,7 @@
       </div>
     </section>
   </main>
-    <!-- Partner Form Section -->
-    <section class="partner-form-section" style="padding:50px; background:rgba(255,255,255,0.05); border-top:1px solid rgba(255,255,255,0.1);">
-      <h2 style="text-align:center; color:#ff0000; margin-bottom:30px;">Become Our Partner</h2>
-      <form id="partnerForm" style="max-width:600px; margin:0 auto; display:flex; flex-direction:column; gap:15px;">
-        <input type="text" placeholder="Full Name" required style="padding:12px; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:white;">
-        <input type="email" placeholder="Email Address" required style="padding:12px; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:white;">
-        <input type="text" placeholder="Organization / Brand" required style="padding:12px; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:white;">
-        <textarea placeholder="Tell us how you’d like to partner..." required style="padding:12px; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:white; min-height:120px;"></textarea>
-        <button type="submit" style="padding:15px; background:linear-gradient(135deg, #ff0000, #cc0000); color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
-          Submit Partnership Request
-        </button>
-      </form>
-    </section>
+  
 
   <div class="modal-overlay" id="uploadModal">
     <div class="upload-modal">
@@ -1070,6 +1240,25 @@
   </div>
 
   <script>
+    function togglePartnerBanner() {
+  const banner = document.getElementById('partnerBanner');
+  const collapsed = document.getElementById('partnerBannerCollapsed');
+  
+  if (banner.style.display === 'none') {
+    banner.style.display = 'block';
+    collapsed.style.display = 'none';
+  } else {
+    banner.style.display = 'none';
+    collapsed.style.display = 'flex';
+  }
+}
+
+function submitPartnerForm(event) {
+  event.preventDefault();
+  showToast('✅ Partnership request submitted successfully!');
+  event.target.reset();
+  togglePartnerBanner();
+}
     const languages = [
       { code: "en", name: "English", flag: "🇬🇧", region: "Global" },
       { code: "sw", name: "Swahili", flag: "🇰🇪", region: "East Africa" },
@@ -1406,4 +1595,3 @@
   </script>
 </body>
 </html>
-
