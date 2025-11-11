@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,204 +6,204 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIVESCORE - Register</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: #1a1d3a;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #020F59;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
 
-    .auth-container {
-      background: #252947;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-      width: 100%;
-      max-width: 480px;
-      padding: 3rem;
-      animation: slideUp 0.5s ease;
-    }
+.auth-container {
+  background: #023373;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 480px;
+  padding: 3rem;
+  animation: slideUp 0.5s ease;
+}
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .auth-header { text-align: center; margin-bottom: 2rem; }
+.auth-header { text-align: center; margin-bottom: 2rem; }
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
 
-    .logo-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
+.logo-icon {
+  width: 56px;
+  height: 56px;
 
-    .logo-text {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
 
-    .auth-header h1 {
-      font-size: 1.875rem;
-      margin-bottom: 0.5rem;
-      color: #ffffff;
-    }
+.logo-text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #F2F2F2;
+}
 
-    .auth-header p { color: #a0a3bd; font-size: 1rem; }
+.auth-header h1 {
+  font-size: 1.875rem;
+  margin-bottom: 0.5rem;
+  color: #F2F2F2;
+}
 
-    .tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      background: #1a1d3a;
-      padding: 0.375rem;
-      border-radius: 10px;
-    }
+.auth-header p { color: #a0a3bd; font-size: 1rem; }
 
-    .tab {
-      flex: 1;
-      padding: 0.875rem;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #a0a3bd;
-      transition: all 0.3s;
-    }
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  background: #020F59;
+  padding: 0.375rem;
+  border-radius: 10px;
+}
 
-    .tab:hover { color: #ffffff; }
-    .tab.active { background: #ff1744; color: #ffffff; }
+.tab {
+  flex: 1;
+  padding: 0.875rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #a0a3bd;
+  transition: all 0.3s;
+}
 
-    .form-section { display: none; }
-    .form-section.active { display: block; }
+.tab:hover { color: #F2F2F2; }
+.tab.active { background: #D90D32; color: #F2F2F2; }
 
-    .form-group { margin-bottom: 1.5rem; }
+.form-section { display: none; }
+.form-section.active { display: block; }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: #ffffff;
-      font-weight: 500;
-    }
+.form-group { margin-bottom: 1.5rem; }
 
-    .form-group input {
-      width: 100%;
-      padding: 0.875rem 1rem;
-      border: 2px solid #3a3f5c;
-      border-radius: 8px;
-      font-size: 1rem;
-      background: #1a1d3a;
-      color: #ffffff;
-    }
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #F2F2F2;
+  font-weight: 500;
+}
 
-    .form-group input::placeholder { color: #6b6f8f; }
+.form-group input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #023E73;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #020F59;
+  color: #F2F2F2;
+}
 
-    .form-group input:focus {
-      outline: none;
-      border-color: #ff1744;
-      box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.2);
-    }
+.form-group input::placeholder { color: #6b6f8f; }
 
-    .btn {
-      width: 100%;
-      padding: 1rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
+.form-group input:focus {
+  outline: none;
+  border-color: #D90D32;
+  box-shadow: 0 0 0 3px rgba(217, 13, 50, 0.2);
+}
 
-    .btn-primary {
-      background: #ff1744;
-      color: white;
-      margin-bottom: 0.75rem;
-    }
+.btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
 
-    .btn-primary:hover {
-      background: #f50057;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
-    }
+.btn-primary {
+  background: #D90D32;
+  color: #F2F2F2;
+  margin-bottom: 0.75rem;
+}
 
-    .btn-guest {
-      background: transparent;
-      color: #ffffff;
-      border: 2px solid #3a3f5c;
-    }
+.btn-primary:hover {
+  background: #B00A28;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 13, 50, 0.4);
+}
 
-    .btn-guest:hover {
-      border-color: #6b6f8f;
-      background: #1a1d3a;
-    }
+.btn-guest {
+  background: transparent;
+  color: #F2F2F2;
+  border: 2px solid #023E73;
+}
 
-    .footer-text {
-      text-align: center;
-      margin-top: 1.5rem;
-      color: #a0a3bd;
-      font-size: 0.875rem;
-    }
+.btn-guest:hover {
+  border-color: #6b6f8f;
+  background: #020F59;
+}
 
-    .footer-text a {
-      color: #ff1744;
-      text-decoration: none;
-      font-weight: 600;
-    }
+.footer-text {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #a0a3bd;
+  font-size: 0.875rem;
+}
 
-    .footer-text a:hover { text-decoration: underline; }
+.footer-text a {
+  color: #D90D32;
+  text-decoration: none;
+  font-weight: 600;
+}
 
-    .password-strength {
-      margin-top: 0.5rem;
-      height: 4px;
-      background: #3a3f5c;
-      border-radius: 2px;
-      overflow: hidden;
-    }
+.footer-text a:hover { text-decoration: underline; }
 
-    .password-strength-bar {
-      height: 100%;
-      width: 0%;
-      transition: all 0.3s;
-      border-radius: 2px;
-    }
+.password-strength {
+  margin-top: 0.5rem;
+  height: 4px;
+  background: #023E73;
+  border-radius: 2px;
+  overflow: hidden;
+}
 
-    .password-strength-text {
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
-      color: #a0a3bd;
-    }
+.password-strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
 
-    .error-message {
-      color: #ff1744;
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-      display: none;
-    }
+.password-strength-text {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  color: #a0a3bd;
+}
 
-    @media (max-width: 640px) {
-      .auth-container { padding: 2rem 1.5rem; }
-      .auth-header h1 { font-size: 1.5rem; }
-    }
+.error-message {
+  color: #D90D32;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .auth-container { padding: 2rem 1.5rem; }
+  .auth-header h1 { font-size: 1.5rem; }
+}
   </style>
 </head>
 <body>
