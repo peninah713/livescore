@@ -28,6 +28,13 @@ body {
   color: var(--text-light);
   min-height: 100vh;
 }
+    /* SHOW the search section */
+.search-section {
+  display: block !important;
+  background: linear-gradient(135deg, var(--ludisco-dark-navy) 0%, var(--ludisco-medium-blue) 100%);
+  padding: 20px 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
 .top-bar-nav {
   background: linear-gradient(135deg, var(--ludisco-dark-navy) 0%, var(--ludisco-medium-blue) 100%);
@@ -1281,7 +1288,7 @@ body {
 <body>
   
   
-   <!-- HEADER WITH SEARCH -->
+  <!-- HEADER WITH SEARCH -->
 <header class="top-bar-nav">
   <div class="nav-wrapper">
     <div class="logo">⚽ LiveScore</div>
@@ -1312,7 +1319,62 @@ body {
     </div>
   </div>
 </header>
- 
+
+<!-- ADD ADVANCED SEARCH SECTION BELOW HEADER -->
+<section class="search-section" style="display: block;">
+  <div class="search-container">
+    <div class="search-row">
+      <div class="location-input-wrapper">
+        <i class="fa-solid fa-location-dot location-icon"></i>
+        <input 
+          type="text" 
+          class="location-input" 
+          id="locationInput" 
+          placeholder="Enter city or location..."
+          list="cityList"
+        >
+        <datalist id="cityList">
+          <option value="London">
+          <option value="Manchester">
+          <option value="Barcelona">
+          <option value="Madrid">
+          <option value="Munich">
+          <option value="Paris">
+          <option value="Cairo">
+          <option value="Milan">
+          <option value="Rome">
+          <option value="Liverpool">
+        </datalist>
+      </div>
+
+      <div class="distance-select-wrapper">
+        <i class="fa-solid fa-road distance-icon"></i>
+        <select class="distance-select" id="distanceSelect">
+          <option value="">Any Distance</option>
+          <option value="10">Within 10 km</option>
+          <option value="25">Within 25 km</option>
+          <option value="50">Within 50 km</option>
+          <option value="100">Within 100 km</option>
+          <option value="200">Within 200 km</option>
+          <option value="500">Within 500 km</option>
+        </select>
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </div>
+
+      <button class="search-btn" onclick="performSearch()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Filter</span>
+      </button>
+    </div>
+
+    <div class="filter-chips" id="activeFilters" style="display: none;">
+      <span style="color: rgba(255,255,255,0.7); font-size: 13px;">Active Filters:</span>
+      <button class="clear-filters" onclick="clearAllFilters()">
+        <i class="fa-solid fa-xmark"></i> Clear All
+      </button>
+    </div>
+  </div>
+</section>
 
   <div class="events-header">
     <h2 class="events-title">Upcoming Events</h2>
