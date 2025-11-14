@@ -89,39 +89,66 @@ body {
     font-weight: 700;
 }
 
-/* SEARCH BAR */
+/* Replace your existing .search-bar styles with this */
 .search-bar {
     position: relative;
     display: flex;
     align-items: center;
+    max-width: 500px;
+    flex: 1;
 }
 
 .search-bar input {
-    padding: 10px 15px 10px 40px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.1);
+    padding: 12px 50px 12px 45px;
+    border-radius: 25px;
+    border: none;
+    background: rgba(255,255,255,0.15);
     color: white;
     font-size: 14px;
-    width: 250px;
+    width: 100%;
     transition: 0.3s ease;
 }
 
 .search-bar input:focus {
-    background: rgba(255,255,255,0.18);
-    border-color: #D90D32;
+    background: rgba(255,255,255,0.25);
     outline: none;
 }
 
 .search-bar input::placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.7);
 }
 
 .search-icon {
     position: absolute;
-    left: 12px;
-    color: rgba(255,255,255,0.6);
+    left: 15px;
+    color: rgba(255,255,255,0.8);
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.search-btn {
+    position: absolute;
+    right: 5px;
+    background: #D90D32;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.search-btn i {
+    color: white;
     font-size: 18px;
+}
+
+.search-btn:hover {
+    background: #B50B28;
+    transform: scale(1.05);
 }
 
 /* TOP ICONS */
@@ -546,18 +573,22 @@ body {
    <header class="top-bar">
     <div class="logo">⚽ LiveScore</div>
      
-    <div class="search-bar">
-        <i class='bx bx-search search-icon'></i>
-        <input type="text" id="searchInput" placeholder="Search sponsorships...">
-    </div>
-    <div class="nav-links">
-        <a href="home.html" class="nav-link">Home</a>
-        <a href="highlights.html" class="nav-link">Highlights</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="players.html" class="nav-link">Players</a>
-        <a href="sponsors.html" class="nav-link active">Sponsors</a>
-      
-    </div>
+<div class="search-bar">
+    <i class='bx bx-search search-icon'></i>
+    <input type="text" id="searchInput" placeholder="Search football highlights...">
+    <button class="search-btn">
+        <i class='bx bx-search'></i>
+    </button>
+</div>
+  <!-- Add this to your nav-links div -->
+<div class="nav-links">
+    <a href="home.html" class="nav-link">Home</a>
+    <a href="highlights.html" class="nav-link">Highlights</a>
+    <a href="events.html" class="nav-link">Events</a>
+    <a href="players.html" class="nav-link">Players</a>
+    <a href="sponsors.html" class="nav-link active">Sponsors</a>
+    <a href="search.html" class="nav-link">Search</a> <!-- ADD THIS LINE -->
+</div>
    
     
     <div class="top-icons">
