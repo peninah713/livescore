@@ -37,6 +37,120 @@ body {
   top: 0;
   z-index: 100;
 }
+    /* ADD THESE STYLES FOR THE SEARCH BAR IN HEADER */
+
+/* Update nav-wrapper to accommodate search bar */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 25px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Search bar styles */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  flex: 1;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 50px 10px 40px;
+  border-radius: 25px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.search-bar input:focus {
+  background: rgba(255,255,255,0.25);
+  outline: none;
+  box-shadow: 0 0 10px rgba(217, 13, 50, 0.3);
+}
+
+.search-bar input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.8);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.search-btn-circle {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ludisco-red);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+  padding: 0;
+}
+
+.search-btn-circle i {
+  color: white;
+  font-size: 16px;
+}
+
+.search-btn-circle:hover {
+  background: #B00A28;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 15px rgba(217, 13, 50, 0.5);
+}
+
+/* Hide the old search section */
+.search-section {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .search-bar {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-wrapper {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0 0 0;
+  }
+  
+  .nav-links {
+    order: 4;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+}
 
 .nav-wrapper {
   display: flex;
@@ -1539,49 +1653,8 @@ body {
     ];
 
     // ===== SEARCH FUNCTIONS =====
-    // UPDATE YOUR DOMContentLoaded SECTION
-document.addEventListener('DOMContentLoaded', function() {
-  updateResultsCount(6);
-
-  // Header search functionality
-  const eventSearchInput = document.getElementById('eventSearch');
-  
-  if (eventSearchInput) {
-    // Real-time search on input
-    eventSearchInput.addEventListener('input', performSearch);
     
-    // Search on Enter key
-    eventSearchInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') performSearch();
-    });
-  }
-  
-  // ... rest of your existing code ...
-});
-
-// UPDATE performSearch function
-function performSearch() {
-  const searchTerm = document.getElementById('eventSearch').value.toLowerCase().trim();
-  
-  currentFilters = { 
-    search: searchTerm, 
-    location: '', 
-    distance: '' 
-  };
-  
-  filterEvents();
-  updateFilterChips();
-}
-    function performSearch() {
-      const searchTerm = document.getElementById('eventSearch').value.toLowerCase();
-      const location = document.getElementById('locationInput').value.toLowerCase();
-      const distance = document.getElementById('distanceSelect').value;
-
-      currentFilters = { search: searchTerm, location, distance };
-      
-      filterEvents();
-      updateFilterChips();
-    }
+    
 
     function filterEvents() {
       const cards = document.querySelectorAll('.event-card');
