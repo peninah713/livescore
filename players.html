@@ -740,7 +740,12 @@ h1 {
                 
                 <span>⚽ LiveScore</span>
             </div>
-            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search players, clubs, positions..." onkeyup="searchPlayer()">
+                <button onclick="performSearch()">
+                    <i class='bx bx-search'></i>
+                </button>
+            </div>
             <div class="nav-links">
                 <a href="home.html" class="nav-link">Home</a>
                 <a href="highlights.html" class="nav-link">Highlights</a>
@@ -750,12 +755,7 @@ h1 {
                 <a href="search.html" class="nav-link">Search</a>
             </div>
 
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search players, clubs, positions..." onkeyup="searchPlayer()">
-                <button onclick="performSearch()">
-                    <i class='bx bx-search'></i>
-                </button>
-            </div>
+            
 
             <div class="top-icons">
                 <i class='bx bx-bell' title="Notifications" onclick="showNotifications()"></i>
