@@ -733,6 +733,10 @@ body {
  <!-- Combined Navigation -->
 <header class="top-bar">
   <div class="logo">⚽ LiveScore</div>
+    <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
+    <button onclick="performSearch()"><i class='bx bx-search'></i></button>
+  </div>
   
   <div class="nav-links">
     <a href="home.html" class="nav-link">Home</a>
@@ -743,11 +747,7 @@ body {
     
   </div>
   
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search football highlights..." onkeyup="searchVideos()" />
-    <button onclick="performSearch()"><i class='bx bx-search'></i></button>
-  </div>
-  
+
   <div class="top-icons">
     <button class="upload-btn" onclick="openUploadModal()">
       <i class='bx bx-plus'></i>
