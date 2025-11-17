@@ -727,6 +727,827 @@ body {
     padding: 15px;
   }
 }
+    /* ===== COMPREHENSIVE RESPONSIVE MEDIA QUERIES ===== */
+
+/* Large Desktops */
+@media (max-width: 1440px) {
+  .main-container {
+    max-width: 1100px;
+  }
+  
+  .feed {
+    gap: 24px;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1200px) {
+  .main-container {
+    max-width: 960px;
+  }
+  
+  .top-bar {
+    padding: 15px 30px;
+  }
+  
+  .nav-link {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  
+  .feed {
+    gap: 20px;
+  }
+  
+  .site {
+    padding: 24px 32px;
+  }
+}
+
+/* Tablet Landscape */
+@media (max-width: 1100px) {
+  .feed { 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .top-bar {
+    padding: 12px 25px;
+  }
+  
+  .search-bar {
+    flex: 0 1 350px;
+    max-width: 350px;
+    margin: 0 20px;
+  }
+  
+  .nav-link {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 15px 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .logo {
+    font-size: 20px;
+    order: 1;
+  }
+  
+  .logo i {
+    font-size: 24px;
+  }
+
+  .search-bar {
+    order: 4;
+    flex: 1 1 100%;
+    max-width: none;
+    margin: 10px 0 0 0;
+  }
+  
+  .nav-links {
+    order: 2;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 0 1 auto;
+  }
+  
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    padding: 12px 20px;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .top-icons {
+    order: 3;
+    gap: 12px;
+    font-size: 20px;
+  }
+  
+  .upload-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  .upload-btn span {
+    display: none;
+  }
+
+  .feed { 
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .stories { 
+    justify-content: flex-start; 
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 20px;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+  }
+  
+  .stories::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .stories::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--ludisco-red), #B00A28);
+    border-radius: 10px;
+  }
+  
+  .story { 
+    width: 86px; 
+    flex: 0 0 auto;
+  }
+  
+  .story .avatar {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .story label {
+    font-size: 12px;
+  }
+  
+  .site { 
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .main-container {
+    padding: 15px;
+  }
+  
+  .card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+  
+  .card .head h3 {
+    font-size: 18px;
+  }
+  
+  .card .media {
+    height: 180px;
+    border-radius: 14px;
+  }
+  
+  .upload-modal-content {
+    width: 95%;
+    max-width: 500px;
+  }
+  
+  .modal-header {
+    padding: 20px 24px 14px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+  }
+  
+  #uploadForm {
+    padding: 20px 24px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .top-bar {
+    padding: 12px 15px;
+    gap: 8px;
+  }
+  
+  .logo {
+    font-size: 18px;
+  }
+  
+  .logo i {
+    font-size: 22px;
+  }
+  
+  .search-bar input {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .search-bar button {
+    padding: 7px 11px;
+  }
+  
+  .nav-link {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .top-icons {
+    gap: 10px;
+    font-size: 18px;
+  }
+  
+  .top-icons > i {
+    padding: 6px;
+  }
+  
+  .upload-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+  
+  .upload-btn i {
+    font-size: 16px;
+  }
+  
+  .main-container {
+    padding: 12px;
+  }
+  
+  .site {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  
+  .stories {
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .story {
+    width: 80px;
+  }
+  
+  .story .avatar {
+    width: 64px;
+    height: 64px;
+    border-width: 3px;
+  }
+  
+  .story label {
+    font-size: 11px;
+  }
+  
+  .feed {
+    gap: 16px;
+  }
+  
+  .card {
+    padding: 12px;
+    border-radius: 14px;
+    min-height: 320px;
+  }
+  
+  .card .head {
+    gap: 10px;
+  }
+  
+  .card .head .pf {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    border-width: 2px;
+  }
+  
+  .card .head h3 {
+    font-size: 16px;
+  }
+  
+  .card .media {
+    height: 170px;
+    border-radius: 12px;
+  }
+  
+  .card .actions {
+    gap: 12px;
+    margin-top: 6px;
+  }
+  
+  .icon-btn {
+    font-size: 12px;
+    gap: 6px;
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .likes {
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  
+  .desc {
+    font-size: 13px;
+  }
+  
+  .comments {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .comment-row {
+    gap: 10px;
+  }
+  
+  .comment-row .dot {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+  
+  .comment-row input {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+  
+  .upload-modal-content {
+    width: 95%;
+    border-radius: 16px;
+  }
+  
+  .modal-header {
+    padding: 18px 20px 12px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+  
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+  }
+  
+  #uploadForm {
+    padding: 18px 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  
+  .form-input, .form-select {
+    padding: 12px 14px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+  
+  .file-upload-area {
+    padding: 32px 16px;
+    border-radius: 14px;
+  }
+  
+  .upload-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+  
+  .upload-text {
+    font-size: 14px;
+  }
+  
+  .upload-subtext {
+    font-size: 12px;
+  }
+  
+  .modal-actions {
+    padding: 16px 0 0;
+    margin-top: 20px;
+  }
+  
+  .btn-secondary, .btn-primary {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 10px 12px;
+  }
+  
+  .logo {
+    font-size: 16px;
+  }
+  
+  .logo i {
+    font-size: 20px;
+  }
+  
+  .search-bar input {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+  
+  .search-bar button {
+    padding: 6px 10px;
+  }
+  
+  .nav-link {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  
+  .top-icons {
+    gap: 8px;
+    font-size: 16px;
+  }
+  
+  .upload-btn {
+    padding: 6px 10px;
+  }
+  
+  .main-container {
+    padding: 10px;
+  }
+  
+  .site {
+    padding: 14px;
+    border-radius: 12px;
+  }
+  
+  .stories {
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  
+  .story {
+    width: 72px;
+  }
+  
+  .story .avatar {
+    width: 58px;
+    height: 58px;
+    border-width: 3px;
+  }
+  
+  .story label {
+    font-size: 10px;
+  }
+  
+  .feed {
+    gap: 14px;
+  }
+  
+  .card {
+    padding: 10px;
+    min-height: 300px;
+  }
+  
+  .card .head {
+    gap: 8px;
+  }
+  
+  .card .head .pf {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+  
+  .card .head h3 {
+    font-size: 14px;
+  }
+  
+  .card .media {
+    height: 160px;
+    border-radius: 10px;
+  }
+  
+  .card .actions {
+    gap: 10px;
+  }
+  
+  .icon-btn {
+    font-size: 11px;
+    gap: 4px;
+  }
+  
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .likes {
+    font-size: 12px;
+  }
+  
+  .desc {
+    font-size: 12px;
+  }
+  
+  .comments {
+    font-size: 11px;
+  }
+  
+  .comment-row {
+    gap: 8px;
+  }
+  
+  .comment-row .dot {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .comment-row input {
+    padding: 6px 9px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+  
+  .upload-modal-content {
+    width: 96%;
+  }
+  
+  .modal-header {
+    padding: 16px 18px 10px;
+  }
+  
+  .modal-title {
+    font-size: 16px;
+  }
+  
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+  }
+  
+  #uploadForm {
+    padding: 16px 18px;
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-label {
+    font-size: 12px;
+  }
+  
+  .form-input, .form-select {
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  
+  .file-upload-area {
+    padding: 28px 14px;
+    border-radius: 12px;
+  }
+  
+  .upload-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .upload-text {
+    font-size: 13px;
+  }
+  
+  .upload-subtext {
+    font-size: 11px;
+  }
+  
+  .modal-actions {
+    gap: 10px;
+    padding: 14px 0 0;
+    margin-top: 16px;
+  }
+  
+  .btn-secondary, .btn-primary {
+    padding: 9px 18px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .top-bar {
+    padding: 8px 10px;
+  }
+  
+  .logo {
+    font-size: 14px;
+  }
+  
+  .logo i {
+    font-size: 18px;
+  }
+  
+  .search-bar input {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+  
+  .nav-link {
+    padding: 7px 12px;
+    font-size: 11px;
+  }
+  
+  .site {
+    padding: 12px;
+  }
+  
+  .stories {
+    gap: 12px;
+  }
+  
+  .story {
+    width: 68px;
+  }
+  
+  .story .avatar {
+    width: 54px;
+    height: 54px;
+  }
+  
+  .story label {
+    font-size: 9px;
+  }
+  
+  .feed {
+    gap: 12px;
+  }
+  
+  .card {
+    padding: 9px;
+  }
+  
+  .card .head h3 {
+    font-size: 13px;
+  }
+  
+  .card .media {
+    height: 150px;
+  }
+  
+  .icon-btn {
+    font-size: 10px;
+  }
+  
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .modal-title {
+    font-size: 15px;
+  }
+  
+  #uploadForm {
+    padding: 14px 16px;
+  }
+  
+  .file-upload-area {
+    padding: 24px 12px;
+  }
+  
+  .upload-icon {
+    font-size: 32px;
+  }
+}
+
+/* Landscape Orientation for Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .top-bar {
+    padding: 8px 15px;
+  }
+  
+  .logo {
+    font-size: 16px;
+  }
+  
+  .search-bar {
+    flex: 0 1 300px;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .main-container {
+    padding: 10px;
+  }
+  
+  .site {
+    padding: 15px;
+  }
+  
+  .stories {
+    margin-bottom: 15px;
+  }
+  
+  .story .avatar {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .feed {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .card {
+    min-height: 280px;
+  }
+  
+  .card .media {
+    height: 140px;
+  }
+  
+  .upload-modal-content {
+    max-height: 95vh;
+  }
+  
+  .modal-header {
+    padding: 14px 20px 10px;
+  }
+  
+  #uploadForm {
+    padding: 16px 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 14px;
+  }
+  
+  .file-upload-area {
+    padding: 24px 16px;
+  }
+  
+  .upload-icon {
+    font-size: 36px;
+  }
+}
+
+/* Very Wide Screens */
+@media (min-width: 1600px) {
+  .main-container {
+    max-width: 1400px;
+  }
+  
+  .feed {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .top-bar,
+  .stories,
+  .card .actions,
+  .comment-row,
+  .modal,
+  .upload-btn {
+    display: none !important;
+  }
+  
+  .feed {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .card {
+    page-break-inside: avoid;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .site {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
   </style>
 </head>
 <body>
