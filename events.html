@@ -1283,6 +1283,647 @@ body {
         gap: 10px;
       }
     }
+    /* ===== MEDIA QUERIES FOR RESPONSIVE DESIGN ===== */
+
+/* Extra Large Screens (1400px and up) */
+@media (min-width: 1400px) {
+  .events {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1400px;
+  }
+  
+  .nav-wrapper {
+    max-width: 1600px;
+  }
+}
+
+/* Large Screens (1200px - 1399px) */
+@media (max-width: 1399px) {
+  .events {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .stream-content-wrapper {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* Medium-Large Screens (992px - 1199px) */
+@media (max-width: 1199px) {
+  .events {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .search-bar {
+    max-width: 250px;
+  }
+  
+  .nav-links {
+    gap: 0;
+  }
+  
+  .nav-link {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+  
+  .sponsorship-tiers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Medium Screens (768px - 991px) - Tablets */
+@media (max-width: 991px) {
+  .nav-wrapper {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .logo {
+    font-size: 20px;
+  }
+  
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0 0 0;
+  }
+  
+  .nav-links {
+    order: 4;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .nav-links::-webkit-scrollbar {
+    height: 3px;
+  }
+  
+  .nav-links::-webkit-scrollbar-thumb {
+    background: rgba(217, 13, 50, 0.5);
+    border-radius: 3px;
+  }
+  
+  .events {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 20px;
+    gap: 20px;
+  }
+  
+  .events-header {
+    padding: 0 20px;
+    margin: 20px auto 15px;
+  }
+  
+  .events-title {
+    font-size: 24px;
+  }
+  
+  .stream-content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .video-container {
+    height: 400px;
+  }
+  
+  .chat-section {
+    max-height: 400px;
+  }
+  
+  .stream-modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .search-section {
+    padding: 20px 20px;
+  }
+  
+  .sponsorship-tiers {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .sponsor-modal-content {
+    width: 95%;
+    padding: 25px;
+  }
+}
+
+/* Small-Medium Screens (576px - 767px) - Large Mobile/Small Tablets */
+@media (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .nav-wrapper {
+    padding: 12px 15px;
+  }
+  
+  .logo {
+    font-size: 18px;
+  }
+  
+  .logo i {
+    font-size: 24px;
+  }
+  
+  .top-icons {
+    font-size: 20px;
+    gap: 10px;
+  }
+  
+  .sign-in-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  .search-section {
+    padding: 15px;
+  }
+  
+  .search-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .search-input-wrapper,
+  .location-input-wrapper,
+  .distance-select-wrapper {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .search-input,
+  .location-input,
+  .distance-select {
+    padding: 12px 20px 12px 45px;
+    font-size: 14px;
+  }
+  
+  .search-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 30px;
+  }
+  
+  .filter-chips {
+    gap: 8px;
+  }
+  
+  .filter-chip {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  
+  .events {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    gap: 20px;
+  }
+  
+  .events-header {
+    padding: 0 15px;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 15px auto 10px;
+  }
+  
+  .events-title {
+    font-size: 22px;
+  }
+  
+  .results-count {
+    font-size: 14px;
+  }
+  
+  .event-card h3 {
+    font-size: 18px;
+  }
+  
+  .event-detail {
+    font-size: 13px;
+  }
+  
+  .btn-ticket {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+  
+  .stream-modal-content {
+    width: 100%;
+    padding: 15px;
+    max-height: 95vh;
+    border-radius: 10px;
+  }
+  
+  .stream-header {
+    margin-bottom: 15px;
+  }
+  
+  .stream-title {
+    font-size: 20px;
+  }
+  
+  .video-container {
+    height: 250px;
+  }
+  
+  .stream-controls {
+    gap: 10px;
+  }
+  
+  .stream-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  
+  .chat-section {
+    max-height: 350px;
+  }
+  
+  .chat-header {
+    padding: 12px;
+  }
+  
+  .chat-header h3 {
+    font-size: 15px;
+  }
+  
+  .tip-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .chat-messages {
+    padding: 12px;
+  }
+  
+  .chat-message {
+    padding: 8px 10px;
+  }
+  
+  .chat-username {
+    font-size: 12px;
+  }
+  
+  .chat-text {
+    font-size: 12px;
+  }
+  
+  .chat-input {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  
+  .send-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .tip-modal-content,
+  .sponsor-modal-content {
+    width: 100%;
+    padding: 20px;
+    max-height: 90vh;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+  }
+  
+  .tip-amounts {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .tip-amount-btn {
+    padding: 15px 10px;
+    font-size: 16px;
+  }
+  
+  .sponsorship-tiers {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .tier-card {
+    padding: 20px 15px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Extra Small Screens (480px - 575px) - Standard Mobile */
+@media (max-width: 575px) {
+  .nav-link {
+    padding: 10px 12px;
+    font-size: 13px;
+    gap: 5px;
+  }
+  
+  .top-icons {
+    font-size: 18px;
+  }
+  
+  .event-image {
+    height: 180px;
+  }
+  
+  .event-card .content {
+    padding: 15px;
+  }
+  
+  .live-badge,
+  .distance-badge {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+  
+  .stream-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .stream-btn {
+    flex: 1 1 45%;
+    min-width: 120px;
+  }
+  
+  .tip-amounts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .form-input,
+  textarea.form-input {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .tier-name {
+    font-size: 20px;
+  }
+  
+  .tier-price {
+    font-size: 24px;
+  }
+  
+  .tier-benefits {
+    font-size: 12px;
+  }
+}
+
+/* Very Small Screens (375px - 479px) - Small Mobile */
+@media (max-width: 479px) {
+  .logo {
+    font-size: 16px;
+  }
+  
+  .logo i {
+    font-size: 20px;
+  }
+  
+  .nav-link span {
+    display: none;
+  }
+  
+  .nav-link {
+    padding: 10px;
+  }
+  
+  .nav-link i {
+    font-size: 18px;
+  }
+  
+  .search-bar input {
+    font-size: 13px;
+    padding: 10px 45px 10px 35px;
+  }
+  
+  .search-btn-circle {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .events {
+    padding: 10px;
+    gap: 15px;
+  }
+  
+  .events-title {
+    font-size: 20px;
+  }
+  
+  .event-card h3 {
+    font-size: 16px;
+  }
+  
+  .btn-ticket {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .icon-btn {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .event-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .event-icons {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .btn-ticket {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .video-container {
+    height: 220px;
+  }
+  
+  .stream-title {
+    font-size: 18px;
+  }
+  
+  .close-btn {
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .tip-amounts {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .tip-amount-btn {
+    padding: 12px 8px;
+    font-size: 14px;
+  }
+  
+  .tip-amount-btn i {
+    font-size: 20px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+}
+
+/* Ultra Small Screens (320px - 374px) - Very Small Mobile */
+@media (max-width: 374px) {
+  .nav-wrapper {
+    padding: 10px 12px;
+  }
+  
+  .logo {
+    font-size: 14px;
+  }
+  
+  .search-section {
+    padding: 12px;
+  }
+  
+  .search-input,
+  .location-input,
+  .distance-select {
+    padding: 10px 15px 10px 40px;
+    font-size: 13px;
+  }
+  
+  .events-title {
+    font-size: 18px;
+  }
+  
+  .event-image {
+    height: 160px;
+  }
+  
+  .video-container {
+    height: 200px;
+  }
+  
+  .chat-section {
+    max-height: 300px;
+  }
+  
+  .stream-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    flex: 1 1 100%;
+  }
+  
+  .tier-card {
+    padding: 15px 12px;
+  }
+  
+  .tier-icon {
+    font-size: 36px;
+  }
+  
+  .tier-name {
+    font-size: 18px;
+  }
+  
+  .tier-price {
+    font-size: 22px;
+  }
+}
+
+/* Landscape Orientation for Mobile Devices */
+@media (max-height: 600px) and (orientation: landscape) {
+  .stream-modal-content {
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  .video-container {
+    height: 300px;
+  }
+  
+  .chat-section {
+    max-height: 250px;
+  }
+  
+  .stream-content-wrapper {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .top-bar-nav,
+  .search-section,
+  .modal,
+  .btn-ticket,
+  .event-icons,
+  .stream-controls {
+    display: none !important;
+  }
+  
+  .events {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-card {
+    page-break-inside: avoid;
+  }
+}
+
+/* High DPI Screens (Retina Displays) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .event-card img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .live-badge,
+  .logo i {
+    animation: none !important;
+  }
+}
+
+/* Dark Mode Support (if needed) */
+@media (prefers-color-scheme: dark) {
+  /* Your existing dark theme already handles this */
+}
   </style>
 </head>
 <body>
