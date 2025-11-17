@@ -7,7 +7,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <title>Scout Discovery | LiveScore</title>
     <style>
-      /* CSS Variables - Ludisco Colors */
+       /* CSS Variables - Ludisco Colors */
 :root {
     --primary-red: #D90D32;
     --navy-blue: #020F59;
@@ -37,7 +37,7 @@ body {
 /* Navigation Bar - STICKY */
 .horizontal-nav {
     background: linear-gradient(135deg, #020F59 0%, #023373 100%);
-     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 15px 25px;
     position: fixed;
     top: 0;
@@ -714,19 +714,379 @@ h1 {
     background: #D90D32;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .profile-content {
-        grid-template-columns: 1fr;
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* Large Desktop (1400px and above) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .players {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Desktop (1200px - 1399px) */
+@media (max-width: 1399px) {
+    .players {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet Landscape (992px - 1199px) */
+@media (max-width: 1199px) {
+    .nav-container {
+        gap: 15px;
+    }
+    
+    .nav-link {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    
+    .players {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+}
+
+/* Tablet Portrait (768px - 991px) */
+@media (max-width: 991px) {
+    body {
+        padding-top: 140px;
+    }
+    
+    .horizontal-nav {
+        padding: 12px 20px;
     }
     
     .nav-container {
         flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    
+    .logo {
+        justify-content: center;
+        font-size: 22px;
     }
     
     .search-bar {
         max-width: 100%;
         width: 100%;
+        order: 2;
+    }
+    
+    .nav-links {
+        order: 3;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .nav-link {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .top-icons {
+        order: 1;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .players {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .profile-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .profile-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .profile-actions {
+        flex-direction: column;
+    }
+    
+    h1 {
+        font-size: 1.6em;
+        text-align: center;
+    }
+    
+    .subtitle {
+        text-align: center;
+        font-size: 1em;
+    }
+}
+
+/* Mobile Landscape (576px - 767px) */
+@media (max-width: 767px) {
+    body {
+        padding-top: 160px;
+    }
+    
+    .container {
+        padding: 0 15px;
+        margin: 20px auto;
+    }
+    
+    .players {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .player-card {
+        border-radius: 12px;
+    }
+    
+    .player-image-container {
+        height: 180px;
+    }
+    
+    .player-content {
+        padding: 12px;
+    }
+    
+    .player-info h3 {
+        font-size: 1em;
+    }
+    
+    .player-info p {
+        font-size: 0.75em;
+    }
+    
+    .stats span {
+        font-size: 1em;
+    }
+    
+    .stats small {
+        font-size: 0.7em;
+    }
+    
+    .action-btn {
+        font-size: 0.75em;
+        padding: 8px;
+    }
+    
+    .modal-header-bar {
+        padding: 15px 20px;
+    }
+    
+    .modal-header-bar h2 {
+        font-size: 20px;
+    }
+    
+    .profile-info-section h2 {
+        font-size: 24px;
+    }
+    
+    .profile-stat-box {
+        padding: 15px;
+    }
+    
+    .stat-value {
+        font-size: 22px;
+    }
+    
+    .contact-content {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+/* Mobile Portrait (480px - 575px) */
+@media (max-width: 575px) {
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 12px;
+        gap: 4px;
+    }
+    
+    .players {
+        grid-template-columns: 1fr;
+    }
+    
+    .player-image-container {
+        height: 220px;
+    }
+    
+    .player-badge {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .position-badge {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .profile-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .contact-player-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-player-image {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Extra Small Mobile (max 479px) */
+@media (max-width: 479px) {
+    body {
+        padding-top: 180px;
+    }
+    
+    .horizontal-nav {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .logo i {
+        font-size: 24px;
+    }
+    
+    .search-bar input {
+        padding: 10px 45px 10px 15px;
+        font-size: 13px;
+    }
+    
+    .top-icons {
+        font-size: 20px;
+        gap: 12px;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    h1 {
+        font-size: 1.3em;
+    }
+    
+    .subtitle {
+        font-size: 0.9em;
+    }
+    
+    .player-content {
+        padding: 10px;
+    }
+    
+    .player-info h3 {
+        font-size: 0.95em;
+    }
+    
+    .stats {
+        padding: 10px 0;
+        margin: 12px 0;
+    }
+    
+    .action-btn {
+        font-size: 0.7em;
+        padding: 7px;
+    }
+    
+    .profile-modal,
+    .contact-modal {
+        border-radius: 15px;
+        max-height: 85vh;
+    }
+    
+    .modal-header-bar {
+        padding: 12px 15px;
+    }
+    
+    .modal-header-bar h2 {
+        font-size: 18px;
+    }
+    
+    .close-modal {
+        font-size: 24px;
+    }
+    
+    .profile-content {
+        padding: 15px;
+    }
+    
+    .profile-info-section h2 {
+        font-size: 20px;
+    }
+    
+    .profile-detail {
+        font-size: 14px;
+    }
+    
+    .profile-stat-box {
+        padding: 12px;
+    }
+    
+    .profile-stat-box i {
+        font-size: 24px;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+    }
+    
+    .contact-content {
+        padding: 15px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding-top: 100px;
+    }
+    
+    .profile-modal,
+    .contact-modal {
+        max-height: 95vh;
+    }
+    
+    .modal-header-bar {
+        position: relative;
     }
 }
     </style>
