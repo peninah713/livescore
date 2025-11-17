@@ -565,7 +565,613 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #D90D32;
-}   
+}  
+        /* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* Large Desktop (1400px and above) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    .sponsor-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop (1200px - 1399px) */
+@media (max-width: 1399px) {
+    .sponsor-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop (992px - 1199px) */
+@media (max-width: 1199px) {
+    .hero h1 {
+        font-size: 42px;
+    }
+    
+    .hero p {
+        font-size: 18px;
+    }
+    
+    .sponsor-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .nav-link {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Tablet Landscape (768px - 991px) */
+@media (max-width: 991px) {
+    .top-bar {
+        flex-wrap: wrap;
+        padding: 15px 20px;
+    }
+    
+    .logo {
+        font-size: 22px;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    
+    .search-bar {
+        order: 3;
+        max-width: 100%;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .nav-links {
+        order: 2;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .top-icons {
+        order: 1;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+    
+    .hero {
+        padding: 50px 20px;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .stats-bar {
+        flex-wrap: wrap;
+        padding: 25px 15px;
+    }
+    
+    .stat-item {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+    
+    .stat-item .number {
+        font-size: 28px;
+    }
+    
+    .filters {
+        padding: 25px 20px;
+    }
+    
+    .sponsor-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 30px;
+    }
+}
+
+/* Tablet Portrait (576px - 767px) */
+@media (max-width: 767px) {
+    .top-bar {
+        padding: 12px 15px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .search-bar input {
+        padding: 10px 45px 10px 40px;
+        font-size: 13px;
+    }
+    
+    .search-icon {
+        left: 12px;
+        font-size: 18px;
+    }
+    
+    .search-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .hero {
+        padding: 40px 15px;
+    }
+    
+    .hero h1 {
+        font-size: 32px;
+    }
+    
+    .hero p {
+        font-size: 15px;
+    }
+    
+    .stats-bar {
+        flex-direction: column;
+        padding: 20px 15px;
+    }
+    
+    .stat-item {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+    }
+    
+    .stat-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .stat-item .number {
+        font-size: 26px;
+    }
+    
+    .stat-item .label {
+        font-size: 12px;
+    }
+    
+    .filters {
+        padding: 20px 15px;
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+    
+    .sponsor-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .card-header h3 {
+        font-size: 20px;
+    }
+    
+    .metrics {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .metric {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 6px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+    
+    .btn-primary,
+    .btn-outline {
+        width: 100%;
+    }
+    
+    .modal-content {
+        padding: 25px;
+        border-radius: 15px;
+    }
+    
+    .modal-title {
+        font-size: 24px;
+    }
+    
+    .container {
+        padding: 25px 15px;
+    }
+}
+
+/* Mobile Landscape (480px - 575px) */
+@media (max-width: 575px) {
+    .top-bar {
+        padding: 10px 12px;
+    }
+    
+    .logo {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    
+    .nav-links {
+        gap: 4px;
+    }
+    
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+    
+    .top-icons i {
+        font-size: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+    }
+    
+    .hero p {
+        font-size: 14px;
+    }
+    
+    .filter-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        gap: 5px;
+    }
+    
+    .filter-btn i {
+        font-size: 16px;
+    }
+    
+    .card {
+        padding: 18px;
+        border-radius: 12px;
+    }
+    
+    .card-header h3 {
+        font-size: 18px;
+    }
+    
+    .badge {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .card p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    .metric span {
+        font-size: 11px;
+    }
+    
+    .metric strong {
+        font-size: 14px;
+    }
+    
+    .tags span {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .btn-primary,
+    .btn-outline {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .modal-title {
+        font-size: 20px;
+    }
+    
+    .detail-section h4 {
+        font-size: 16px;
+    }
+    
+    .detail-row {
+        padding: 10px 0;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .detail-label,
+    .detail-value {
+        font-size: 14px;
+    }
+}
+
+/* Extra Small Mobile (max 479px) */
+@media (max-width: 479px) {
+    .top-bar {
+        padding: 8px 10px;
+    }
+    
+    .logo {
+        font-size: 16px;
+    }
+    
+    .search-bar input {
+        padding: 8px 40px 8px 35px;
+        font-size: 12px;
+    }
+    
+    .search-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .search-btn i {
+        font-size: 14px;
+    }
+    
+    .nav-link {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+    
+    .top-icons i {
+        font-size: 18px;
+    }
+    
+    .hero {
+        padding: 30px 12px;
+    }
+    
+    .hero h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .hero p {
+        font-size: 13px;
+    }
+    
+    .stats-bar {
+        padding: 15px 10px;
+    }
+    
+    .stat-item .number {
+        font-size: 22px;
+    }
+    
+    .stat-item .label {
+        font-size: 11px;
+    }
+    
+    .filters {
+        padding: 15px 10px;
+    }
+    
+    .filter-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+    
+    .container {
+        padding: 20px 10px;
+    }
+    
+    .sponsor-cards {
+        gap: 15px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .card-header h3 {
+        font-size: 16px;
+    }
+    
+    .badge {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .card p {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+    
+    .metrics {
+        gap: 10px;
+    }
+    
+    .metric {
+        padding: 8px;
+    }
+    
+    .metric span {
+        font-size: 10px;
+    }
+    
+    .metric strong {
+        font-size: 13px;
+    }
+    
+    .tags {
+        gap: 6px;
+        margin: 15px 0;
+    }
+    
+    .tags span {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .buttons {
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .btn-primary,
+    .btn-outline {
+        padding: 9px 14px;
+        font-size: 12px;
+        gap: 5px;
+    }
+    
+    .modal-content {
+        padding: 18px;
+        width: 98%;
+        max-height: 85vh;
+    }
+    
+    .modal-header {
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
+    
+    .modal-title {
+        font-size: 18px;
+    }
+    
+    .close-btn {
+        font-size: 28px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .detail-section {
+        margin-bottom: 20px;
+    }
+    
+    .detail-section h4 {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .detail-section p {
+        font-size: 13px;
+    }
+    
+    .detail-row {
+        padding: 8px 0;
+    }
+    
+    .detail-label,
+    .detail-value {
+        font-size: 13px;
+    }
+    
+    .empty-state {
+        padding: 60px 15px;
+    }
+    
+    .empty-state i {
+        font-size: 60px;
+    }
+    
+    .empty-state h3 {
+        font-size: 20px;
+    }
+    
+    .empty-state p {
+        font-size: 14px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        padding: 30px 20px;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+    }
+    
+    .stats-bar {
+        flex-direction: row;
+        padding: 20px 15px;
+    }
+    
+    .stat-item {
+        width: 25%;
+        margin-bottom: 0;
+    }
+    
+    .modal-content {
+        max-height: 90vh;
+    }
+}
+
+/* Very small screens in portrait */
+@media (max-width: 360px) {
+    .logo {
+        font-size: 15px;
+    }
+    
+    .hero h1 {
+        font-size: 22px;
+    }
+    
+    .hero p {
+        font-size: 12px;
+    }
+    
+    .nav-link {
+        padding: 5px 6px;
+        font-size: 9px;
+    }
+    
+    .filter-btn {
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+    
+    .card-header h3 {
+        font-size: 15px;
+    }
+    
+    .stat-item .number {
+        font-size: 20px;
+    }
+}
     </style>
 </head>
 <body>
